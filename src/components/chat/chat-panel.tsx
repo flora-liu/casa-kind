@@ -90,7 +90,7 @@ export function ChatPanel({
           )}
           {suggestions && suggestions?.length > 0 && (
             <div>
-              <p className="text-xs">
+              <p className="text-xs text-muted-foreground">
                 Enter a response or select an option to continue.
               </p>
             </div>

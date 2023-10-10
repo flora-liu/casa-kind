@@ -7,8 +7,8 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Saku",
-  description: "🌸 Miniapp to support lifelong blossoming.",
+  title: "Casa Kind",
+  description: "Miniapp for self-care and lifelong blossoming.",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
