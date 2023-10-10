@@ -6,27 +6,6 @@ import { useEffect, useState } from "react";
 export default function Page() {
   const [response, setResponse] = useState(null);
 
-  useEffect(() => {
-    async function postData() {
-      try {
-        const res = await fetch("/api/chat'", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ data: "Some data..." }),
-        });
-
-        const json = await res.json();
-        setResponse(json);
-      } catch (error) {
-        console.error("Error posting data:", error);
-      }
-    }
-
-    postData();
-  }, []);
-
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
