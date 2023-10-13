@@ -16,7 +16,12 @@ export async function middleware(req: NextRequest) {
 
   const {
     data: { user },
+    error,
   } = await supabase.auth.getUser();
+
+  if (error) {
+    console.log(`[DEBUG] middleware - supabase.auth.getSession: ${error}`);
+  }
 
   /** If user is signed in and the current path is / redirect the user to /home */
   if (user && [landingPath, ...authPaths].includes(req.nextUrl.pathname)) {

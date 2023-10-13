@@ -12,6 +12,9 @@ export const auth = async ({
     cookies: () => readOnlyRequestCookies,
   });
   const { data, error } = await supabase.auth.getSession();
-  if (error) throw error;
+  if (error) {
+    console.log(`[DEBUG] auth - supabase.auth.getSession: ${error}`);
+    throw error;
+  }
   return data.session;
 };
