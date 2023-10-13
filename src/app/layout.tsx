@@ -8,7 +8,8 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import AuthProvider from "@/components/common/auth-provider";
 
-export const dynamic = "force-dynamic";
+export const runtime = "edge";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
