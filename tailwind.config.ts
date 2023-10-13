@@ -16,6 +16,14 @@ const config: Config = {
       },
     },
     extend: {
+      fontFamily: {
+        relative: ["var(--font-relative)", "sans-serif", "system-ui"],
+        "relative-mono": [
+          "var(--font-relative-mono)",
+          "ui-monospace",
+          "SFMono-Regular",
+        ],
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

@@ -25,8 +25,8 @@ const features = [
 export default function Page() {
   return (
     <div className="relative flex h-full flex-col items-center justify-center md:grid md:max-w-none md:grid-cols-2 lg:px-0">
-      <div className="flex-1 w-full relative h-full flex-col p-5 pt-12 pb-8 md:p-10 dark:border-r md:flex">
-        <div className="relative z-20 flex items-center text-5xl md:text-7xl mb-3 mt-20">
+      <div className="flex-1 w-full relative h-full flex-col p-5 pt-10 pb-8 md:p-10 dark:border-r md:flex">
+        <div className="font-relative relative z-20 flex items-center text-5xl md:text-7xl mb-3 mt-20">
           Self-Care Menu
         </div>
         <div className="relative z-20 mt-auto">
@@ -38,15 +38,15 @@ export default function Page() {
         </div>
       </div>
       <div className="lg:p-8 relative md:h-screen flex-auto w-full">
-        <div className="absolute inset-0 bg-muted text-muted-foreground z-10" />
-        <div className="relative w-full h-full flex flex-col gap-y-2 py-8 md:py-12 md:p-5">
+        <div className="absolute inset-0 z-10" />
+        <div className="relative w-full h-full flex flex-col gap-y-3 py-2 md:gap-y-4 md:py-12 px-5 md:p-5">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="relative mx-auto flex w-full flex-col justify-center space-y-6 z-20 rounded-xl"
+              className="relative mx-auto flex w-full flex-col justify-center space-y-4 z-20 rounded-xl bg-secondary text-secondary-foreground"
             >
               <Link
-                className="flex flex-col space-y-2 text-left px-5 py-5 md:py-8 w-full"
+                className="flex flex-col space-y-2 text-left px-4 py-4 md:py-8 w-full"
                 href={feature.href}
                 variant="basic"
               >

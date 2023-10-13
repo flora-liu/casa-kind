@@ -13,7 +13,7 @@ const examples = [
 export function EmptyScreen({ append }: Pick<UseChatHelpers, "append">) {
   return (
     <div className="mx-auto max-w-2xl px-4">
-      <div className="rounded-lg border p-8 bg-muted">
+      <div className="rounded-lg border p-6 md:p-8 bg-muted">
         <h1 className="mb-3 text-xl font-semibold">Heart Talk</h1>
         <p className="mb-6 leading-normal text-muted-foreground">
           Explore through conversation
@@ -26,8 +26,6 @@ export function EmptyScreen({ append }: Pick<UseChatHelpers, "append">) {
         <p className="mb-2 leading-normal">
           You will be guided through an exercise to build emotional awareness.
           Get started by selecting the button or typing a message in the input.
-          You will be lead through multiple instructions inviting you to be
-          aware of your emotions.
         </p>
         <div className="mt-6 flex flex-col items-start space-y-2">
           {examples.map((example, index) => (

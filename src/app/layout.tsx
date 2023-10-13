@@ -8,10 +8,35 @@ import { Nav } from "@/components/common/nav";
 import AuthProvider from "@/components/common/auth-provider";
 import { auth } from "@/app/auth";
 import "./globals.css";
+import { cn } from "@/lib/utils";
 
 export const runtime = "edge";
 
 const inter = Inter({ subsets: ["latin"] });
+
+const relativeFont = localFont({
+  src: [
+    {
+      path: "./fonts/relative-book.woff2",
+      weight: "400",
+    },
+    {
+      path: "./fonts/relative-bold.woff2",
+      weight: "600",
+    },
+  ],
+  variable: "--font-relative",
+});
+
+const relativeMonoFont = localFont({
+  src: [
+    {
+      path: "./fonts/relative-mono.woff2",
+      weight: "400",
+    },
+  ],
+  variable: "--font-relative-mono",
+});
 
 export const metadata: Metadata = {
   title: "Casa Kind",
@@ -36,7 +61,13 @@ export default async function RootLayout({
       <head />
       <body className={inter.className}>
         <Providers attribute="class" defaultTheme="light" enableSystem>
-          <div className="flex flex-col min-h-screen relative text-foreground">
+          <div
+            className={cn(
+              "flex flex-col min-h-screen relative text-foreground",
+              relativeFont.variable,
+              relativeMonoFont.variable
+            )}
+          >
             <Nav isLoggedIn={!!session?.user} />
             <main className="flex flex-col flex-1 bg-background h-full">
               <AuthProvider accessToken={accessToken}>{children}</AuthProvider>
