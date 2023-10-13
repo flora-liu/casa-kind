@@ -38,7 +38,7 @@ export default function Page() {
         </div>
       </div>
       <div className="lg:p-8 relative md:h-screen flex-auto w-full">
-        <div className="absolute inset-0 bg-[#EBE9E1] text-muted-foreground z-10" />
+        <div className="absolute inset-0 bg-muted text-muted-foreground z-10" />
         <div className="relative w-full h-full flex flex-col gap-y-2 py-8 md:py-12 md:p-5">
           {features.map((feature, index) => (
             <div

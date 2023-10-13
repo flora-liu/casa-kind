@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import type { Database } from "@/lib/database/types";
 
+/** Handles Supabase Proof Key for Code Exchange (PKCE) flow */
 export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
@@ -17,6 +18,6 @@ export async function GET(request: NextRequest) {
     await supabase.auth.exchangeCodeForSession(code);
   }
 
-  // URL to redirect to after sign in process completes
+  // URL to redirect to after process completes
   return NextResponse.redirect(requestUrl.origin);
 }

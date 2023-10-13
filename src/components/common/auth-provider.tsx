@@ -20,7 +20,9 @@ const AuthProvider: React.FC<AuthProviderProps> = ({
     const {
       data: { subscription: authListener },
     } = supabase.auth.onAuthStateChange((_event, session) => {
+      /** Handle when session changes or becomes invalid */
       if (session?.access_token !== accessToken) {
+        /** Trigger a router refresh whenever the current session changes */
         router.refresh();
       }
     });
