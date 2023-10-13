@@ -1,12 +1,13 @@
 import localFont from "next/font/local";
-import { Providers } from "@/components/common/providers";
-import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Nav } from "@/components/common/nav";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import { Inter } from "next/font/google";
+
+import { Providers } from "@/components/common/providers";
+import { Nav } from "@/components/common/nav";
 import AuthProvider from "@/components/common/auth-provider";
+import { auth } from "@/app/auth";
+import "./globals.css";
 
 export const runtime = "edge";
 
@@ -26,11 +27,8 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const supabase = createServerComponentClient({ cookies });
-
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+  const readOnlyRequestCookies = cookies();
+  const session = await auth({ readOnlyRequestCookies });
 
   const accessToken = session?.access_token || null;
   return (
@@ -39,7 +37,7 @@ export default async function RootLayout({
       <body className={inter.className}>
         <Providers attribute="class" defaultTheme="light" enableSystem>
           <div className="flex flex-col min-h-screen relative text-foreground">
-            <Nav />
+            <Nav isLoggedIn={!!session?.user} />
             <main className="flex flex-col flex-1 bg-background h-full">
               <AuthProvider accessToken={accessToken}>{children}</AuthProvider>
             </main>
