@@ -6,7 +6,6 @@ import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "@/components/ui/link";
-import { headers } from "next/headers";
 
 export default function Page() {
   const [email, setEmail] = useState<string>("");
@@ -21,7 +20,7 @@ export default function Page() {
       email,
       password,
       options: {
-        emailRedirectTo: `${window.location.origin}/auth/callback`,
+        emailRedirectTo: `${location.origin}/auth/callback`,
       },
     });
 
