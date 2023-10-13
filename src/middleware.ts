@@ -20,8 +20,8 @@ export async function middleware(req: NextRequest) {
   } = await supabase.auth.getUser();
 
   if (error) {
+    /** https://github.com/vercel/next.js/issues/49373#issuecomment-1655577473 */
     res.cookies.delete(`sb-${process.env.SUPABASE_PROJECT_ID}-auth-token`);
-    console.log(`[DEBUG] middleware - supabase.auth.getSession: ${error}`);
   }
 
   /** If user is signed in and the current path is / redirect the user to /home */

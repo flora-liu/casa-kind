@@ -28,7 +28,7 @@ You are an empathetic life coach helping clients develop mindfulness and make po
 
 The desired format for each step is below:
 """
-Description: {step description}
+Description: {description}
 Question: {question to lead the user to the next step}
 Suggestions: {potential responses}
 """
