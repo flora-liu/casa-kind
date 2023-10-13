@@ -1,5 +1,7 @@
-// Inspired by Chatbot-UI and modified to fit the needs of this project
-// @see https://github.com/mckaywrigley/chatbot-ui/blob/main/components/Chat/ChatMessage.tsx
+/**
+ * Inspired by Chatbot-UI and modified to fit the needs of this project
+ * @see https://github.com/mckaywrigley/chatbot-ui/blob/main/components/Chat/ChatMessage.tsx
+ */
 
 import { Message } from "ai";
 import remarkGfm from "remark-gfm";
@@ -16,8 +18,8 @@ export interface ChatMessageProps {
   message: Message;
 }
 
-function ChatMessage({ message: message, ...props }: ChatMessageProps) {
-  // const message = formatResponse(_message);
+function ChatMessage({ message: _message, ...props }: ChatMessageProps) {
+  const message = formatResponse(_message);
   return (
     <div
       className={cn("group relative mb-4 flex items-start md:-ml-12")}
