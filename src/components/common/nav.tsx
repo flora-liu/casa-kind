@@ -31,21 +31,40 @@ function Nav() {
         </div>
       </Button>
       {isOpen && (
-        <div className="bg-accent mt-1 rounded-lg flex flex-col items-start overflow-hidden p-3 gap-y-1">
-          <Button asChild variant="custom" className="rounded-none w-full">
+        <div className="bg-accent mt-1 rounded-lg flex flex-col items-start overflow-hidden p-1">
+          <Button
+            asChild
+            variant="custom"
+            className="rounded-none w-full justify-start py-1.5 px-2"
+          >
             <a href="/home">Home</a>
           </Button>
-          <Button asChild variant="custom" className="rounded-none w-full">
+          <Button
+            asChild
+            variant="custom"
+            className="rounded-none w-full justify-start py-1.5 px-2"
+          >
             <a href="/heart-talk">Heart Talk</a>
           </Button>
-          <Button asChild variant="custom" className="rounded-none w-full">
+          <Button
+            asChild
+            variant="custom"
+            className="rounded-none w-full justify-start py-1.5 px-2"
+          >
             <a href="/meditate">Meditate</a>
           </Button>
-          <Button asChild variant="custom" className="rounded-none w-full">
+          <Button
+            asChild
+            variant="custom"
+            className="rounded-none w-full justify-start py-1.5 px-2"
+          >
             <a href="/journal">Journal</a>
           </Button>
           <form action="/auth/sign-out" method="post" className="w-full">
-            <Button variant="custom" className="rounded-none w-full">
+            <Button
+              variant="custom"
+              className="rounded-none w-full justify-start py-1.5 px-2"
+            >
               Sign out
             </Button>
           </form>
