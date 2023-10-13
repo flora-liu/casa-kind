@@ -5,7 +5,6 @@ import { Inter } from "next/font/google";
 
 import { Providers } from "@/components/common/providers";
 import { Nav } from "@/components/common/nav";
-import AuthProvider from "@/components/common/auth-provider";
 import { auth } from "@/app/auth";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -55,7 +54,6 @@ export default async function RootLayout({
   const readOnlyRequestCookies = cookies();
   const session = await auth({ readOnlyRequestCookies });
 
-  const accessToken = session?.access_token || null;
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
@@ -70,7 +68,7 @@ export default async function RootLayout({
           >
             <Nav isLoggedIn={!!session?.user} />
             <main className="flex flex-col flex-1 bg-background h-full">
-              <AuthProvider accessToken={accessToken}>{children}</AuthProvider>
+              {children}
             </main>
           </div>
         </Providers>
