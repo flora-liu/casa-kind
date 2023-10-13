@@ -20,6 +20,7 @@ export async function middleware(req: NextRequest) {
   } = await supabase.auth.getUser();
 
   if (error) {
+    res.cookies.delete(`sb-${process.env.SUPABASE_PROJECT_ID}-auth-token`);
     console.log(`[DEBUG] middleware - supabase.auth.getSession: ${error}`);
   }
 
