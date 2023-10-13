@@ -100,6 +100,20 @@ function IconUser({ className, ...props }: React.ComponentProps<"svg">) {
   );
 }
 
+function IconArrowDown({ className, ...props }: React.ComponentProps<"svg">) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 256 256"
+      fill="currentColor"
+      className={cn("h-4 w-4", className)}
+      {...props}
+    >
+      <path d="m205.66 149.66-72 72a8 8 0 0 1-11.32 0l-72-72a8 8 0 0 1 11.32-11.32L120 196.69V40a8 8 0 0 1 16 0v156.69l58.34-58.35a8 8 0 0 1 11.32 11.32Z" />
+    </svg>
+  );
+}
+
 function IconArrowRight({ className, ...props }: React.ComponentProps<"svg">) {
   return (
     <svg
@@ -114,9 +128,59 @@ function IconArrowRight({ className, ...props }: React.ComponentProps<"svg">) {
   );
 }
 
+function IconChevronRight({
+  className,
+  ...props
+}: React.ComponentProps<"svg">) {
+  return (
+    <svg
+      width="8"
+      height="14"
+      viewBox="0 0 8 14"
+      fill="none"
+      className={cn("h-4 w-4", className)}
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1 13L7 7L1 1"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function IconChevronDown({ className, ...props }: React.ComponentProps<"svg">) {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      className={cn("h-4 w-4", className)}
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6 9L12 15L18 9"
+        stroke="currentcolor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export {
+  IconChevronRight,
+  IconChevronDown,
   IconArrowRight,
   IconPlus,
+  IconArrowDown,
   IconReturn,
   IconRefresh,
   IconStop,

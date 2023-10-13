@@ -39,7 +39,13 @@ function Chat({ id, initialMessages, className }: ChatProps) {
 
   return (
     <>
-      <div className={cn("pb-[240px] pt-4 md:pt-10", className)}>
+      <div
+        className={cn(
+          "pt-20 md:pt-10",
+          className,
+          suggestions?.length > 0 ? "pb-[300px]" : "pb-[200px]"
+        )}
+      >
         {messages.length ? (
           <>
             <ChatList messages={messages} />

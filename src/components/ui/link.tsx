@@ -8,11 +8,19 @@ const linkVariants = cva(
     variants: {
       variant: {
         default: "after:bg-foreground",
-        muted: "after:bg-muted-foreground ",
+        muted: "text-muted-foreground after:bg-muted-foreground ",
+        basic: "after:h-0 hover:text-muted-foreground",
+      },
+      size: {
+        default: "text-sm",
+        sm: "text-sm",
+        md: "text-base",
+        lg: "text-lg",
       },
     },
     defaultVariants: {
       variant: "default",
+      size: "default",
     },
   }
 );
