@@ -1,11 +1,44 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema", "postgresqlExtensions"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  directUrl  = env("DIRECT_URL")
+  extensions = [uuid_ossp(map: "uuid-ossp")]
+}
+
+model User {
+  id        String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  firstName String?
+  lastName  String?
+  email     String?
+  entry     Entry[]
+}
+
+model Category {
+  id      String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title   String   @unique
+  prompts Prompt[] @relation("CategoryToPrompt")
+}
+
+model Prompt {
+  id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt   DateTime   @db.Date
+  title       String
+  description String?
+  entries     Entry[]
+  categories  Category[] @relation("CategoryToPrompt")
+}
+
+model Entry {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt DateTime @db.Date
+  userId    String   @db.Uuid
+  content   String
+  promptId  String   @db.Uuid
+  prompt    Prompt   @relation(fields: [promptId], references: [id])
+  createdBy User     @relation(fields: [userId], references: [id])
 }
