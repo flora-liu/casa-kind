@@ -25,8 +25,8 @@ const features = [
 export default function Page() {
   return (
     <div className="relative flex h-full flex-col items-center justify-center md:grid md:max-w-none md:grid-cols-2 lg:px-0">
-      <div className="flex-1 w-full relative h-full flex-col p-5 pt-10 pb-8 md:p-10 dark:border-r md:flex">
-        <div className="font-relative relative z-20 flex items-center text-5xl md:text-7xl mb-3 mt-20">
+      <div className="flex-1 w-full relative h-full flex-col p-5 md:p-10 dark:border-r md:flex">
+        <div className="font-relative relative z-20 flex items-center text-5xl md:text-7xl mb-3 mt-16 md:mt-20">
           Self-Care Menu
         </div>
         <div className="relative z-20 mt-auto">
@@ -43,7 +43,7 @@ export default function Page() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="relative mx-auto flex w-full flex-col justify-center space-y-4 z-20 rounded-xl bg-secondary text-secondary-foreground"
+              className="relative mx-auto flex w-full flex-col justify-center space-y-4 z-20 rounded-xl bg-secondary hover:bg-secondary/80 text-secondary-foreground"
             >
               <Link
                 className="flex flex-col space-y-2 text-left px-4 py-4 md:py-8 w-full"
