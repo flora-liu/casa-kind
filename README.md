@@ -13,6 +13,22 @@ Web application to support mental, emotional wellness and self-development.
 
 ## Getting Started
 
+### Environment variables
+
+Add the following to `.env.local`
+
+```
+# PostgreSQL connection string used for migrations by Prisma Client
+DIRECT_URL=""
+# PostgreSQL connection string with pgBouncer config — used by Prisma Client
+DATABASE_URL=""
+OPENAI_API_KEY=""
+NEXT_PUBLIC_SUPABASE_URL=""
+NEXT_PUBLIC_SUPABASE_ANON_KEY=""
+```
+
+### Run application locally 
+
 First, run the development server:
 
 ```bash
