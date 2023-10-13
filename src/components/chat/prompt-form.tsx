@@ -7,16 +7,28 @@ import Textarea from "react-textarea-autosize";
 
 import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { IconPlus, IconReturn } from "@/components/common/icons";
+import {
+  IconPlus,
+  IconRefresh,
+  IconReturn,
+  IconStop,
+} from "@/components/common/icons";
 import { useEnterSubmit } from "@/lib/hooks/use-enter-submit";
 
 export interface PromptProps
-  extends Pick<UseChatHelpers, "input" | "setInput"> {
+  extends Pick<UseChatHelpers, "input" | "setInput" | "stop" | "reload"> {
   onSubmit: (value: string) => Promise<void>;
   isLoading: boolean;
 }
 
-function PromptForm({ input, setInput, onSubmit, isLoading }: PromptProps) {
+function PromptForm({
+  input,
+  setInput,
+  onSubmit,
+  isLoading,
+  stop,
+  reload,
+}: PromptProps) {
   const { formRef, onKeyDown } = useEnterSubmit();
   const inputRef = React.useRef<HTMLTextAreaElement>(null);
   const router = useRouter();
@@ -37,22 +49,51 @@ function PromptForm({ input, setInput, onSubmit, isLoading }: PromptProps) {
   };
 
   return (
-    <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden bg-background px-8 sm:rounded-md sm:border sm:px-12">
-      <form onSubmit={onSubmitHandler} ref={formRef}>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            router.refresh();
-            router.push("/chat");
-          }}
-          className={cn(
-            buttonVariants({ size: "sm", variant: "outline" }),
-            "absolute left-0 top-4 h-8 w-8 rounded-full bg-background p-0 sm:left-4"
+    <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden bg-background pr-8 sm:rounded-md sm:border sm:pr-12">
+      <form
+        className="flex items-start"
+        onSubmit={onSubmitHandler}
+        ref={formRef}
+      >
+        <div className="py-4 flex md:pl-4 gap-x-1.5 md:gap-x-2">
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              router.refresh();
+              router.push("/chat");
+            }}
+            className={cn(
+              buttonVariants({ size: "sm", variant: "outline" }),
+              "h-8 w-8 rounded-full bg-background p-0"
+            )}
+          >
+            <IconPlus />
+            <span className="sr-only">New Chat</span>
+          </button>
+          {isLoading ? (
+            <button
+              onClick={() => stop()}
+              className={cn(
+                buttonVariants({ size: "sm", variant: "outline" }),
+                "h-8 w-8 rounded-full bg-background p-0"
+              )}
+            >
+              <IconStop />
+              <span className="sr-only">Stop generating</span>
+            </button>
+          ) : (
+            <button
+              onClick={() => reload()}
+              className={cn(
+                buttonVariants({ size: "sm", variant: "outline" }),
+                "h-8 w-8 rounded-full bg-background p-0"
+              )}
+            >
+              <IconRefresh />
+              <span className="sr-only">Regenerate response</span>
+            </button>
           )}
-        >
-          <IconPlus />
-          <span className="sr-only">New Chat</span>
-        </button>
+        </div>
         <Textarea
           ref={inputRef}
           tabIndex={0}

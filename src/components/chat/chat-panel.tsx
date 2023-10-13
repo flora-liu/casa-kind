@@ -45,32 +45,9 @@ export function ChatPanel({
     <div className="fixed inset-x-0 bottom-0 bg-gradient-to-b from-muted/10 from-10% to-muted/30 to-50%">
       {/* <ButtonScrollToBottom /> */}
       <div className="mx-auto sm:max-w-2xl sm:px-4">
-        <div className="flex h-10 items-center justify-center">
-          {isLoading ? (
-            <Button
-              variant="outline"
-              onClick={() => stop()}
-              className="bg-background mb-4"
-            >
-              <IconStop className="mr-2" />
-              Stop generating
-            </Button>
-          ) : (
-            messages?.length > 0 && (
-              <Button
-                variant="outline"
-                onClick={() => reload()}
-                className="bg-background mb-4"
-              >
-                <IconRefresh className="mr-2" />
-                Regenerate response
-              </Button>
-            )
-          )}
-        </div>
-        <div className="space-y-4 border-t bg-background px-4 py-3 shadow-lg sm:rounded-t-xl sm:border md:py-4">
+        <div className="border-t bg-background px-4 shadow-lg sm:rounded-t-xl sm:border">
           {suggestions && suggestions?.length > 0 && (
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 mt-3 sm:mb-3">
               {suggestions?.map((suggestion, index) => (
                 <button
                   key={index}
@@ -88,18 +65,13 @@ export function ChatPanel({
               ))}
             </div>
           )}
-          {suggestions && suggestions?.length > 0 && (
-            <div>
-              <p className="text-xs text-muted-foreground">
-                Enter a response or select an option to continue.
-              </p>
-            </div>
-          )}
           <PromptForm
             onSubmit={onSubmitHandler}
             input={input}
             setInput={setInput}
             isLoading={isLoading}
+            reload={reload}
+            stop={stop}
           />
           {/* <FooterText className="hidden sm:block" /> */}
         </div>
