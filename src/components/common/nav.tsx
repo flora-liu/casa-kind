@@ -4,13 +4,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Button } from "@/components/ui/button";
 
 import { IconChevronDown } from "@/components/common/icons";
-import {
-  Sheet,
-  SheetTrigger,
-  SheetContent,
-  SheetHeader,
-  SheetFooter,
-} from "@/components/ui/sheet";
+import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 
 function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
   const supabase = createClientComponentClient();

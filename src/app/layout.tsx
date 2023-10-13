@@ -8,6 +8,7 @@ import { Nav } from "@/components/common/nav";
 import { auth } from "@/app/auth";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import AuthProvider from "@/components/common/auth-provider";
 
 export const runtime = "edge";
 
@@ -68,7 +69,9 @@ export default async function RootLayout({
           >
             <Nav isLoggedIn={!!session?.user} />
             <main className="flex flex-col flex-1 bg-background h-full">
-              {children}
+              <AuthProvider accessToken={session?.access_token || null}>
+                {children}
+              </AuthProvider>
             </main>
           </div>
         </Providers>
