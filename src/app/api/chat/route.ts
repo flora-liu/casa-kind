@@ -1,9 +1,6 @@
 import { OpenAIStream, StreamingTextResponse } from "ai";
 import { Configuration, OpenAIApi } from "openai-edge";
-import { cookies } from "next/headers";
-import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
-import { Database } from "@/lib/database/types";
-import { auth } from "@/app/auth";
+import { getSession } from "@/app/auth";
 
 // Create an OpenAI API client (that's edge friendly!)
 const configuration = new Configuration({
@@ -42,11 +39,7 @@ After the exercise is over, gently congratulate and celebrate the client for tak
 ];
 
 export async function POST(req: Request) {
-  const readOnlyRequestCookies = cookies();
-  const supabase = createRouteHandlerClient<Database>({
-    cookies: () => readOnlyRequestCookies,
-  });
-  const userId = (await auth({ readOnlyRequestCookies }))?.user.id;
+  const userId = (await getSession())?.user.id;
   if (!userId) {
     return new Response("Unauthorized", {
       status: 401,

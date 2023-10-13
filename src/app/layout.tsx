@@ -1,11 +1,10 @@
 import localFont from "next/font/local";
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
 import { Inter } from "next/font/google";
 
 import { Providers } from "@/components/common/providers";
 import { Nav } from "@/components/common/nav";
-import { auth } from "@/app/auth";
+import { getSession } from "@/app/auth";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import AuthProvider from "@/components/common/auth-provider";
@@ -52,8 +51,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const readOnlyRequestCookies = cookies();
-  const session = await auth({ readOnlyRequestCookies });
+  const session = await getSession();
 
   return (
     <html lang="en" suppressHydrationWarning>

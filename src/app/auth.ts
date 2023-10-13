@@ -1,20 +1,26 @@
 import "server-only";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import {
+  Session,
+  createServerComponentClient,
+} from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import { cache } from "react";
 
-export const auth = async ({
-  readOnlyRequestCookies,
-}: {
-  readOnlyRequestCookies: ReturnType<typeof cookies>;
-}) => {
-  /** Create a Supabase client configured to use cookies */
-  const supabase = createServerComponentClient({
-    cookies: () => readOnlyRequestCookies,
-  });
-  const { data, error } = await supabase.auth.getSession();
-  if (error) {
-    console.log(`[DEBUG] auth - supabase.auth.getSession: ${error}`);
-    throw error;
+/** Create a Supabase client configured to use cookies */
+export const createServerSupabaseClient = cache(() => {
+  const cookieStore = cookies();
+  return createServerComponentClient({ cookies: () => cookieStore });
+});
+
+export async function getSession() {
+  const supabase = createServerSupabaseClient();
+  try {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    return session;
+  } catch (error) {
+    console.error("[DEBUG] Error calling supabase.auth.getSession:", error);
+    return null;
   }
-  return data.session;
-};
+}
