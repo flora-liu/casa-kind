@@ -26,7 +26,7 @@ model Category {
 
 model Prompt {
   id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  createdAt   DateTime   @db.Date
+  createdAt   DateTime   @default(now()) @db.Date
   title       String
   description String?
   entries     Entry[]
