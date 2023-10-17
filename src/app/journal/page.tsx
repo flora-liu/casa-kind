@@ -18,7 +18,17 @@ const limit = 12;
 async function Page() {
   const categories = await getAllPromptsByCategory();
   return (
-    <div className="mt-16 md:mt-12 min-h-screen w-full flex justify-center items-center">
+    <div className="my-16 md:my-12 min-h-screen w-full flex flex-col justify-center items-center">
+      <div className="relative mx-auto sm:max-w-3xl md:max-w-5xl flex flex-col items-start justify-start w-full px-6 py-4 md:px-8 md:py-6">
+        <div className="rounded-lg py-4 md:py-6 px-1.5 md:px-2 w-full">
+          <h1 className="mb-3 text-xl font-semibold">Journal</h1>
+          <p className="leading-normal text-muted-foreground max-w-md">
+            Cultivate awareness through connecting with the present moment and
+            writing down what&apos;s on your mind. We&apos;ve provided prompts
+            to inspire and get you started.
+          </p>
+        </div>
+      </div>
       <div className="relative mx-auto sm:max-w-3xl md:max-w-5xl p-4 w-full flex flex-col gap-y-4 md:gap-y-6">
         {categories &&
           Object.keys(categories)?.map((key, categoryIndex) => {
@@ -32,8 +42,8 @@ async function Page() {
             const prompts = categories[key];
             return (
               <div key={categoryIndex}>
-                <div className="px-2 md:px-4 flex justify-between items-center">
-                  <h3 className="mb-3 text-lg md:text-xl font-semibold">
+                <div className="px-3 md:px-5 flex justify-between items-center">
+                  <h3 className="mb-3 text-base md:text-lg font-semibold">
                     {categoryTitle}
                   </h3>
                   <div className="flex items-center">
