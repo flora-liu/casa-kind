@@ -36,18 +36,16 @@ async function Page() {
                   <h3 className="mb-3 text-lg md:text-xl font-semibold">
                     {categoryTitle}
                   </h3>
-                  <a href="/">
-                    <div className="flex items-center">
-                      <Link
-                        variant="basic"
-                        className="flex item-center"
-                        href={`/journal/category/${key}`}
-                      >
-                        <p className="text-sm md:text-base">See more</p>
-                        <IconArrowRight className="ml-1" />
-                      </Link>
-                    </div>
-                  </a>
+                  <div className="flex items-center">
+                    <Link
+                      variant="basic"
+                      className="flex item-center"
+                      href={`/journal/category/${key}`}
+                    >
+                      <p className="text-sm md:text-base">See more</p>
+                      <IconArrowRight className="ml-1" />
+                    </Link>
+                  </div>
                 </div>
                 <div className="p-2 md:p-4 grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
                   {prompts?.slice(0, 4)?.map(({ title }, promptIndex) => (
