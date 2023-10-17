@@ -60,7 +60,7 @@ export default async function RootLayout({
         <Providers attribute="class" defaultTheme="light" enableSystem>
           <div
             className={cn(
-              "flex flex-col min-h-screen relative text-foreground",
+              "flex flex-col min-h-screen relative text-foreground text-base",
               relativeFont.variable,
               relativeMonoFont.variable
             )}

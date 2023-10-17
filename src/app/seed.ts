@@ -219,7 +219,6 @@ const categories: { [key: string]: Array<{ title: string }> } = {
     { title: "What am I looking forward to today?" },
     { title: "What positive things happened today?" },
     { title: "What will I do differently tomorrow?" },
-    { title: "What will I do differently tomorrow?" },
     {
       title:
         "What is one simple adjustment you can make to your morning routine to help you care for yourself as you prepare for the day?",

@@ -27,14 +27,14 @@ export default function Page() {
     <div className="relative flex h-full flex-col items-center justify-center md:grid md:max-w-none md:grid-cols-2 lg:px-0">
       <div className="flex-1 w-full relative h-full flex-col p-5 md:p-10 dark:border-r md:flex">
         <div className="font-relative relative z-20 flex items-center text-5xl md:text-7xl mb-3 mt-16 md:mt-20">
-          Self-Care Menu
+          <h1>Self-Care Menu</h1>
         </div>
         <div className="relative z-20 mt-auto">
-          <blockquote className="space-y-2">
+          <div className="space-y-2">
             <p className="text-lg text-muted-foreground">
               Pick one to nourish your being
             </p>
-          </blockquote>
+          </div>
         </div>
       </div>
       <div className="lg:p-8 relative md:h-screen flex-auto w-full">
@@ -56,12 +56,12 @@ export default function Page() {
                   </h2>
                   <IconChevronRight className="h-3 w-3" />
                 </div>
-                <div className="flex flex-row flex-nowrap justify-between gap-x-3 items-center">
-                  <p className="text-sm text-muted-foreground shrink-0">
+                <div className="flex flex-row flex-nowrap justify-between gap-x-3 items-center text-base">
+                  <p className="text-muted-foreground shrink-0">
                     {feature.description}
                   </p>
                   <div className="h-px w-full flex-grow border-dotted border-b-2 border-b-muted-foreground/60"></div>
-                  <p className="text-sm text-muted-foreground shrink-0">
+                  <p className="text-muted-foreground shrink-0">
                     {feature.duration}
                   </p>
                 </div>
