@@ -40,8 +40,8 @@ export function EmptyScreen({ append }: Pick<UseChatHelpers, "append">) {
                   });
                 }}
               >
+                <IconArrowRight className="mr-1" />
                 {example.heading}
-                <IconArrowRight className="ml-2" />
               </Button>
             </div>
           ))}

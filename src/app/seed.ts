@@ -89,6 +89,7 @@ const categories: { [key: string]: Array<{ title: string }> } = {
     { title: "What book do you want to read next?" },
     { title: "What motivates me?" },
     { title: "What are my main coping mechanisms? Are they serving me well?" },
+    { title: "What is your personal vision for yourself?" },
   ],
   "self-discovery": [
     { title: "When do you feel most connected to yourself?" },
@@ -224,6 +225,7 @@ const categories: { [key: string]: Array<{ title: string }> } = {
         "What is one simple adjustment you can make to your morning routine to help you care for yourself as you prepare for the day?",
     },
     { title: "What made me happiest this week?" },
+    { title: "What would make today great?" },
   ],
   gratitude: [
     { title: "List three things you’re grateful for about yourself today." },

@@ -16,7 +16,7 @@ function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (
     <Sheet>
       <SheetTrigger>
-        <div className="absolute top-0 left-0 translate-x-4 translate-y-5 md:translate-x-10 md:translate-y-10 z-50">
+        <div className="absolute top-0 left-0 translate-x-4 translate-y-5 md:translate-x-6 md:translate-y-8 z-50">
           <Button asChild variant="accent" className="rounded-full px-2">
             <div className="flex justify-between items-center gap-x-3 group">
               <div className="border border-primary rounded-full p-0.5">

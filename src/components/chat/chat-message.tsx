@@ -34,7 +34,7 @@ function ChatMessage({ message, ...props }: ChatMessageProps) {
       >
         {message.role === "user" ? <IconUser /> : <IconHeart />}
       </div>
-      <div className="flex-1 px-1 ml-4 overflow-hidden flex items-start justify-between">
+      <div className="flex-1 mt-1.5 px-1 ml-4 overflow-hidden flex items-start justify-between">
         <Markdown
           className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"
           remarkPlugins={[remarkGfm, remarkMath]}

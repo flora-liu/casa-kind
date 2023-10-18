@@ -3,6 +3,12 @@ import { Link } from "@/components/ui/link";
 
 const features = [
   {
+    name: "Journal",
+    description: "Create space to reflect",
+    href: "/journal",
+    duration: "5 - 10 mins",
+  },
+  {
     name: "Heart Talk",
     description: "Explore through conversation",
     href: "/heart-talk",
@@ -13,12 +19,6 @@ const features = [
     description: "Focus on the breath",
     href: "/meditate",
     duration: "5 / 10 / 15 mins",
-  },
-  {
-    name: "Journal",
-    description: "Create space to reflect",
-    href: "/journal",
-    duration: "5 - 10 mins",
   },
 ];
 

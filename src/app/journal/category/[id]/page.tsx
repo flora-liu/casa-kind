@@ -11,16 +11,18 @@ async function Page({ params }: { params: { id: string } }) {
   const prompts = await getPromptsByCategoryTitle(id);
   const categoryTitle = capitalizeWords(id);
   return (
-    <div className="my-16 md:my-12 min-h-screen w-full flex flex-col justify-center items-center">
+    <div className="my-16 min-h-screen w-full flex flex-col justify-center items-center">
       <div className="relative mx-auto sm:max-w-3xl md:max-w-5xl flex flex-col items-start justify-start w-full px-6 py-4 md:px-8 md:py-6">
-        <Link
-          href="/journal"
-          className="flex items-center text-sm md:text-base mb-4 md:mb-6"
-          variant="basic"
-        >
-          <IconArrowRight className="rotate-180 mr-1"></IconArrowRight>Back to
-          all
-        </Link>
+        <div className="mb-4 md:mb-6">
+          <Link
+            href="/journal"
+            className="flex items-center text-sm md:text-base"
+            variant="basic"
+          >
+            <IconArrowRight className="rotate-180 mr-1"></IconArrowRight>Back to
+            all
+          </Link>
+        </div>
         <div className="rounded-lg py-4 md:py-6 px-1.5 md:px-2 w-full">
           <h1 className="mb-3 text-xl font-semibold">{categoryTitle}</h1>
           <p className="leading-normal text-muted-foreground">
