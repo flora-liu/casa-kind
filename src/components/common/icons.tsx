@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { Loader, Loader2 } from "lucide-react";
 
 function IconHeart({ className, ...props }: React.ComponentProps<"svg">) {
   return (
@@ -322,7 +323,12 @@ function IconCross({ className, ...props }: React.ComponentProps<"svg">) {
   );
 }
 
+function IconLoading({ className }: React.ComponentProps<"svg">) {
+  return <Loader2 className={cn("h-4 w-4 animate-spin", className)} />;
+}
+
 export {
+  IconLoading,
   IconCross,
   IconChevronRight,
   IconChevronDown,

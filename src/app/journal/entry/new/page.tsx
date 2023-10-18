@@ -1,8 +1,19 @@
 import { IconCross } from "@/components/common/icons";
 import JournalForm from "@/components/journal/journal-form";
 import { Link } from "@/components/ui/link";
+import { getPromptById, getPromptOfTheDay } from "@/app/actions";
+import { Category, Prompt } from "@/lib/types";
 
-export default function Page() {
+async function Page({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const promptOfTheDay = await getPromptOfTheDay();
+  let selectedPrompt: { category: Category; prompt: Prompt } | null = null;
+  if (searchParams["prompt_id"]) {
+    selectedPrompt = await getPromptById(`${searchParams["prompt_id"]}`);
+  }
   return (
     <div className="min-h-screen">
       <div className="justify-start flex flex-col items-center mx-auto w-full">
@@ -17,8 +28,13 @@ export default function Page() {
         </div>
       </div>
       <div className="sm:max-w-2xl justify-start flex flex-col items-center mx-auto w-full">
-        <JournalForm />
+        <JournalForm
+          promptOfTheDay={promptOfTheDay}
+          selectedPrompt={selectedPrompt}
+        />
       </div>
     </div>
   );
 }
+
+export default Page;

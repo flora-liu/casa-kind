@@ -32,7 +32,7 @@ async function Page({ params }: { params: { id: string } }) {
       </div>
       <div className="relative mx-auto sm:max-w-3xl md:max-w-5xl px-4 w-full flex flex-col gap-y-4 md:gap-y-6">
         <div className="px-2 md:px-4 grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
-          {prompts?.map(({ title }, promptIndex) => (
+          {prompts?.map(({ title, id }, promptIndex) => (
             <div
               key={promptIndex}
               className={cn(
@@ -53,11 +53,14 @@ async function Page({ params }: { params: { id: string } }) {
               </p>
               <div>
                 <Button
+                  asChild
                   variant="outline"
                   size="sm"
                   className="bg-white hover:bg-white/80 text-muted-foreground text-sm"
                 >
-                  Answer <IconPencil className="ml-1.5 h-3 w-3" />
+                  <a href={`/journal/entry/new?prompt_id=${id}`}>
+                    <IconPencil className="mr-1.5 h-3 w-3" /> Answer
+                  </a>
                 </Button>
               </div>
             </div>

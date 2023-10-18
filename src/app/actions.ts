@@ -5,30 +5,89 @@ import { cookies } from "next/headers";
 import { Database } from "@/lib/database/types";
 import { Category, Prompt } from "@/lib/types";
 
-export async function getPrompts() {
+export async function getPromptById(id: string) {
   try {
     const cookieStore = cookies();
     const supabase = createServerActionClient<Database>({
       cookies: () => cookieStore,
     });
-    const { data } = await supabase.from("prompt").select();
+    const { data, status, error } = await supabase
+      .from("prompt")
+      .select(
+        `
+            *,
+            _category_to_prompt (
+              category (id, title, slug)
+            )
+          `
+      )
+      .eq("id", id)
+      .single();
 
-    return data?.map((entry) => entry) ?? [];
+    if (error && status !== 406) {
+      throw error;
+    }
+
+    if (data) {
+      if (
+        !data?._category_to_prompt ||
+        data?._category_to_prompt[0]?.category == null
+      ) {
+        return null;
+      }
+      const result: { category: Category; prompt: Prompt } = {
+        prompt: {
+          id: data.id,
+          title: data.title,
+        },
+        category: data?._category_to_prompt[0]?.category,
+      };
+      return result;
+    }
+    return null;
   } catch (error) {
-    return [];
+    return null;
   }
 }
 
-export async function getCategories() {
+export async function getPromptOfTheDay() {
+  // TODO: create job to select new prompt for each day
   try {
     const cookieStore = cookies();
     const supabase = createServerActionClient<Database>({
       cookies: () => cookieStore,
     });
-    const { data } = await supabase.from("category").select();
-    return data ?? [];
+    const { data } = await supabase
+      .from("prompt")
+      .select(
+        `
+        *,
+        _category_to_prompt (
+          category (id, title, slug)
+        )
+    `
+      )
+      .limit(1)
+      .single();
+    if (data) {
+      if (
+        !data?._category_to_prompt ||
+        data?._category_to_prompt[0]?.category == null
+      ) {
+        return null;
+      }
+      const result: { category: Category; prompt: Prompt } = {
+        prompt: {
+          id: data.id,
+          title: data.title,
+        },
+        category: data?._category_to_prompt[0]?.category,
+      };
+      return result;
+    }
+    return null;
   } catch (error) {
-    return [];
+    return null;
   }
 }
 

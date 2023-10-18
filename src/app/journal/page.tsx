@@ -7,7 +7,7 @@ import {
 } from "@/components/common/icons";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
-import { capitalizeWords, cn } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 const colors = [
   "bg-[#E2D6CA]",
@@ -96,7 +96,7 @@ async function Page() {
                   </div>
                 </div>
                 <div className="p-2 md:p-4 grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
-                  {prompts?.slice(0, 4)?.map(({ title }, promptIndex) => (
+                  {prompts?.slice(0, 4)?.map(({ title, id }, promptIndex) => (
                     <div
                       key={promptIndex}
                       className={cn(
@@ -125,9 +125,12 @@ async function Page() {
                         <Button
                           variant="outline"
                           size="sm"
+                          asChild
                           className="bg-white hover:bg-white/80 text-muted-foreground text-sm"
                         >
-                          <IconPencil className="mr-1.5 h-3 w-3" /> Answer
+                          <a href={`/journal/entry/new?prompt_id=${id}`}>
+                            <IconPencil className="mr-1.5 h-3 w-3" /> Answer
+                          </a>
                         </Button>
                       </div>
                     </div>
