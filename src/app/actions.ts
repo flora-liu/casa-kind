@@ -46,11 +46,6 @@ export async function getAllPromptsByCategory() {
         )
       `
     );
-    const result: Array<
-      Category & {
-        prompts: Array<Prompt>;
-      }
-    > = [];
     return data?.map((item) => {
       const prompts: Array<Prompt> = [];
       item?._category_to_prompt?.forEach((item) => {
