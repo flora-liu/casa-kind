@@ -66,7 +66,7 @@ export async function getAllPromptsByCategory() {
   }
 }
 
-export async function getPromptsByCategoryTitle(title: string) {
+export async function getPromptsByCategorySlug(slug: string) {
   try {
     const cookieStore = cookies();
     const supabase = createServerActionClient<Database>({
@@ -83,7 +83,7 @@ export async function getPromptsByCategoryTitle(title: string) {
         )
       `
       )
-      .eq("title", title)
+      .eq("slug", slug)
       .single();
 
     const prompts: Array<Prompt> = [];
@@ -94,63 +94,6 @@ export async function getPromptsByCategoryTitle(title: string) {
         }
       });
     }
-    return prompts;
-  } catch (error) {
-    return [];
-  }
-}
-
-export async function getPromptsByCategoryId(categoryId: string) {
-  try {
-    const cookieStore = cookies();
-    const supabase = createServerActionClient<Database>({
-      cookies: () => cookieStore,
-    });
-
-    const { data: prompts } = await supabase
-      .from("_category_to_prompt")
-      .select(`prompt (id, title)`)
-      .eq("A", categoryId)
-      .not("prompt", "is", null);
-
-    const result: Array<Prompt> | undefined = prompts
-      ?.map((item) => item.prompt)
-      ?.filter((item): item is Prompt => item !== null);
-    return result;
-  } catch (error) {
-    return [];
-  }
-}
-
-export async function getScratch(categoryId: string) {
-  console.log(`categoryId: ${categoryId}`);
-  try {
-    const cookieStore = cookies();
-    const supabase = createServerActionClient<Database>({
-      cookies: () => cookieStore,
-    });
-
-    const { data: prompts } = await supabase
-      .from("_CategoryToPrompt")
-      .select(
-        `
-          Category(id, title),
-          Prompt (id, title)
-      `
-      )
-      .eq("A", categoryId);
-
-    // const { data: categoryToPrompt } = await supabase
-    //   .from("_CategoryToPrompt")
-    //   .select()
-    //   .eq("A", categoryId);
-    // const promptIds = categoryToPrompt?.map((item) => item.B) || [];
-    // const { data: prompts } = await supabase
-    //   .from("Prompt")
-    //   .select()
-    //   .in("id", promptIds)
-    //   .order("createdAt", { ascending: false });
-
     return prompts;
   } catch (error) {
     return [];

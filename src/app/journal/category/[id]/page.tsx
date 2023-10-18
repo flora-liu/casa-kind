@@ -1,14 +1,14 @@
-import { getPromptsByCategoryTitle } from "@/app/actions";
+import { getPromptsByCategorySlug } from "@/app/actions";
 import { IconArrowRight, IconPencil } from "@/components/common/icons";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
 import { capitalizeWords, cn } from "@/lib/utils";
 
-const limit = 12;
+const limit = 15;
 
 async function Page({ params }: { params: { id: string } }) {
   const { id } = params;
-  const prompts = await getPromptsByCategoryTitle(id);
+  const prompts = await getPromptsByCategorySlug(id);
   const categoryTitle = capitalizeWords(id);
   return (
     <div className="my-16 min-h-screen w-full flex flex-col justify-center items-center">
