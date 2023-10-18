@@ -73,15 +73,11 @@ async function Page() {
       </div>
       <div className="relative mx-auto sm:max-w-3xl md:max-w-5xl p-4 w-full flex flex-col gap-y-4 md:gap-y-6">
         {categories &&
-          Object.keys(categories)?.map((key, categoryIndex) => {
-            if (
-              !categories[key] ||
-              (categories[key] && categories[key]?.length === 0)
-            ) {
+          categories?.map((category, categoryIndex) => {
+            const { prompts, title: categoryTitle, slug } = category;
+            if (prompts?.length === 0) {
               return null;
             }
-            const categoryTitle = capitalizeWords(key);
-            const prompts = categories[key];
             return (
               <div key={categoryIndex}>
                 <div className="px-3 md:px-5 flex justify-between items-center">
@@ -92,7 +88,7 @@ async function Page() {
                     <Link
                       variant="basic"
                       className="flex item-center"
-                      href={`/journal/category/${key}`}
+                      href={`/journal/category/${slug}`}
                     >
                       <p className="text-sm md:text-base">See more</p>
                       <IconArrowRight className="ml-1" />

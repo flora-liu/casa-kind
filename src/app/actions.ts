@@ -3,7 +3,7 @@ import "server-only";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { Database } from "@/lib/database/types";
-import { Prompt } from "@/lib/types";
+import { Category, Prompt } from "@/lib/types";
 
 export async function getPrompts() {
   try {
@@ -46,22 +46,26 @@ export async function getAllPromptsByCategory() {
         )
       `
     );
-    const result: { [key: string]: Array<Prompt> } = {};
-    data?.forEach((item) => {
-      if (item?._category_to_prompt) {
-        item?._category_to_prompt.forEach((categoryToPrompt) => {
-          if (categoryToPrompt.prompt && categoryToPrompt.prompt !== null) {
-            const title = item?.title;
-            if (!result[title]) {
-              result[title] = [];
-            }
-            result[title].push(categoryToPrompt.prompt);
-          }
-        });
+    const result: Array<
+      Category & {
+        prompts: Array<Prompt>;
       }
+    > = [];
+    return data?.map((item) => {
+      const prompts: Array<Prompt> = [];
+      item?._category_to_prompt?.forEach((item) => {
+        if (item?.prompt && item?.prompt !== null) {
+          prompts.push(item?.prompt);
+        }
+      });
+      const result: Category & {
+        prompts: Array<Prompt>;
+      } = {
+        prompts,
+        ...item,
+      };
+      return result;
     });
-
-    return result;
   } catch (error) {
     return null;
   }
