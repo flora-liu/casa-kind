@@ -10,35 +10,35 @@ datasource db {
   extensions = [uuid_ossp(map: "uuid-ossp")]
 }
 
-model User {
-  id        String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+model profile {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   firstName String?
   lastName  String?
   email     String?
-  entry     Entry[]
+  entry     entry[]
+  createdAt DateTime @default(now()) @db.Date
 }
 
-model Category {
+model category {
   id      String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   title   String   @unique
-  prompts Prompt[] @relation("CategoryToPrompt")
+  slug    String   @unique
+  prompts prompt[] @relation("category_to_prompt")
 }
 
-model Prompt {
-  id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  createdAt   DateTime   @default(now()) @db.Date
-  title       String
-  description String?
-  entries     Entry[]
-  categories  Category[] @relation("CategoryToPrompt")
+model prompt {
+  id         String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title      String
+  entries    entry[]
+  categories category[] @relation("category_to_prompt")
 }
 
-model Entry {
+model entry {
   id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   createdAt DateTime @db.Date
   userId    String   @db.Uuid
   content   String
   promptId  String   @db.Uuid
-  prompt    Prompt   @relation(fields: [promptId], references: [id])
-  createdBy User     @relation(fields: [userId], references: [id])
+  prompt    prompt   @relation(fields: [promptId], references: [id])
+  createdBy profile  @relation(fields: [userId], references: [id])
 }

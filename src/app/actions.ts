@@ -11,10 +11,7 @@ export async function getPrompts() {
     const supabase = createServerActionClient<Database>({
       cookies: () => cookieStore,
     });
-    const { data } = await supabase
-      .from("Prompt")
-      .select()
-      .order("createdAt", { ascending: false });
+    const { data } = await supabase.from("prompt").select();
 
     return data?.map((entry) => entry) ?? [];
   } catch (error) {
@@ -28,7 +25,7 @@ export async function getCategories() {
     const supabase = createServerActionClient<Database>({
       cookies: () => cookieStore,
     });
-    const { data } = await supabase.from("Category").select();
+    const { data } = await supabase.from("category").select();
     return data ?? [];
   } catch (error) {
     return [];
@@ -41,24 +38,24 @@ export async function getAllPromptsByCategory() {
     const supabase = createServerActionClient<Database>({
       cookies: () => cookieStore,
     });
-    const { data } = await supabase.from("Category").select(
+    const { data } = await supabase.from("category").select(
       `
         *,
-        _CategoryToPrompt (
-          Prompt (id, title)
+        _category_to_prompt (
+          prompt (id, title)
         )
       `
     );
     const result: { [key: string]: Array<Prompt> } = {};
     data?.forEach((item) => {
-      if (item?._CategoryToPrompt) {
-        item?._CategoryToPrompt.forEach((categoryToPrompt) => {
-          if (categoryToPrompt.Prompt && categoryToPrompt.Prompt !== null) {
+      if (item?._category_to_prompt) {
+        item?._category_to_prompt.forEach((categoryToPrompt) => {
+          if (categoryToPrompt.prompt && categoryToPrompt.prompt !== null) {
             const title = item?.title;
             if (!result[title]) {
               result[title] = [];
             }
-            result[title].push(categoryToPrompt.Prompt);
+            result[title].push(categoryToPrompt.prompt);
           }
         });
       }
@@ -78,12 +75,12 @@ export async function getPromptsByCategoryTitle(title: string) {
     });
 
     const { data } = await supabase
-      .from("Category")
+      .from("category")
       .select(
         `
         *,
-        _CategoryToPrompt (
-          Prompt (id, title)
+        _category_to_prompt (
+          prompt (id, title)
         )
       `
       )
@@ -91,10 +88,10 @@ export async function getPromptsByCategoryTitle(title: string) {
       .single();
 
     const prompts: Array<Prompt> = [];
-    if (data?._CategoryToPrompt) {
-      data?._CategoryToPrompt.forEach((categoryToPrompt) => {
-        if (categoryToPrompt.Prompt && categoryToPrompt.Prompt !== null) {
-          prompts.push(categoryToPrompt.Prompt);
+    if (data?._category_to_prompt) {
+      data?._category_to_prompt.forEach((categoryToPrompt) => {
+        if (categoryToPrompt.prompt && categoryToPrompt.prompt !== null) {
+          prompts.push(categoryToPrompt.prompt);
         }
       });
     }
@@ -112,15 +109,50 @@ export async function getPromptsByCategoryId(categoryId: string) {
     });
 
     const { data: prompts } = await supabase
-      .from("_CategoryToPrompt")
-      .select(`Prompt (id, title)`)
+      .from("_category_to_prompt")
+      .select(`prompt (id, title)`)
       .eq("A", categoryId)
-      .not("Prompt", "is", null);
+      .not("prompt", "is", null);
 
     const result: Array<Prompt> | undefined = prompts
-      ?.map((item) => item.Prompt)
+      ?.map((item) => item.prompt)
       ?.filter((item): item is Prompt => item !== null);
     return result;
+  } catch (error) {
+    return [];
+  }
+}
+
+export async function getScratch(categoryId: string) {
+  console.log(`categoryId: ${categoryId}`);
+  try {
+    const cookieStore = cookies();
+    const supabase = createServerActionClient<Database>({
+      cookies: () => cookieStore,
+    });
+
+    const { data: prompts } = await supabase
+      .from("_CategoryToPrompt")
+      .select(
+        `
+          Category(id, title),
+          Prompt (id, title)
+      `
+      )
+      .eq("A", categoryId);
+
+    // const { data: categoryToPrompt } = await supabase
+    //   .from("_CategoryToPrompt")
+    //   .select()
+    //   .eq("A", categoryId);
+    // const promptIds = categoryToPrompt?.map((item) => item.B) || [];
+    // const { data: prompts } = await supabase
+    //   .from("Prompt")
+    //   .select()
+    //   .in("id", promptIds)
+    //   .order("createdAt", { ascending: false });
+
+    return prompts;
   } catch (error) {
     return [];
   }

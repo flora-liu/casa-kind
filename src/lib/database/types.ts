@@ -9,7 +9,7 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      _CategoryToPrompt: {
+      _category_to_prompt: {
         Row: {
           A: string
           B: string
@@ -24,15 +24,15 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "_CategoryToPrompt_A_fkey"
+            foreignKeyName: "_category_to_prompt_A_fkey"
             columns: ["A"]
-            referencedRelation: "Category"
+            referencedRelation: "category"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "_CategoryToPrompt_B_fkey"
+            foreignKeyName: "_category_to_prompt_B_fkey"
             columns: ["B"]
-            referencedRelation: "Prompt"
+            referencedRelation: "prompt"
             referencedColumns: ["id"]
           }
         ]
@@ -70,22 +70,25 @@ export interface Database {
         }
         Relationships: []
       }
-      Category: {
+      category: {
         Row: {
           id: string
+          slug: string
           title: string
         }
         Insert: {
           id?: string
+          slug: string
           title: string
         }
         Update: {
           id?: string
+          slug?: string
           title?: string
         }
         Relationships: []
       }
-      Entry: {
+      entry: {
         Row: {
           content: string
           createdAt: string
@@ -109,58 +112,55 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "Entry_promptId_fkey"
+            foreignKeyName: "entry_promptId_fkey"
             columns: ["promptId"]
-            referencedRelation: "Prompt"
+            referencedRelation: "prompt"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "Entry_userId_fkey"
+            foreignKeyName: "entry_userId_fkey"
             columns: ["userId"]
-            referencedRelation: "User"
+            referencedRelation: "profile"
             referencedColumns: ["id"]
           }
         ]
       }
-      Prompt: {
+      profile: {
         Row: {
           createdAt: string
-          description: string | null
-          id: string
-          title: string
-        }
-        Insert: {
-          createdAt: string
-          description?: string | null
-          id?: string
-          title: string
-        }
-        Update: {
-          createdAt?: string
-          description?: string | null
-          id?: string
-          title?: string
-        }
-        Relationships: []
-      }
-      User: {
-        Row: {
           email: string | null
           firstName: string | null
           id: string
           lastName: string | null
         }
         Insert: {
+          createdAt?: string
           email?: string | null
           firstName?: string | null
           id?: string
           lastName?: string | null
         }
         Update: {
+          createdAt?: string
           email?: string | null
           firstName?: string | null
           id?: string
           lastName?: string | null
+        }
+        Relationships: []
+      }
+      prompt: {
+        Row: {
+          id: string
+          title: string
+        }
+        Insert: {
+          id?: string
+          title: string
+        }
+        Update: {
+          id?: string
+          title?: string
         }
         Relationships: []
       }
@@ -169,10 +169,7 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
-      handle_new_user: {
-        Args: Record<PropertyKey, never>
-        Returns: undefined
-      }
+      [_ in never]: never
     }
     Enums: {
       [_ in never]: never
