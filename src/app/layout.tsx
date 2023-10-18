@@ -7,7 +7,6 @@ import { Nav } from "@/components/common/nav";
 import { getSession } from "@/app/auth";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import AuthProvider from "@/components/common/auth-provider";
 
 export const runtime = "edge";
 
@@ -57,7 +56,13 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head />
       <body className={inter.className}>
-        <Providers attribute="class" defaultTheme="light" enableSystem>
+        <Providers
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          accessToken={session?.access_token || null}
+          userId={session?.user?.id}
+        >
           <div
             className={cn(
               "flex flex-col min-h-screen relative text-foreground text-base",
@@ -67,9 +72,7 @@ export default async function RootLayout({
           >
             <Nav isLoggedIn={!!session?.user} />
             <main className="flex flex-col flex-1 bg-background h-full">
-              <AuthProvider accessToken={session?.access_token || null}>
-                {children}
-              </AuthProvider>
+              {children}
             </main>
           </div>
         </Providers>

@@ -3,6 +3,8 @@ import JournalForm from "@/components/journal/journal-form";
 import { Link } from "@/components/ui/link";
 import { getPromptById, getPromptOfTheDay } from "@/app/actions";
 import { Category, Prompt } from "@/lib/types";
+import { getSession } from "@/app/auth";
+import { redirect } from "next/navigation";
 
 async function Page({
   searchParams,
@@ -14,6 +16,11 @@ async function Page({
   if (searchParams["prompt_id"]) {
     selectedPrompt = await getPromptById(`${searchParams["prompt_id"]}`);
   }
+  const session = await getSession();
+  if (!session) {
+    redirect("/sign-in");
+  }
+
   return (
     <div className="min-h-screen">
       <div className="justify-start flex flex-col items-center mx-auto w-full">

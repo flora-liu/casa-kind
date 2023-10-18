@@ -6,6 +6,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { IconCheck } from "../common/icons";
 import { Category, Prompt } from "@/lib/types";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { Database } from "@/lib/database/types";
+import { useAuthContext } from "../common/auth-provider";
 
 interface JournalFormProps {
   promptOfTheDay?: {
@@ -23,6 +26,8 @@ export default function JournalForm({
   selectedPrompt,
 }: JournalFormProps) {
   const [input, setInput] = useState<string>("");
+  const supabase = createClientComponentClient<Database>();
+  const { userId } = useAuthContext();
 
   return (
     <div className="px-5 md:px-0 w-full">

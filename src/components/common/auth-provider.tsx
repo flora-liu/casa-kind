@@ -1,17 +1,29 @@
 "use client";
 
-import { useEffect } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 
-interface AuthProviderProps {
+interface AuthContextProps {
+  userId?: string;
+}
+
+const AuthContext = createContext<AuthContextProps>({
+  userId: undefined,
+});
+
+export const useAuthContext = () => useContext(AuthContext);
+
+export interface AuthProviderProps {
   children: React.ReactNode;
   accessToken: string | null;
+  userId?: string;
 }
 
 const AuthProvider: React.FC<AuthProviderProps> = ({
   accessToken,
   children,
+  userId,
 }) => {
   const supabase = createClientComponentClient();
   const router = useRouter();
@@ -32,7 +44,9 @@ const AuthProvider: React.FC<AuthProviderProps> = ({
     };
   }, [accessToken, supabase, router]);
 
-  return children;
+  return (
+    <AuthContext.Provider value={{ userId }}>{children}</AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;

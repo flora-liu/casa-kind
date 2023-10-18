@@ -39,5 +39,5 @@ export async function middleware(req: NextRequest) {
 
 /** We really only need this middleware to run on authenticated routes */
 export const config = {
-  matcher: [landingPath, authenticatedPaths, authPaths],
+  matcher: ["/", "/home", "/heart-talk", "/meditate", "/journal"],
 };
