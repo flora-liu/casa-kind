@@ -11,6 +11,7 @@ import { Database } from "@/lib/database/types";
 import { useAuthContext } from "@/components/common/auth-provider";
 import { getDateFormatted } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import JournalHeader from "@/components/journal/journal-header";
 
 enum EntryMode {
   PromptOfTheDay = "prompt-of-the-day",
@@ -127,49 +128,33 @@ export default function JournalForm({
         )}
         {selectedPrompt?.prompt && (
           <TabsContent value={EntryMode.Prompt} className="w-full">
-            {selectedPrompt?.category?.title && (
-              <p className="pt-4 md:pt-8 pb-2 md:pb-3 leading-normal text-sm md:text-base text-muted-foreground">
-                {selectedPrompt?.category?.title}
-              </p>
-            )}
-            <p className="font-relative tracking-tight text-2xl md:text-3xl">
-              {selectedPrompt?.prompt.title}
-            </p>
+            <JournalHeader
+              leading={selectedPrompt?.category?.title}
+              title={selectedPrompt?.prompt?.title}
+            />
           </TabsContent>
         )}
         {promptOfTheDay?.prompt && (
           <TabsContent value={EntryMode.PromptOfTheDay} className="w-full">
-            {promptOfTheDay?.category?.title && (
-              <p className="pt-4 md:pt-8 pb-2 md:pb-3 leading-normal text-sm md:text-base text-muted-foreground">
-                {promptOfTheDay?.category?.title}
-              </p>
-            )}
-            <p className="font-relative tracking-tight text-2xl md:text-3xl">
-              {promptOfTheDay.prompt.title}
-            </p>
+            <JournalHeader
+              leading={promptOfTheDay?.category?.title}
+              title={promptOfTheDay.prompt.title}
+            />
           </TabsContent>
         )}
         <TabsContent value={EntryMode.FreeForm} className="w-full">
-          <p className="pt-4 md:pt-8 pb-2 md:pb-3 leading-normal text-sm md:text-base text-muted-foreground">
-            Stream of consciousness
-          </p>
-          <p className="font-relative tracking-tight text-2xl md:text-3xl">
-            What&apos;s on your mind? How is your heart?
-          </p>
+          <JournalHeader
+            leading="Stream of consciousness"
+            title="What's on your mind? How is your heart?"
+          />
         </TabsContent>
         {entry && (
           <TabsContent value={EntryMode.Edit} className="w-full">
-            <p className="pt-4 md:pt-8 pb-2 md:pb-3 leading-normal text-sm md:text-base text-muted-foreground">
-              {entry?.prompt?.category?.title
-                ? entry.prompt.category?.title
-                : "Free form"}
-            </p>
-            <p className="font-relative tracking-tight text-2xl md:text-3xl mb-6">
-              {entry?.prompt?.title ? entry.prompt.title : "Journal entry"}
-            </p>
-            <div className="text-muted-foreground text-sm">
-              <p>{getDateFormatted(new Date(entry.createdAt))}</p>
-            </div>
+            <JournalHeader
+              leading={entry?.prompt?.category?.title || "Free form"}
+              title={entry?.prompt?.title || "Journal entry"}
+              date={entry.createdAt}
+            />
           </TabsContent>
         )}
       </Tabs>

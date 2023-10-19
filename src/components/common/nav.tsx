@@ -32,9 +32,9 @@ function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
           {isLoggedIn ? (
             <>
               <a href="/home">Home</a>
+              <a href="/journal">Journal</a>
               <a href="/heart-talk">Heart Talk</a>
               <a href="/meditate">Meditate</a>
-              <a href="/journal">Journal</a>
               <button className="text-left" onClick={signOut}>
                 Sign Out
               </button>
