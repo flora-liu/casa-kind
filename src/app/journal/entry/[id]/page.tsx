@@ -18,7 +18,7 @@ async function Page({ params: { id } }: { params: { id: string } }) {
           </Link>
         </div>
       </div>
-      <div className="sm:max-w-2xl justify-start flex flex-col items-center mx-auto w-full">
+      <div className="sm:max-w-2xl justify-start flex flex-col items-center mx-auto w-full pb-8 md:pb-12">
         <JournalRenderer entry={entry} />
       </div>
     </div>
