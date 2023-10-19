@@ -3,9 +3,16 @@ import "server-only";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { Database } from "@/lib/database/types";
-import { Category, Entry, Prompt } from "@/lib/types";
+import { Category, Entry, Prompt, PromptWithCategory } from "@/lib/types";
+import {
+  isCategory,
+  isEntry,
+  parseCategory,
+  parseEntry,
+  parsePrompt,
+} from "@/lib/journal";
 
-export async function getEntryById(id: string) {
+export async function getEntryById(id: string): Promise<Entry | null> {
   try {
     const cookieStore = cookies();
     const supabase = createServerActionClient<Database>({
@@ -31,32 +38,52 @@ export async function getEntryById(id: string) {
       throw error;
     }
 
-    if (data) {
-      const entry: Entry = {
-        content: data.content,
-        createdAt: data.createdAt,
-        id: data.id,
-      };
-      if (
-        data?.prompt &&
-        data?.prompt?._category_to_prompt &&
-        data?.prompt?._category_to_prompt[0]?.category !== null
-      ) {
-        entry.prompt = {
-          id: data.prompt.id,
-          title: data.prompt.title,
-          category: data?.prompt._category_to_prompt[0]?.category,
-        };
-      }
-      return entry;
-    }
-    return null;
+    return parseEntry(data);
   } catch (error) {
     return null;
   }
 }
 
-export async function getPromptById(id: string) {
+export async function getAllEntriesForUser(
+  userId: string
+): Promise<Array<Entry> | null> {
+  try {
+    const cookieStore = cookies();
+    const supabase = createServerActionClient<Database>({
+      cookies: () => cookieStore,
+    });
+    const { data, status, error } = await supabase
+      .from("entry")
+      .select(
+        `
+            *,
+            prompt (
+              *,
+              _category_to_prompt (
+                category (id, title, slug)
+              )
+            )
+          `
+      )
+      .eq("userId", userId);
+
+    if (error && status !== 406) {
+      throw error;
+    }
+
+    let result: Array<Entry> | null = null;
+    if (data) {
+      result = data?.map((item) => parseEntry(item))?.filter(isEntry);
+    }
+    return result;
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function getPromptById(
+  id: string
+): Promise<PromptWithCategory | null> {
   try {
     const cookieStore = cookies();
     const supabase = createServerActionClient<Database>({
@@ -79,29 +106,13 @@ export async function getPromptById(id: string) {
       throw error;
     }
 
-    if (data) {
-      if (
-        !data?._category_to_prompt ||
-        data?._category_to_prompt[0]?.category == null
-      ) {
-        return null;
-      }
-      const result: { category: Category; prompt: Prompt } = {
-        prompt: {
-          id: data.id,
-          title: data.title,
-        },
-        category: data?._category_to_prompt[0]?.category,
-      };
-      return result;
-    }
-    return null;
+    return parsePrompt(data) || null;
   } catch (error) {
     return null;
   }
 }
 
-export async function getPromptOfTheDay() {
+export async function getPromptOfTheDay(): Promise<PromptWithCategory | null> {
   // TODO: create job to select new prompt for each day
   try {
     const cookieStore = cookies();
@@ -120,29 +131,14 @@ export async function getPromptOfTheDay() {
       )
       .limit(1)
       .single();
-    if (data) {
-      if (
-        !data?._category_to_prompt ||
-        data?._category_to_prompt[0]?.category == null
-      ) {
-        return null;
-      }
-      const result: { category: Category; prompt: Prompt } = {
-        prompt: {
-          id: data.id,
-          title: data.title,
-        },
-        category: data?._category_to_prompt[0]?.category,
-      };
-      return result;
-    }
-    return null;
+
+    return parsePrompt(data) || null;
   } catch (error) {
     return null;
   }
 }
 
-export async function getAllPromptsByCategory() {
+export async function getAllPromptsByCategory(): Promise<Array<Category> | null> {
   try {
     const cookieStore = cookies();
     const supabase = createServerActionClient<Database>({
@@ -156,27 +152,15 @@ export async function getAllPromptsByCategory() {
         )
       `
     );
-    return data?.map((item) => {
-      const prompts: Array<Prompt> = [];
-      item?._category_to_prompt?.forEach((item) => {
-        if (item?.prompt && item?.prompt !== null) {
-          prompts.push(item?.prompt);
-        }
-      });
-      const result: Category & {
-        prompts: Array<Prompt>;
-      } = {
-        prompts,
-        ...item,
-      };
-      return result;
-    });
+    return data?.map((item) => parseCategory(item))?.filter(isCategory) || null;
   } catch (error) {
     return null;
   }
 }
 
-export async function getPromptsByCategorySlug(slug: string) {
+export async function getCategoryBySlug(
+  slug: string
+): Promise<Category | null> {
   try {
     const cookieStore = cookies();
     const supabase = createServerActionClient<Database>({
@@ -196,16 +180,8 @@ export async function getPromptsByCategorySlug(slug: string) {
       .eq("slug", slug)
       .single();
 
-    const prompts: Array<Prompt> = [];
-    if (data?._category_to_prompt) {
-      data?._category_to_prompt.forEach((categoryToPrompt) => {
-        if (categoryToPrompt.prompt && categoryToPrompt.prompt !== null) {
-          prompts.push(categoryToPrompt.prompt);
-        }
-      });
-    }
-    return prompts;
+    return parseCategory(data || null);
   } catch (error) {
-    return [];
+    return null;
   }
 }

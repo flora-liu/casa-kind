@@ -1,9 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { Entry } from "@/lib/types";
 import JournalDisplay from "@/components/journal/journal-display";
 import JournalForm from "@/components/journal/journal-form";
-import { useState } from "react";
 
 interface JournalRendererProps {
   entry?: Entry | null;
@@ -11,9 +11,11 @@ interface JournalRendererProps {
 
 export default function JournalRenderer({ entry }: JournalRendererProps) {
   const [isEditing, setIsEditing] = useState<boolean>(false);
+
   if (!entry) {
     return null;
   }
+
   return (
     <>
       {isEditing ? (

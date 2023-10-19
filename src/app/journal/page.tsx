@@ -5,6 +5,10 @@ import {
   IconPencil,
   IconPlus,
 } from "@/components/common/icons";
+import {
+  PromptCard,
+  PromptCardContainer,
+} from "@/components/journal/prompt-card";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
 import { cn } from "@/lib/utils";
@@ -17,8 +21,6 @@ const colors = [
   "bg-[#E3DECB]",
   "bg-[#E2D6CA]",
 ];
-
-const limit = 12;
 
 async function Page() {
   const categories = await getAllPromptsByCategory();
@@ -95,47 +97,20 @@ async function Page() {
                     </Link>
                   </div>
                 </div>
-                <div className="p-2 md:p-4 grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
+                <PromptCardContainer>
                   {prompts?.slice(0, 4)?.map(({ title, id }, promptIndex) => (
-                    <div
+                    <PromptCard
+                      categoryTitle={categoryTitle}
+                      promptId={id}
+                      promptTitle={title}
                       key={promptIndex}
                       className={cn(
                         promptIndex === 3 ? "md:hidden" : "",
-                        "gap-y-2.5 md:gap-y-3 h-52 md:min-h-60 md:h-96 bg-secondary rounded-lg p-3 sm:p-5 flex flex-col justify-between",
                         colors[categoryIndex % colors.length]
                       )}
-                    >
-                      <div className="flex justify-start">
-                        <p className="text-sm text-muted-foreground">
-                          {categoryTitle}
-                        </p>
-                      </div>
-                      <p className="sm:text-lg md:text-3xl font-relative tracking-tight">
-                        <span className="sm:hidden">
-                          {title.split(" ").length <= limit
-                            ? title
-                            : `${title
-                                .split(" ")
-                                .slice(0, limit)
-                                .join(" ")}...`}
-                        </span>
-                        <span className="hidden sm:block">{title}</span>
-                      </p>
-                      <div>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          asChild
-                          className="bg-white hover:bg-white/80 text-muted-foreground text-sm"
-                        >
-                          <a href={`/journal/entry/new?prompt_id=${id}`}>
-                            <IconPencil className="mr-1.5 h-3 w-3" /> Answer
-                          </a>
-                        </Button>
-                      </div>
-                    </div>
+                    />
                   ))}
-                </div>
+                </PromptCardContainer>
               </div>
             );
           })}

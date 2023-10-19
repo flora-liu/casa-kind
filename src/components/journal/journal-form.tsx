@@ -4,12 +4,11 @@ import { useState } from "react";
 import Textarea from "react-textarea-autosize";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { IconCheck, IconCross } from "@/components/common/icons";
+import { IconCheck, IconCross, IconLoading } from "@/components/common/icons";
 import { Category, Entry, Prompt } from "@/lib/types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Database } from "@/lib/database/types";
 import { useAuthContext } from "@/components/common/auth-provider";
-import { getDateFormatted } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import JournalHeader from "@/components/journal/journal-header";
 
@@ -51,6 +50,7 @@ export default function JournalForm({
   const [input, setInput] = useState<string>(entry?.content || "");
   const [error, setError] = useState<string | undefined>();
   const supabase = createClientComponentClient<Database>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { userId } = useAuthContext();
   const router = useRouter();
 
@@ -100,8 +100,9 @@ export default function JournalForm({
       setError(error?.message);
     }
     if (data) {
+      setIsLoading(false);
       onCancelEdit?.();
-      router.push(`/journal/entry/${data.id}`);
+      router.refresh();
     }
   }
 
@@ -152,7 +153,7 @@ export default function JournalForm({
           <TabsContent value={EntryMode.Edit} className="w-full">
             <JournalHeader
               leading={entry?.prompt?.category?.title || "Free form"}
-              title={entry?.prompt?.title || "Journal entry"}
+              title={entry?.prompt?.prompt.title || "Journal entry"}
               date={entry.createdAt}
             />
           </TabsContent>
@@ -166,7 +167,7 @@ export default function JournalForm({
           onChange={(e) => setInput(e.target.value)}
           placeholder="Enter your thoughts"
           spellCheck={false}
-          className="whitespace-pre-line min-h-[50vh] w-full resize-none rounded-md bg-background p-4 focus-within:outline-none text-sm md:text-base border border-input ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+          className="whitespace-pre-line min-h-[40vh] md:min-h-[45vh] w-full resize-none rounded-md bg-background p-4 focus-within:outline-none text-sm md:text-base border border-input ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
         />
       </div>
       {error && (
@@ -179,6 +180,7 @@ export default function JournalForm({
           size="md"
           className="flex items-center"
           onClick={() => {
+            setIsLoading(true);
             if (entry?.id) {
               updateJournalEntry();
             } else {
@@ -186,8 +188,17 @@ export default function JournalForm({
             }
           }}
         >
-          <IconCheck className="mr-1" />
-          Save
+          {isLoading ? (
+            <>
+              <IconLoading className="mr-1" />
+              Saving
+            </>
+          ) : (
+            <>
+              <IconCheck className="mr-1" />
+              Save
+            </>
+          )}
         </Button>
         {onCancelEdit && (
           <Button
