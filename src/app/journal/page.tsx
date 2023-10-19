@@ -11,6 +11,7 @@ import {
 } from "@/components/journal/prompt-card";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
+import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 
 const colors = [
@@ -50,6 +51,7 @@ async function Page() {
           </div>
         </div>
       </div>
+      <Separator className="my-4" />
       <div className="relative mx-auto sm:max-w-3xl md:max-w-5xl w-full flex flex-col gap-y-4 md:gap-y-6">
         <div className="px-6 md:px-8 p-4 md:p-6 flex flex-col gap-y-4 md:gap-y-6">
           <h3 className="mb-3 text-base md:text-lg font-semibold">
@@ -81,7 +83,7 @@ async function Page() {
               return null;
             }
             return (
-              <div key={categoryIndex}>
+              <div key={categoryIndex} className="py-2 md:py-3">
                 <div className="px-3 md:px-5 flex justify-between items-center">
                   <h3 className="mb-3 text-base md:text-lg font-semibold">
                     {categoryTitle}
@@ -89,11 +91,11 @@ async function Page() {
                   <div className="flex items-center">
                     <Link
                       variant="basic"
-                      className="flex item-center"
+                      className="flex items-center"
                       href={`/journal/category/${slug}`}
                     >
                       <p className="text-sm md:text-base">See more</p>
-                      <IconArrowRight className="ml-1" />
+                      <IconArrowRight className="ml-0.5 mr:ml-1 h-3 w-3 md:h-4 md:w-4" />
                     </Link>
                   </div>
                 </div>

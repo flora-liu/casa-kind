@@ -2,9 +2,13 @@ import { getEntryById } from "@/app/actions";
 import { IconCross } from "@/components/common/icons";
 import { EntryRenderer } from "@/components/journal/entry-renderer";
 import { Link } from "@/components/ui/link";
+import { redirect } from "next/navigation";
 
 async function Page({ params: { id } }: { params: { id: string } }) {
   const entry = await getEntryById(id);
+  if (!entry) {
+    redirect("/journal");
+  }
   return (
     <div className="min-h-screen">
       <div className="justify-start flex flex-col items-center mx-auto w-full">

@@ -34,18 +34,12 @@ export function EntryDisplay({ entry, onEdit }: EntryDisplayProps) {
     if (!userId || !entry?.id) {
       return;
     }
-    console.log(`entryId: ${entry.id}`);
-    const { data, error } = await supabase
-      .from("entry")
-      .delete()
-      .eq("id", entry.id);
+    const { error } = await supabase.from("entry").delete().eq("id", entry.id);
     if (error) {
       setError(error?.message);
+    } else {
+      router.push("/journal/entries");
     }
-    console.log(data);
-    // if (data) {
-    //   router.push("/journal/entries");
-    // }
   }
 
   return (

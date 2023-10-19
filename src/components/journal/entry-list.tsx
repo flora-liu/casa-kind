@@ -1,7 +1,6 @@
 import { Entry } from "@/lib/types";
 import { IconPlus, IconTokens } from "@/components/common/icons";
 import { Button } from "@/components/ui/button";
-import { EntryDisplay } from "@/components/journal/entry-display";
 import { Separator } from "@/components/ui/separator";
 import { EntryCard } from "./entry-card";
 
@@ -30,15 +29,13 @@ export function EntryList({ entries }: EntryListProps) {
           </div>
         </div>
       </div>
-      <div className="relative mx-auto sm:max-w-3xl md:max-w-5xl p-6 md:p-8 w-full flex flex-col">
+      <Separator className="my-4" />
+      <div className="relative mx-auto sm:max-w-3xl md:max-w-5xl px-6 md:px-8 py-4 md:py-6 w-full flex flex-col">
         {entries &&
           entries?.map((entry, index) => {
             return (
               <div key={index}>
                 <EntryCard entry={entry} />
-                {index < entries.length - 1 && (
-                  <Separator className="my-4 md:my-8" />
-                )}
               </div>
             );
           })}

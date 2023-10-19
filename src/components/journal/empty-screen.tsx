@@ -20,7 +20,7 @@ export function EmptyScreen() {
         <div className="mt-6 flex flex-col items-start space-y-2">
           <div className="flex items-center">
             <Button size="md" asChild>
-              <a href="/journal">
+              <a href="/journal/entry/new">
                 <IconArrowRight className="mr-1" />
                 Get started
               </a>
