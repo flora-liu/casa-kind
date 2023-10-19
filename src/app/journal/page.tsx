@@ -25,7 +25,7 @@ const colors = [
 async function Page() {
   const categories = await getAllPromptsByCategory();
   return (
-    <div className="my-16 min-h-screen w-full flex flex-col justify-center items-center">
+    <div className="my-16 min-h-screen w-full flex flex-col justify-start items-center">
       <div className="relative mx-auto sm:max-w-3xl md:max-w-5xl flex flex-col items-start justify-start w-full px-6 py-4 md:px-8 md:py-6">
         <div className="pt-4 md:pt-6 w-full flex justify-between flex-col md:flex-row gap-8">
           <div>

@@ -1,21 +1,21 @@
 import { Button } from "@/components/ui/button";
 import { IconPencil } from "../common/icons";
 import { Entry } from "@/lib/types";
-import JournalHeader from "./journal-header";
+import EntryHeader from "./entry-header";
 
-interface JournalDisplayProps {
+interface EntryDisplayProps {
   entry?: Entry | null;
   onEdit?: () => void;
 }
 
-export default function JournalDisplay({ entry, onEdit }: JournalDisplayProps) {
+export default function EntryDisplay({ entry, onEdit }: EntryDisplayProps) {
   if (!entry) {
     return null;
   }
   return (
     <div className="px-5 md:px-0 w-full">
       <div className="pt-2">
-        <JournalHeader
+        <EntryHeader
           leading={entry?.prompt?.category?.title || "Free form"}
           title={entry?.prompt?.prompt?.title || "Journal entry"}
           date={entry.createdAt}

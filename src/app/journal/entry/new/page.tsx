@@ -1,5 +1,5 @@
 import { IconCross } from "@/components/common/icons";
-import JournalForm from "@/components/journal/journal-form";
+import EntryForm from "@/components/journal/entry-form";
 import { Link } from "@/components/ui/link";
 import { getPromptById, getPromptOfTheDay } from "@/app/actions";
 import { PromptWithCategory } from "@/lib/types";
@@ -35,7 +35,7 @@ async function Page({
         </div>
       </div>
       <div className="sm:max-w-2xl justify-start flex flex-col items-center mx-auto w-full pb-16 md:pb-20">
-        <JournalForm
+        <EntryForm
           promptOfTheDay={promptOfTheDay}
           selectedPrompt={selectedPrompt}
         />

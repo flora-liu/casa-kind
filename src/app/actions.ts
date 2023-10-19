@@ -3,7 +3,7 @@ import "server-only";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { Database } from "@/lib/database/types";
-import { Category, Entry, Prompt, PromptWithCategory } from "@/lib/types";
+import { Category, Entry, PromptWithCategory } from "@/lib/types";
 import {
   isCategory,
   isEntry,
@@ -44,7 +44,7 @@ export async function getEntryById(id: string): Promise<Entry | null> {
   }
 }
 
-export async function getAllEntriesForUser(
+export async function getEntriesForUser(
   userId: string
 ): Promise<Array<Entry> | null> {
   try {

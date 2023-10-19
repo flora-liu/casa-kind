@@ -1,6 +1,6 @@
 import { getEntryById } from "@/app/actions";
 import { IconCross } from "@/components/common/icons";
-import JournalRenderer from "@/components/journal/journal-renderer";
+import EntryRenderer from "@/components/journal/entry-renderer";
 import { Link } from "@/components/ui/link";
 
 async function Page({ params: { id } }: { params: { id: string } }) {
@@ -19,7 +19,7 @@ async function Page({ params: { id } }: { params: { id: string } }) {
         </div>
       </div>
       <div className="sm:max-w-2xl justify-start flex flex-col items-center mx-auto w-full pb-16 md:pb-20">
-        <JournalRenderer entry={entry} />
+        <EntryRenderer entry={entry} />
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Database } from "@/lib/database/types";
 import { useAuthContext } from "@/components/common/auth-provider";
 import { useRouter } from "next/navigation";
-import JournalHeader from "@/components/journal/journal-header";
+import EntryHeader from "@/components/journal/entry-header";
 
 enum EntryMode {
   PromptOfTheDay = "prompt-of-the-day",
@@ -19,7 +19,7 @@ enum EntryMode {
   Edit = "edit",
 }
 
-interface JournalFormProps {
+interface EntryFormProps {
   promptOfTheDay?: {
     prompt?: Prompt;
     category?: Category;
@@ -32,12 +32,12 @@ interface JournalFormProps {
   onCancelEdit?: () => void;
 }
 
-export default function JournalForm({
+export default function EntryForm({
   promptOfTheDay,
   selectedPrompt,
   entry,
   onCancelEdit,
-}: JournalFormProps) {
+}: EntryFormProps) {
   const [mode, setMode] = useState<string>(
     entry
       ? EntryMode.Edit
@@ -129,7 +129,7 @@ export default function JournalForm({
         )}
         {selectedPrompt?.prompt && (
           <TabsContent value={EntryMode.Prompt} className="w-full">
-            <JournalHeader
+            <EntryHeader
               leading={selectedPrompt?.category?.title}
               title={selectedPrompt?.prompt?.title}
             />
@@ -137,21 +137,21 @@ export default function JournalForm({
         )}
         {promptOfTheDay?.prompt && (
           <TabsContent value={EntryMode.PromptOfTheDay} className="w-full">
-            <JournalHeader
+            <EntryHeader
               leading={promptOfTheDay?.category?.title}
               title={promptOfTheDay.prompt.title}
             />
           </TabsContent>
         )}
         <TabsContent value={EntryMode.FreeForm} className="w-full">
-          <JournalHeader
+          <EntryHeader
             leading="Stream of consciousness"
             title="What's on your mind? How is your heart?"
           />
         </TabsContent>
         {entry && (
           <TabsContent value={EntryMode.Edit} className="w-full">
-            <JournalHeader
+            <EntryHeader
               leading={entry?.prompt?.category?.title || "Free form"}
               title={entry?.prompt?.prompt.title || "Journal entry"}
               date={entry.createdAt}
