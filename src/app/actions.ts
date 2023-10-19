@@ -3,7 +3,58 @@ import "server-only";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { Database } from "@/lib/database/types";
-import { Category, Prompt } from "@/lib/types";
+import { Category, Entry, Prompt } from "@/lib/types";
+
+export async function getEntryById(id: string) {
+  try {
+    const cookieStore = cookies();
+    const supabase = createServerActionClient<Database>({
+      cookies: () => cookieStore,
+    });
+    const { data, status, error } = await supabase
+      .from("entry")
+      .select(
+        `
+            *,
+            prompt (
+              *,
+              _category_to_prompt (
+                category (id, title, slug)
+              )
+            )
+          `
+      )
+      .eq("id", id)
+      .single();
+
+    if (error && status !== 406) {
+      throw error;
+    }
+
+    if (data) {
+      const entry: Entry = {
+        content: data.content,
+        createdAt: data.createdAt,
+        id: data.id,
+      };
+      if (
+        data?.prompt &&
+        data?.prompt?._category_to_prompt &&
+        data?.prompt?._category_to_prompt[0]?.category !== null
+      ) {
+        entry.prompt = {
+          id: data.prompt.id,
+          title: data.prompt.title,
+          category: data?.prompt._category_to_prompt[0]?.category,
+        };
+      }
+      return entry;
+    }
+    return null;
+  } catch (error) {
+    return null;
+  }
+}
 
 export async function getPromptById(id: string) {
   try {

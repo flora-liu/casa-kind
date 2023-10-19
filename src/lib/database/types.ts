@@ -93,21 +93,21 @@ export interface Database {
           content: string
           createdAt: string
           id: string
-          promptId: string
+          promptId: string | null
           userId: string
         }
         Insert: {
           content: string
-          createdAt: string
+          createdAt?: string
           id?: string
-          promptId: string
+          promptId?: string | null
           userId: string
         }
         Update: {
           content?: string
           createdAt?: string
           id?: string
-          promptId?: string
+          promptId?: string | null
           userId?: string
         }
         Relationships: [

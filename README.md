@@ -56,12 +56,31 @@ create trigger on_auth_user_created
 
 ```
 
+We also want to [add a trigger](https://supabase.com/docs/guides/getting-started/tutorials/with-nextjs#add-the-new-widget) to delete the `public.profile`` row before a user is deleted.
+
+```SQL
+create or replace function delete_old_profile()
+returns trigger
+language 'plpgsql'
+security definer
+as $$
+begin
+  delete from public.profiles where id = old.id;
+  return old;
+end;
+$$;
+
+create trigger before_delete_user
+  before delete on auth.users
+  for each row execute function public.delete_old_profile();
+```
+
 #### Generate database types
 
 1. Create a new file at `src/lib/database/types.ts`
 
 2. Run the command
-    ```
+    ```bash
     npx supabase gen types typescript --project-id "$PROJECT_REF" --schema public > src/lib/database/types.ts --project-id <supabase_project_id>
     ```
 
@@ -72,18 +91,18 @@ create trigger on_auth_user_created
 1. Make a change to `prisma/schema.prisma`
 
 2. Push change to [sync Prisma schema](https://www.prisma.io/docs/concepts/components/prisma-migrate/mental-model) with database schema
-    ```
+    ```bash
     prisma migrate dev
     ```
 
 3. [Generate updated Prisma Client](https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/generating-prisma-client) with the following command:
 
-    ```
+    ```bash
     sudo prisma generate
     ```
 
 4. Update local database types
-    ```
+    ```bash
     npx supabase gen types typescript --project-id "$PROJECT_REF" --schema public > src/lib/database/types.ts --project-id <supabase_project_id>
     ```
 
@@ -122,7 +141,7 @@ If your database schema is out of sync from your migration history, prisma migra
 
 If you run into this problem, create a draft migration using prisma migrate dev --create-only, and [add the following helper SQL](https://supabase.com/partners/integrations/prisma):
 
-```
+```SQL
 grant usage on schema public to postgres, anon, authenticated, service_role;
 
 grant all privileges on all tables in schema public to postgres, anon, authenticated, service_role;
@@ -139,7 +158,7 @@ alter default privileges in schema public grant all on sequences to postgres, an
 
 If experiencing client permission denied for public schema, [run the following](https://stackoverflow.com/questions/67551593/supabase-client-permission-denied-for-schema-public) in the Supabase SQL Editor:
 
-```
+```SQL
 grant usage on schema "public" to anon;
 grant usage on schema "public" to authenticated;
 

@@ -35,10 +35,10 @@ model prompt {
 
 model entry {
   id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  createdAt DateTime @db.Date
+  createdAt DateTime @default(now()) @db.Date
   userId    String   @db.Uuid
   content   String
-  promptId  String   @db.Uuid
-  prompt    prompt   @relation(fields: [promptId], references: [id])
+  promptId  String?  @db.Uuid
+  prompt    prompt?  @relation(fields: [promptId], references: [id])
   createdBy profile  @relation(fields: [userId], references: [id])
 }
