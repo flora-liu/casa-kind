@@ -1,6 +1,6 @@
 import { getEntryById } from "@/app/actions";
 import { IconCross } from "@/components/common/icons";
-import EntryRenderer from "@/components/journal/entry-renderer";
+import { EntryRenderer } from "@/components/journal/entry-renderer";
 import { Link } from "@/components/ui/link";
 
 async function Page({ params: { id } }: { params: { id: string } }) {

@@ -10,7 +10,8 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Database } from "@/lib/database/types";
 import { useAuthContext } from "@/components/common/auth-provider";
 import { useRouter } from "next/navigation";
-import EntryHeader from "@/components/journal/entry-header";
+import { EntryHeader } from "@/components/journal/entry-header";
+import { freeFormCategory, freeFormTitle } from "@/lib/journal";
 
 enum EntryMode {
   PromptOfTheDay = "prompt-of-the-day",
@@ -32,7 +33,7 @@ interface EntryFormProps {
   onCancelEdit?: () => void;
 }
 
-export default function EntryForm({
+export function EntryForm({
   promptOfTheDay,
   selectedPrompt,
   entry,
@@ -54,7 +55,7 @@ export default function EntryForm({
   const { userId } = useAuthContext();
   const router = useRouter();
 
-  async function createJournalEntry() {
+  async function createEntry() {
     if (!userId) {
       return;
     }
@@ -82,7 +83,7 @@ export default function EntryForm({
     }
   }
 
-  async function updateJournalEntry() {
+  async function updateEntry() {
     if (!userId || !entry?.id) {
       return;
     }
@@ -152,8 +153,8 @@ export default function EntryForm({
         {entry && (
           <TabsContent value={EntryMode.Edit} className="w-full">
             <EntryHeader
-              leading={entry?.prompt?.category?.title || "Free form"}
-              title={entry?.prompt?.prompt.title || "Journal entry"}
+              leading={entry?.prompt?.category?.title || freeFormCategory}
+              title={entry?.prompt?.prompt.title || freeFormTitle}
               date={entry.createdAt}
             />
           </TabsContent>
@@ -182,9 +183,9 @@ export default function EntryForm({
           onClick={() => {
             setIsLoading(true);
             if (entry?.id) {
-              updateJournalEntry();
+              updateEntry();
             } else {
-              createJournalEntry();
+              createEntry();
             }
           }}
         >

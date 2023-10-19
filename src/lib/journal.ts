@@ -77,3 +77,6 @@ export function parseCategory(data: ServerCategory): Category | null {
     ...data,
   };
 }
+
+export const freeFormCategory = "Free form";
+export const freeFormTitle = "Journal entry";

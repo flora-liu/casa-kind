@@ -1,5 +1,5 @@
 import { IconCross } from "@/components/common/icons";
-import EntryForm from "@/components/journal/entry-form";
+import { EntryForm } from "@/components/journal/entry-form";
 import { Link } from "@/components/ui/link";
 import { getPromptById, getPromptOfTheDay } from "@/app/actions";
 import { PromptWithCategory } from "@/lib/types";
