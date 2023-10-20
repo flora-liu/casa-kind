@@ -86,7 +86,7 @@ export function EntryDisplay({ entry, onEdit }: EntryDisplayProps) {
             className="flex items-center"
             onClick={() => deleteEntry()}
           >
-            <IconCross className="mr-1" />
+            <IconCross className="mr-1 rotate-45" />
             Delete
           </Button>
         </div>

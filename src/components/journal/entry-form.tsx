@@ -208,7 +208,7 @@ export function EntryForm({
             className="flex items-center"
             onClick={onCancelEdit}
           >
-            <IconCross className="mr-1" />
+            <IconCross className="mr-1 rotate-45" />
             Cancel
           </Button>
         )}
