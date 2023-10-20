@@ -18,7 +18,7 @@ async function Page({ params: { id } }: { params: { id: string } }) {
             className="flex items-center text-sm md:text-base"
             variant="basic"
           >
-            <IconCross className="h-5 w-5" />
+            <IconCross className="h-5 w-5 rotate-45" />
           </Link>
         </div>
       </div>
