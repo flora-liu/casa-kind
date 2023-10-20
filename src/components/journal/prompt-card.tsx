@@ -57,7 +57,7 @@ function PromptCard({
 
 function PromptCardContainer({ children }: React.ComponentProps<"div">) {
   return (
-    <div className="p-2 md:p-4 grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
       {children}
     </div>
   );

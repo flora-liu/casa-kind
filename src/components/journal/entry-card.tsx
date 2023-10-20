@@ -9,14 +9,14 @@ interface EntryCardProps {
 }
 function EntryCard({ entry }: EntryCardProps) {
   return (
-    <div className="py-6 md:py-8">
-      <p className="pb-2 md:pb-3 leading-normal text-sm md:text-base text-muted-foreground">
+    <div className="p-3 md:py-6 border border-border rounded-lg md:px-5 bg-card">
+      <p className="pb-4 md:pb-5 leading-normal text-xs sm:text-sm md:text-base text-muted-foreground">
         {getDateFormatted(new Date(entry.createdAt))}
       </p>
       <p
         className={cn(
-          "font-relative tracking-tight text-2xl md:text-3xl",
-          entry.createdAt ? "mb-6" : ""
+          "font-relative tracking-tight text-lg sm:text-2xl md:text-3xl",
+          entry.createdAt ? "mb-4 md:mb-6" : ""
         )}
       >
         {entry.prompt?.prompt?.title || freeFormTitle}

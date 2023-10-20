@@ -3,7 +3,7 @@ import { IconArrowRight } from "@/components/common/icons";
 
 export function EmptyScreen() {
   return (
-    <div className="pt-20 md:pt-10 pb-[200px] w-full relative mx-auto sm:max-w-2xl px-4">
+    <div className="py-2 md:py-6 pb-[200px] w-full relative mx-auto sm:max-w-2xl px-4">
       <div className="bg-muted rounded-lg p-6 md:p-8 border border-border flex flex-col w-full">
         <h1 className="mb-3 text-xl font-semibold">Journal</h1>
         <p className="mb-6 leading-normal text-muted-foreground">

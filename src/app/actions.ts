@@ -65,7 +65,8 @@ export async function getEntriesForUser(
             )
           `
       )
-      .eq("userId", userId);
+      .eq("userId", userId)
+      .order("createdAt", { ascending: false });
 
     if (error && status !== 406) {
       throw error;
