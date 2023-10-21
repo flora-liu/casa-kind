@@ -7,14 +7,13 @@ import { EntryForm } from "@/components/journal/entry-form";
 
 interface EntryRendererProps {
   entry?: Entry | null;
+  newPromptId?: string;
 }
 
-export function EntryRenderer({ entry }: EntryRendererProps) {
-  const [isEditing, setIsEditing] = useState<boolean>(false);
-
-  if (!entry) {
-    return null;
-  }
+export function EntryRenderer({ entry, newPromptId }: EntryRendererProps) {
+  const [isEditing, setIsEditing] = useState<boolean>(
+    newPromptId ? true : false
+  );
 
   return (
     <>

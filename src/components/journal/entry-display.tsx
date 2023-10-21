@@ -12,8 +12,6 @@ import {
   IconArrowLeft,
 } from "@/components/common/icons";
 import { Entry } from "@/lib/types";
-import { EntryHeader } from "@/components/journal/entry-header";
-import { freeFormCategory, freeFormTitle } from "@/lib/journal";
 
 interface EntryDisplayProps {
   entry?: Entry | null;
@@ -44,14 +42,7 @@ export function EntryDisplay({ entry, onEdit }: EntryDisplayProps) {
 
   return (
     <div className="px-5 md:px-0 w-full">
-      <div className="pt-2">
-        <EntryHeader
-          leading={entry?.prompt?.category?.title || freeFormCategory}
-          title={entry?.prompt?.prompt?.title || freeFormTitle}
-          date={entry.createdAt}
-        />
-      </div>
-      <div className="py-4 md:py-6 w-full">
+      <div className="py-2 md:py-4 w-full">
         <p className="whitespace-pre-line min-h-[40vh] md:min-h-[45vh] w-full resize-none rounded-md bg-background p-4 focus-within:outline-none text-sm md:text-base border border-input/60 ring-offset-background">
           {entry.content}
         </p>

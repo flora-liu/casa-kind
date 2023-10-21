@@ -1,10 +1,10 @@
 import { IconCross } from "@/components/common/icons";
-import { EntryForm } from "@/components/journal/entry-form";
 import { Link } from "@/components/ui/link";
 import { getPromptById, getPromptOfTheDay } from "@/app/actions";
 import { PromptWithCategory } from "@/lib/types";
 import { getSession } from "@/app/auth";
 import { redirect } from "next/navigation";
+import { NewEntry } from "@/components/journal/new-entry";
 
 async function Page({
   searchParams,
@@ -35,7 +35,7 @@ async function Page({
         </div>
       </div>
       <div className="sm:max-w-2xl justify-start flex flex-col items-center mx-auto w-full pb-16 md:pb-20">
-        <EntryForm
+        <NewEntry
           promptOfTheDay={promptOfTheDay}
           selectedPrompt={selectedPrompt}
         />

@@ -3,6 +3,8 @@ import { IconCross } from "@/components/common/icons";
 import { EntryRenderer } from "@/components/journal/entry-renderer";
 import { Link } from "@/components/ui/link";
 import { redirect } from "next/navigation";
+import { EntryHeader } from "@/components/journal/entry-header";
+import { freeFormCategory, freeFormTitle } from "@/lib/journal";
 
 async function Page({ params: { id } }: { params: { id: string } }) {
   const entry = await getEntryById(id);
@@ -23,6 +25,12 @@ async function Page({ params: { id } }: { params: { id: string } }) {
         </div>
       </div>
       <div className="sm:max-w-2xl justify-start flex flex-col items-center mx-auto w-full pb-16 md:pb-20">
+        <EntryHeader
+          className="mt-2"
+          leading={entry?.prompt?.category?.title || freeFormCategory}
+          title={entry?.prompt?.prompt?.title || freeFormTitle}
+          date={entry?.createdAt}
+        />
         <EntryRenderer entry={entry} />
       </div>
     </div>

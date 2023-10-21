@@ -59,14 +59,12 @@ function Section({
       )}
       {...props}
     >
-      <div className="px-6 md:px-8 p-4 md:p-6 flex flex-col gap-y-4 md:gap-y-6">
+      <div className="px-6 md:px-8 p-4 md:p-6 flex flex-col gap-y-3 md:gap-y-4">
         {(title || headerRight) && (
           <div className="flex justify-between items-center">
             <div>
               {title && (
-                <h3 className="mb-3 text-base md:text-lg font-semibold">
-                  {title}
-                </h3>
+                <h3 className="text-base md:text-lg font-semibold">{title}</h3>
               )}
             </div>
             {headerRight}
