@@ -44,6 +44,54 @@ export async function getEntryById(id: string): Promise<Entry | null> {
   }
 }
 
+export async function getDailyGratitudeEntries() {
+  try {
+    const cookieStore = cookies();
+    const supabase = createServerActionClient<Database>({
+      cookies: () => cookieStore,
+    });
+    const { data, status, error } = await supabase
+      .from("entry")
+      .select(
+        `
+            *,
+            prompt (
+              *,
+              _category_to_prompt (
+                category (id, title, slug)
+              )
+            )
+          `
+      )
+      .in("promptId", [
+        process.env.TODAY_GRATITUDE_ID,
+        process.env.LIFE_GRATITUDE_ID,
+      ])
+      .eq("createdAt", new Date().toISOString().split("T")[0]);
+
+    if (error && status !== 406) {
+      throw error;
+    }
+    if (data) {
+      const parsed = data?.map((item) => parseEntry(item));
+      return {
+        dailyGratitudeId: process.env.TODAY_GRATITUDE_ID,
+        dailyGratitudeEntry: parsed?.find(
+          (item) => item?.prompt?.prompt?.id === process.env.TODAY_GRATITUDE_ID
+        ),
+        lifeGratitudeId: process.env.LIFE_GRATITUDE_ID,
+        lifeGratitudeEntry: parsed?.find(
+          (item) => item?.prompt?.prompt?.id === process.env.LIFE_GRATITUDE_ID
+        ),
+      };
+    }
+
+    return null;
+  } catch (error) {
+    return null;
+  }
+}
+
 export async function getEntriesForUser(
   userId: string
 ): Promise<Array<Entry> | null> {

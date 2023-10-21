@@ -12,13 +12,21 @@ import {
   IconArrowLeft,
 } from "@/components/common/icons";
 import { Entry } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
-interface EntryDisplayProps {
+export type EntryDisplayProps = {
   entry?: Entry | null;
   onEdit?: () => void;
-}
+  textareaStyles?: string;
+  deleteLink?: string;
+} & React.ComponentProps<"div">;
 
-export function EntryDisplay({ entry, onEdit }: EntryDisplayProps) {
+export function EntryDisplay({
+  entry,
+  onEdit,
+  textareaStyles,
+  className,
+}: EntryDisplayProps) {
   const supabase = createClientComponentClient<Database>();
   const { userId } = useAuthContext();
   const router = useRouter();
@@ -41,9 +49,14 @@ export function EntryDisplay({ entry, onEdit }: EntryDisplayProps) {
   }
 
   return (
-    <div className="px-5 md:px-0 w-full">
+    <div className={cn("px-5 md:px-0 w-full", className)}>
       <div className="py-2 md:py-4 w-full">
-        <p className="whitespace-pre-line min-h-[40vh] md:min-h-[45vh] w-full resize-none rounded-md bg-background p-4 focus-within:outline-none text-sm md:text-base border border-input/60 ring-offset-background">
+        <p
+          className={cn(
+            "whitespace-pre-line min-h-[40vh] md:min-h-[45vh] w-full resize-none rounded-md bg-background p-4 focus-within:outline-none text-sm md:text-base border border-input/60 ring-offset-background",
+            textareaStyles
+          )}
+        >
           {entry.content}
         </p>
       </div>
@@ -53,12 +66,6 @@ export function EntryDisplay({ entry, onEdit }: EntryDisplayProps) {
         </div>
       )}
       <div className="flex justify-between gap-2">
-        <Button variant="outline" size="md" className="flex items-center">
-          <a className="flex items-center" href="/journal/entries">
-            <IconArrowLeft className="mr-1" />
-            Back
-          </a>
-        </Button>
         <div className="flex flex-row gap-2">
           {onEdit && (
             <Button

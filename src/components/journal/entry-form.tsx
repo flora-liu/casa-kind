@@ -11,7 +11,7 @@ import { useAuthContext } from "@/components/common/auth-provider";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 
-type EntryFormProps = {
+export type EntryFormProps = {
   newPromptId?: string;
   entry?: Entry | null;
   onCancelEdit?: () => void;
@@ -46,6 +46,7 @@ export function EntryForm({
       })
       .select()
       .single();
+    setIsLoading(false);
     if (error) {
       setError(error?.message);
     }
@@ -104,6 +105,7 @@ export function EntryForm({
       )}
       <div className="flex gap-4 justify-between">
         <Button
+          disabled={!input}
           size="md"
           className="flex items-center"
           onClick={() => {

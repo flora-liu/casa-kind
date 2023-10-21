@@ -1,26 +1,54 @@
 "use client";
 
 import { useState } from "react";
-import { Entry } from "@/lib/types";
-import { EntryDisplay } from "@/components/journal/entry-display";
-import { EntryForm } from "@/components/journal/entry-form";
+import {
+  EntryDisplay,
+  EntryDisplayProps,
+} from "@/components/journal/entry-display";
+import { EntryForm, EntryFormProps } from "@/components/journal/entry-form";
 
-interface EntryRendererProps {
-  entry?: Entry | null;
-  newPromptId?: string;
-}
+type EntryRendererProps = {
+  hideCancelButton?: boolean;
+} & EntryFormProps &
+  EntryDisplayProps;
 
-export function EntryRenderer({ entry, newPromptId }: EntryRendererProps) {
+export function EntryRenderer({
+  entry,
+  newPromptId,
+  hideCancelButton,
+  // EntryFormProps
+  className,
+  textareaStyles,
+  onCancelEdit,
+  // EntryDisplayProps
+  deleteLink,
+}: EntryRendererProps) {
   const [isEditing, setIsEditing] = useState<boolean>(
-    newPromptId ? true : false
+    entry ? false : newPromptId ? true : false
   );
 
   return (
     <>
       {isEditing ? (
-        <EntryForm entry={entry} onCancelEdit={() => setIsEditing(false)} />
+        <EntryForm
+          newPromptId={newPromptId}
+          className={className}
+          entry={entry}
+          onCancelEdit={
+            hideCancelButton
+              ? undefined
+              : () => (onCancelEdit ? onCancelEdit() : setIsEditing(false))
+          }
+          textareaStyles={textareaStyles}
+        />
       ) : (
-        <EntryDisplay entry={entry} onEdit={() => setIsEditing(true)} />
+        <EntryDisplay
+          className={className}
+          entry={entry}
+          textareaStyles={textareaStyles}
+          onEdit={() => setIsEditing(true)}
+          deleteLink={deleteLink}
+        />
       )}
     </>
   );

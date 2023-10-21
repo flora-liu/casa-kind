@@ -71,3 +71,10 @@ export type ServerActionResult<Result> = Promise<
       error: string;
     }
 >;
+
+export interface GratitudeEntryData {
+  dailyGratitudeId?: string;
+  dailyGratitudeEntry?: Entry | null;
+  lifeGratitudeId?: string;
+  lifeGratitudeEntry?: Entry | null;
+}
