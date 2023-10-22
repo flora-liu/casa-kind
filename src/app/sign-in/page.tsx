@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { redirect } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { Provider } from "@supabase/supabase-js";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,7 +14,7 @@ export default function Page() {
   const [password, setPassword] = useState("");
 
   const supabase = createClientComponentClient();
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   async function signIn() {
     const { error } = await supabase.auth.signInWithPassword({
@@ -22,11 +23,18 @@ export default function Page() {
     });
 
     if (error) {
-      setErrorMsg(error.message);
+      setError(error.message);
     } else {
       redirect("/home");
     }
   }
+
+  const handleProviderSignIn = async (provider: Provider) => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider,
+    });
+    if (error) setError(error.message);
+  };
 
   return (
     <div className="h-[800px] flex flex-col items-center justify-center">
@@ -38,33 +46,42 @@ export default function Page() {
               Sign into your account
             </p>
           </div>
-          <form action={signIn} className="grid gap-2">
-            <Input
-              name="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <Input
-              type="password"
-              name="password"
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              autoComplete="on"
-            />
-            <Button className="mt-2" type="submit">
-              Sign In
+          <div>
+            <form action={signIn} className="grid gap-2">
+              <Input
+                name="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <Input
+                type="password"
+                name="password"
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                autoComplete="on"
+              />
+              <Button className="mt-2" type="submit">
+                Sign In
+              </Button>
+            </form>
+            <Button
+              className="mt-2 w-full"
+              variant="outline"
+              onClick={() => handleProviderSignIn("google")}
+            >
+              Sign in with Google
             </Button>
-          </form>
+          </div>
           <div className="flex flex-col items-center">
             <Link variant="muted" href="/sign-up">
               Create an account
             </Link>
           </div>
-          {errorMsg && (
+          {error && (
             <div className="flex flex-col items-center">
-              <p className="text-sm text-destructive">{errorMsg}</p>
+              <p className="text-sm text-destructive">{error}</p>
             </div>
           )}
         </div>

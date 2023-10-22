@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { redirect } from "next/navigation";
+import { Provider } from "@supabase/supabase-js";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,7 +10,7 @@ import { Link } from "@/components/ui/link";
 export default function Page() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);
 
   const supabase = createClientComponentClient();
@@ -25,12 +25,23 @@ export default function Page() {
     });
 
     if (error) {
-      setErrorMsg(error.message);
+      setError(error.message);
     } else if (data?.user?.email) {
       setSuccess(true);
       setEmail(data?.user?.email);
     }
   }
+
+  const handleProviderSignUp = async (provider: Provider) => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider,
+      options: {
+        scopes:
+          "https://www.googleapis.com/auth/userinfo.email,https://www.googleapis.com/auth/userinfo.profile",
+      },
+    });
+    if (error) setError(error.message);
+  };
 
   return (
     <div className="h-[800px] flex flex-col items-center justify-center">
@@ -52,25 +63,34 @@ export default function Page() {
             </Button>
           ) : (
             <>
-              <form action={signUp} className="grid gap-2">
-                <Input
-                  name="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <Input
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
-                  autoComplete="on"
-                />
-                <Button className="mt-2" type="submit">
-                  Sign up
+              <div>
+                <form action={signUp} className="grid gap-2">
+                  <Input
+                    name="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <Input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    autoComplete="on"
+                  />
+                  <Button className="mt-2" type="submit">
+                    Sign up
+                  </Button>
+                </form>
+                <Button
+                  className="mt-2 w-full"
+                  variant="outline"
+                  onClick={() => handleProviderSignUp("google")}
+                >
+                  Sign up with Google
                 </Button>
-              </form>
+              </div>
               <div className="flex flex-row justify-center flex-wrap">
                 <span className="text-muted-foreground text-sm mr-1.5">
                   Already have an account?{" "}
@@ -81,9 +101,9 @@ export default function Page() {
               </div>
             </>
           )}
-          {errorMsg && (
+          {error && (
             <div className="flex flex-col items-center">
-              <p className="text-sm text-destructive">{errorMsg}</p>
+              <p className="text-sm text-destructive">{error}</p>
             </div>
           )}
         </div>
