@@ -36,7 +36,8 @@ export default function Page() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        scopes: "/auth/userinfo.email /auth/userinfo.profile openid",
+        scopes:
+          "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid",
       },
     });
     if (error) setError(error.message);
