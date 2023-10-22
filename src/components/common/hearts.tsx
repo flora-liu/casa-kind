@@ -73,28 +73,28 @@ function Heart4({ ...props }: React.ComponentProps<"svg">) {
 
 function Hearts() {
   return (
-    <div className="relative sm:absolute w-full sm:w-1/2 right-0 top-0">
-      <div className="w-full h-full min-h-[20rem] md:min-h-[30rem] relative">
-        <div className="absolute -top-[4%] left-[5%] rotate-[16deg]">
-          <Heart1 />
-        </div>
+    <div className="z-20 relative sm:absolute w-full sm:w-1/2 right-0 top-0">
+      <div className="w-full h-full min-h-[16rem] md:min-h-[30rem] relative">
         <div className="absolute top-[85%] left-2/3 -rotate-6">
-          <Heart1 />
+          <Heart1 className="w-3/5 h-3/5 md:w-4/5 md:h-4/5" />
         </div>
         <div className="absolute top-1/4 left-1/4">
-          <Heart2 />
+          <Heart2 className="w-3/5 h-3/5 md:w-4/5 md:h-4/5" />
+        </div>
+        <div className="absolute top-[128%] left-[80%] rotate-45">
+          <Heart2 className="w-2/5 h-2/5 md:w-3/5 md:h-3/5" />
         </div>
         <div className="absolute top-[10%] left-3/4 rotate-12">
-          <Heart3 />
+          <Heart3 className="w-3/5 h-3/5 md:w-4/5 md:h-4/5" />
         </div>
         <div className="absolute top-[110%] left-[40%] -rotate-12">
-          <Heart3 />
+          <Heart3 className="w-3/5 h-3/5 md:w-4/5 md:h-4/5" />
         </div>
         <div className="absolute top-1/2 left-2/4 rotate-3">
-          <Heart4 />
+          <Heart4 className="w-3/5 h-3/5 md:w-4/5 md:h-4/5" />
         </div>
-        <div className="absolute top-[90%] left-[12%] rotate-[-8deg]">
-          <Heart4 />
+        <div className="absolute top-[90%] left-[12%] rotate-[28deg]">
+          <Heart4 className="w-2/5 h-2/5 md:w-3/5 md:h-3/5" />
         </div>
       </div>
     </div>
