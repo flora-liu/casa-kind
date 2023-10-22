@@ -23,9 +23,9 @@ function Layout({
       <div className="relative mx-auto flex flex-col items-start justify-start w-full px-6 md:px-8">
         <div className="pt-4 md:pt-10 w-full flex justify-between flex-col gap-4 md:gap-6 md:flex-row">
           <div>
-            <h1 className={cn("text-xl font-semibold", subtitle ? "mb-3" : "")}>
+            <p className={cn("text-xl font-semibold", subtitle ? "mb-3" : "")}>
               {title}
-            </h1>
+            </p>
             {subtitle && (
               <p className="leading-normal text-muted-foreground pb-1">
                 {subtitle}

@@ -1,109 +1,86 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import { Hearts } from "@/components/common/hearts";
+import { IconHeart, IconPencil } from "@/components/common/icons";
+import { Button } from "@/components/ui/button";
+
+const features = [
+  {
+    icon: <IconPencil />,
+    leading: "Tap into crafted spaces for thought",
+    title: "Journal",
+    description:
+      "Carve out an intentional space for your thoughts and what’s on your mind. Discover your deepest self with tailored prompts that inspire reflection.",
+  },
+  {
+    icon: <IconHeart />,
+    leading: "Discover through dialogue",
+    title: "Heart Talk",
+    description:
+      "Engage, express, and explore your feelings with our approachable chat experience designed to help you build emotional awareness.",
+  },
+  {
+    icon: <IconPencil />,
+    leading: "Uncover the power of stillness",
+    title: "Meditate",
+    description:
+      "Experience the transformative power of meditation for clarity and rejuvenation. Build a steady mindfulness practice that brings alignment to your everyday.",
+  },
+];
 
 export default function Page() {
-  const [response, setResponse] = useState(null);
-
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div className="relative">
+      <Hearts />
+      <div className="min-h-[28rem] md:min-h-[40rem] px-5 py-20 md:px-16 md:py-24 flex flex-col items-center justify-center">
+        <div className="text-left sm:grid sm:grid-cols-12 md:max-w-7xl w-full">
+          <div className="sm:col-span-8 mt-16">
+            <h1 className="font-relative text-3xl md:text-4xl lg:text-5xl leading-tight md:leading-snug mb-3 md:mb-6">
+              Cultivating a kinder world, <br />
+              starting within
+            </h1>
+            <p className="text-muted-foreground text-lg md:text-xl">
+              Discover Casa Kind, your sanctuary for mindful self-care
+            </p>
+            <Button asChild size="lg" className="mt-8 md:mt-12">
+              <a href="/login">Start now</a>
+            </Button>
+          </div>
         </div>
       </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left">
-        <a
-          href="/heart-talk"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Heart Talk{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
+      <div className="flex min-h-[80vh] bg-secondary flex-col items-center justify-center px-5 py-8 md:p-16 lg:px-24">
+        <div className="text-center md:max-w-xl pb-20">
+          <h2 className="mb-6 md:mb-8 text-2xl font-relative md:text-3xl lg:text-4xl">
+            Dedicate daily moments to nurture your happiest, most{" "}
+            <span className="font-cambon font-light italic">whole</span> self
           </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore through conversation
+          <p>
+            We understand that what everyone has different needs. We provide
+            tools for building your individual practice of lifelong mindfulness.
           </p>
-        </a>
-        <a
-          href="/journal"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Journal
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Create space to reflect
-          </p>
-        </a>
-        <a
-          href="/meditate"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Meditate
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Focus on the breath.
-          </p>
-        </a>
+        </div>
+        <div className=" lg:w-full mb-32 lg:max-w-5xl grid lg:mb-0 lg:grid-cols-3 text-left gap-y-4 sm:gap-x-4">
+          {features.map((feature, index) => {
+            return (
+              <div
+                key={index}
+                className="px-2 py-4 flex flex-col gap-y-2 md:gap-y-3"
+              >
+                <div className="p-3 py-2.5 bg-[#E3DECB] rounded-md w-fit mb-3">
+                  {feature.icon}
+                </div>
+                <p className="max-w-[30ch] text-sm md:text-base text-muted-foreground">
+                  {feature.leading}
+                </p>
+                <h2 className="mb-2 text-lg md:text-xl font-medium tracking-tight">
+                  {feature.title}
+                </h2>
+                <p>{feature.description}</p>
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </main>
+    </div>
   );
-}
-
-async function getData() {
-  try {
-    const res = await fetch("http://localhost:3000/api/chat/completion", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ data: "Some data..." }),
-    });
-
-    const data = await res.json();
-
-    return {
-      props: { data },
-    };
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return {
-      props: { data: null },
-    };
-  }
 }

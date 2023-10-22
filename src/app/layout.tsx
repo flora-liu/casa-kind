@@ -36,6 +36,21 @@ const relativeMonoFont = localFont({
   variable: "--font-relative-mono",
 });
 
+const cambonFont = localFont({
+  src: [
+    {
+      path: "./fonts/cambon-regular.woff2",
+      weight: "400",
+    },
+    {
+      path: "./fonts/cambon-thin-italic.woff2",
+      weight: "300",
+      style: "italic",
+    },
+  ],
+  variable: "--font-cambon",
+});
+
 export const metadata: Metadata = {
   title: "Casa Kind",
   description: "Miniapp for self-care and lifelong blossoming.",
@@ -67,7 +82,8 @@ export default async function RootLayout({
             className={cn(
               "flex flex-col min-h-screen relative text-foreground text-base",
               relativeFont.variable,
-              relativeMonoFont.variable
+              relativeMonoFont.variable,
+              cambonFont.variable
             )}
           >
             <Nav isLoggedIn={!!session?.user} />

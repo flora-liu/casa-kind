@@ -5,10 +5,6 @@ export function EmptyScreen() {
   return (
     <div className="py-2 md:py-6 pb-[200px] w-full relative mx-auto sm:max-w-2xl px-4">
       <div className="bg-muted rounded-lg p-6 md:p-8 border border-border flex flex-col w-full">
-        <h1 className="mb-3 text-xl font-semibold">Journal</h1>
-        <p className="mb-6 leading-normal text-muted-foreground">
-          Create space to reflect
-        </p>
         <p className="mb-2 leading-normal">
           It looks like you don&apos;t have any entries yet.
         </p>

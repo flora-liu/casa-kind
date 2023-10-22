@@ -41,7 +41,7 @@ function Chat({ id, initialMessages, className }: ChatProps) {
     <>
       <div
         className={cn(
-          "pt-20 md:pt-10",
+          "py-2 md:py-6 w-full",
           className,
           suggestions?.length > 0 ? "pb-[300px]" : "pb-[200px]"
         )}

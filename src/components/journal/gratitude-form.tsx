@@ -21,7 +21,7 @@ function GratitudeForm({
           newPromptId={dailyGratitudeId}
           entry={dailyGratitudeEntry}
           className="px-0 md:px-0"
-          textareaStyles="min-h-[25vh] md:min-h-[30vh]"
+          textareaStyles="min-h-[10rem] md:min-h-[14rem]"
           hideCancelButton
           deleteLink="/journal"
         />
@@ -32,7 +32,7 @@ function GratitudeForm({
           newPromptId={lifeGratitudeId}
           entry={lifeGratitudeEntry}
           className="px-0 md:px-0"
-          textareaStyles="min-h-[25vh] md:min-h-[30vh]"
+          textareaStyles="min-h-[10rem] md:min-h-[14rem]"
           hideCancelButton
           deleteLink="/journal"
         />
