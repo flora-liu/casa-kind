@@ -76,25 +76,25 @@ function Hearts() {
     <div className="z-20 relative sm:absolute w-full sm:w-1/2 right-0 top-0">
       <div className="w-full h-full min-h-[16rem] md:min-h-[30rem] relative">
         <div className="absolute top-[85%] left-2/3 -rotate-6">
-          <Heart1 className="w-3/5 h-3/5 md:w-4/5 md:h-4/5" />
+          <Heart1 className="w-5 h-5 md:w-11 md:h-11" />
         </div>
         <div className="absolute top-1/4 left-1/4">
-          <Heart2 className="w-3/5 h-3/5 md:w-4/5 md:h-4/5" />
+          <Heart2 className="w-5 h-5 md:w-11 md:h-11" />
         </div>
         <div className="absolute top-[128%] left-[80%] rotate-45">
-          <Heart2 className="w-2/5 h-2/5 md:w-3/5 md:h-3/5" />
+          <Heart2 className="w-6 h-6 md:w-9 md:h-9" />
         </div>
         <div className="absolute top-[10%] left-3/4 rotate-12">
-          <Heart3 className="w-3/5 h-3/5 md:w-4/5 md:h-4/5" />
+          <Heart3 className="w-5 h-5 md:w-11 md:h-11" />
         </div>
         <div className="absolute top-[110%] left-[40%] -rotate-12">
-          <Heart3 className="w-3/5 h-3/5 md:w-4/5 md:h-4/5" />
+          <Heart3 className="w-5 h-5 md:w-11 md:h-11" />
         </div>
         <div className="absolute top-1/2 left-2/4 rotate-3">
-          <Heart4 className="w-3/5 h-3/5 md:w-4/5 md:h-4/5" />
+          <Heart4 className="w-5 h-5 md:w-11 md:h-11" />
         </div>
         <div className="absolute top-[90%] left-[12%] rotate-[28deg]">
-          <Heart4 className="w-2/5 h-2/5 md:w-3/5 md:h-3/5" />
+          <Heart4 className="w-6 h-6 md:w-9 md:h-9" />
         </div>
       </div>
     </div>
