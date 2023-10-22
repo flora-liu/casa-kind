@@ -6,6 +6,7 @@ import { Provider } from "@supabase/supabase-js";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "@/components/ui/link";
+import { Separator } from "@/components/ui/separator";
 
 export default function Page() {
   const [email, setEmail] = useState<string>("");
@@ -38,6 +39,10 @@ export default function Page() {
       options: {
         scopes:
           "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid",
+        // queryParams: {
+        //   access_type: "offline",
+        //   prompt: "consent",
+        // },
       },
     });
     if (error) setError(error.message);
@@ -83,8 +88,9 @@ export default function Page() {
                     Sign up
                   </Button>
                 </form>
+                <Separator className="my-4 md:my-8" />
                 <Button
-                  className="mt-2 w-full"
+                  className="w-full"
                   variant="outline"
                   onClick={() => handleProviderSignUp("google")}
                 >

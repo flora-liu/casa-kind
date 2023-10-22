@@ -8,6 +8,7 @@ import { Provider } from "@supabase/supabase-js";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "@/components/ui/link";
+import { Separator } from "@/components/ui/separator";
 
 export default function Page() {
   const [email, setEmail] = useState("");
@@ -32,6 +33,12 @@ export default function Page() {
   const handleProviderSignIn = async (provider: Provider) => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider,
+      // options: {
+      //   queryParams: {
+      //     access_type: "offline",
+      //     prompt: "consent",
+      //   },
+      // },
     });
     if (error) setError(error.message);
   };
@@ -66,8 +73,11 @@ export default function Page() {
                 Sign In
               </Button>
             </form>
+            <div>
+              <Separator className="my-4 md:my-8" />
+            </div>
             <Button
-              className="mt-2 w-full"
+              className="w-full"
               variant="outline"
               onClick={() => handleProviderSignIn("google")}
             >
