@@ -32,6 +32,7 @@ const config: Config = {
           "ui-monospace",
           "SFMono-Regular",
         ],
+        cambon: ["var(--font-cambon)", "sans-serif", "system-ui"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
