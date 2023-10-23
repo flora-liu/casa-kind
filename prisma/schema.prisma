@@ -11,34 +11,35 @@ datasource db {
 }
 
 model profile {
-  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  firstName String?
-  lastName  String?
-  email     String?
-  createdAt DateTime @default(now()) @db.Date
-  entry     entry[]
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  firstName  String?
+  lastName   String?
+  email      String?
+  created_at DateTime @default(now()) @db.Date
+  entry      entry[]
 }
 
 model category {
-  id      String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title   String   @unique
-  slug    String   @unique
-  prompts prompt[] @relation("category_to_prompt")
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title       String   @unique
+  slug        String   @unique
+  description String?
+  prompts     prompt[] @relation("category_to_prompt")
 }
 
 model prompt {
   id         String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   title      String
-  entries    entry[]
+  entry      entry[]
   categories category[] @relation("category_to_prompt")
 }
 
 model entry {
-  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  createdAt DateTime @default(now()) @db.Date
-  userId    String   @db.Uuid
-  content   String
-  promptId  String?  @db.Uuid
-  prompt    prompt?  @relation(fields: [promptId], references: [id])
-  createdBy profile  @relation(fields: [userId], references: [id])
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at DateTime @default(now()) @db.Date
+  user_id    String   @db.Uuid
+  content    String
+  prompt_id  String?  @db.Uuid
+  prompt     prompt?  @relation(fields: [prompt_id], references: [id])
+  profile    profile  @relation(fields: [user_id], references: [id])
 }

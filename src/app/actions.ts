@@ -63,11 +63,11 @@ export async function getDailyGratitudeEntries() {
             )
           `
       )
-      .in("promptId", [
+      .in("prompt_id", [
         process.env.TODAY_GRATITUDE_ID,
         process.env.LIFE_GRATITUDE_ID,
       ])
-      .eq("createdAt", new Date().toISOString().split("T")[0]);
+      .eq("created_at", new Date().toISOString().split("T")[0]);
 
     if (error && status !== 406) {
       throw error;
@@ -113,8 +113,8 @@ export async function getEntriesForUser(
             )
           `
       )
-      .eq("userId", userId)
-      .order("createdAt", { ascending: false });
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false });
 
     if (error && status !== 406) {
       throw error;

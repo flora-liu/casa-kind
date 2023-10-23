@@ -18,7 +18,7 @@ export function parseEntry(data: ServerEntry): Entry | null {
   }
   const entry: Entry = {
     content: data.content,
-    createdAt: data.createdAt,
+    createdAt: data.created_at,
     id: data.id,
   };
   if (

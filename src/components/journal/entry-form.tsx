@@ -41,8 +41,8 @@ export function EntryForm({
       .from("entry")
       .insert({
         content: input,
-        userId,
-        ...(newPromptId && { promptId: newPromptId }),
+        user_id: userId,
+        ...(newPromptId && { prompt_id: newPromptId }),
       })
       .select()
       .single();
@@ -64,7 +64,7 @@ export function EntryForm({
       .from("entry")
       .upsert({
         content: input,
-        userId,
+        user_id: userId,
         id: entry.id,
       })
       .select()

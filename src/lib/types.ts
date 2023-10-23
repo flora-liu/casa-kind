@@ -41,10 +41,10 @@ export interface PromptWithCategory {
 
 export type ServerEntry = {
   content: string;
-  createdAt: string;
+  created_at: string;
   id: string;
-  promptId: string | null;
-  userId: string;
+  prompt_id: string | null;
+  user_id: string;
   prompt: {
     id: string;
     title: string;

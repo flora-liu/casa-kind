@@ -72,16 +72,19 @@ export interface Database {
       }
       category: {
         Row: {
+          description: string | null
           id: string
           slug: string
           title: string
         }
         Insert: {
+          description?: string | null
           id?: string
           slug: string
           title: string
         }
         Update: {
+          description?: string | null
           id?: string
           slug?: string
           title?: string
@@ -91,35 +94,35 @@ export interface Database {
       entry: {
         Row: {
           content: string
-          createdAt: string
+          created_at: string
           id: string
-          promptId: string | null
-          userId: string
+          prompt_id: string | null
+          user_id: string
         }
         Insert: {
           content: string
-          createdAt?: string
+          created_at?: string
           id?: string
-          promptId?: string | null
-          userId: string
+          prompt_id?: string | null
+          user_id: string
         }
         Update: {
           content?: string
-          createdAt?: string
+          created_at?: string
           id?: string
-          promptId?: string | null
-          userId?: string
+          prompt_id?: string | null
+          user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "entry_promptId_fkey"
-            columns: ["promptId"]
+            foreignKeyName: "entry_prompt_id_fkey"
+            columns: ["prompt_id"]
             referencedRelation: "prompt"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "entry_userId_fkey"
-            columns: ["userId"]
+            foreignKeyName: "entry_user_id_fkey"
+            columns: ["user_id"]
             referencedRelation: "profile"
             referencedColumns: ["id"]
           }
@@ -127,21 +130,21 @@ export interface Database {
       }
       profile: {
         Row: {
-          createdAt: string
+          created_at: string
           email: string | null
           firstName: string | null
           id: string
           lastName: string | null
         }
         Insert: {
-          createdAt?: string
+          created_at?: string
           email?: string | null
           firstName?: string | null
           id?: string
           lastName?: string | null
         }
         Update: {
-          createdAt?: string
+          created_at?: string
           email?: string | null
           firstName?: string | null
           id?: string
