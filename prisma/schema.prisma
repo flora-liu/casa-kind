@@ -15,8 +15,8 @@ model profile {
   firstName String?
   lastName  String?
   email     String?
-  entry     entry[]
   createdAt DateTime @default(now()) @db.Date
+  entry     entry[]
 }
 
 model category {
