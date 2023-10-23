@@ -115,6 +115,10 @@ create trigger before_delete_user
     npx prisma db seed
     ```
 
+#### Pull schema from remote
+
+If changes are made to Supabase directly, pull the remote database schema for Prisma by running: `prisma db pull`
+
 ## Development
 
 ### Run application locally 
