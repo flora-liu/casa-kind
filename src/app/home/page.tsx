@@ -29,10 +29,10 @@ export default function Page() {
       title="Welcome"
       subtitle="Warm hugs from Casa Kind, we're thrilled you're here."
     >
-      <div className="relative flex h-full flex-col items-center justify-center">
-        <div className="lg:max-w-7xl md:grid md:grid-cols-2">
+      <div className="relative flex h-full flex-col items-center justify-center px-5 md:px-0 mt-2 md:mt-6">
+        <div className="lg:max-w-7xl md:grid md:grid-cols-2 bg-card pt-2 pb-4 md:py-8 rounded-xl border border-border">
           <div className="flex-1 w-full relative h-full flex-col p-5 md:px-10 md:py-4 dark:border-r md:flex">
-            <div className="font-relative relative z-20 flex items-center text-5xl md:text-6xl lg:text-7xl mb-3">
+            <div className="font-relative relative z-20 flex items-center text-4xl md:text-6xl lg:text-7xl mb-3">
               <h1>Self-Care Menu</h1>
             </div>
             <div className="relative mt-2">
