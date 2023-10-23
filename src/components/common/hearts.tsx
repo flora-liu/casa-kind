@@ -24,6 +24,8 @@ const Heart1 = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>(
   }
 );
 
+Heart1.displayName = "Heart1";
+
 const Heart2 = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>(
   (props, ref) => {
     return (
@@ -44,6 +46,8 @@ const Heart2 = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>(
     );
   }
 );
+
+Heart2.displayName = "Heart2";
 
 const Heart3 = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>(
   (props, ref) => {
@@ -66,6 +70,8 @@ const Heart3 = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>(
   }
 );
 
+Heart3.displayName = "Heart3";
+
 const Heart4 = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>(
   (props, ref) => {
     return (
@@ -86,6 +92,8 @@ const Heart4 = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>(
     );
   }
 );
+
+Heart4.displayName = "Heart4";
 
 function Hearts() {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -161,5 +169,7 @@ function Hearts() {
     </div>
   );
 }
+
+Hearts.displayName = "Hearts";
 
 export { Heart1, Heart2, Heart3, Heart4, Hearts };

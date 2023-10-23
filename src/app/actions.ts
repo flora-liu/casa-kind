@@ -178,6 +178,7 @@ export async function getPromptOfTheDay(): Promise<PromptWithCategory | null> {
         )
     `
       )
+      .in("id", [process.env.DAILY_PROMPT_ID])
       .limit(1)
       .single();
 
