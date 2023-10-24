@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/journal/prompt/generate",
+      "schedule": "0 0 * * *"
+    }
+  ]
+}
