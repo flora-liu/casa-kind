@@ -11,28 +11,34 @@ export interface Database {
     Tables: {
       _category_to_prompt: {
         Row: {
-          A: string
-          B: string
+          category_id: string
+          prompt_id: string
         }
         Insert: {
-          A: string
-          B: string
+          category_id: string
+          prompt_id: string
         }
         Update: {
-          A?: string
-          B?: string
+          category_id?: string
+          prompt_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "_category_to_prompt_A_fkey"
-            columns: ["A"]
+            foreignKeyName: "_category_to_prompt_category_id_fkey"
+            columns: ["category_id"]
             referencedRelation: "category"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "_category_to_prompt_B_fkey"
-            columns: ["B"]
+            foreignKeyName: "_category_to_prompt_prompt_id_fkey"
+            columns: ["prompt_id"]
             referencedRelation: "prompt"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "_category_to_prompt_prompt_id_fkey"
+            columns: ["prompt_id"]
+            referencedRelation: "random_prompts"
             referencedColumns: ["id"]
           }
         ]
@@ -91,6 +97,37 @@ export interface Database {
         }
         Relationships: []
       }
+      daily_prompt: {
+        Row: {
+          created_at: string
+          id: string
+          prompt_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          prompt_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          prompt_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "daily_prompt_prompt_id_fkey"
+            columns: ["prompt_id"]
+            referencedRelation: "prompt"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "daily_prompt_prompt_id_fkey"
+            columns: ["prompt_id"]
+            referencedRelation: "random_prompts"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       entry: {
         Row: {
           content: string
@@ -118,6 +155,12 @@ export interface Database {
             foreignKeyName: "entry_prompt_id_fkey"
             columns: ["prompt_id"]
             referencedRelation: "prompt"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "entry_prompt_id_fkey"
+            columns: ["prompt_id"]
+            referencedRelation: "random_prompts"
             referencedColumns: ["id"]
           },
           {
@@ -155,24 +198,52 @@ export interface Database {
       prompt: {
         Row: {
           id: string
+          is_system_generated: boolean | null
           title: string
         }
         Insert: {
           id?: string
+          is_system_generated?: boolean | null
           title: string
         }
         Update: {
           id?: string
+          is_system_generated?: boolean | null
           title?: string
         }
         Relationships: []
       }
     }
     Views: {
-      [_ in never]: never
+      random_prompts: {
+        Row: {
+          id: string | null
+          is_system_generated: boolean | null
+          title: string | null
+        }
+        Insert: {
+          id?: string | null
+          is_system_generated?: boolean | null
+          title?: string | null
+        }
+        Update: {
+          id?: string | null
+          is_system_generated?: boolean | null
+          title?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
-      [_ in never]: never
+      get_random_category: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          description: string | null
+          id: string
+          slug: string
+          title: string
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never

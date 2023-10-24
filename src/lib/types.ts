@@ -2,7 +2,8 @@ export type ServerCategory = {
   id: string;
   slug: string;
   title: string;
-  _category_to_prompt: {
+  description?: string | null;
+  _category_to_prompt?: {
     prompt: {
       id: string;
       title: string;
@@ -14,6 +15,7 @@ export interface Category extends Record<string, any> {
   id: string;
   title: string;
   slug: string;
+  description?: string | null;
   prompts?: Array<Prompt>;
 }
 
