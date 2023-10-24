@@ -235,12 +235,30 @@ export interface Database {
       }
     }
     Functions: {
+      get_daily_prompt: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          id: string
+          is_system_generated: boolean | null
+          title: string
+        }[]
+      }
       get_random_category: {
         Args: Record<PropertyKey, never>
         Returns: {
           description: string | null
           id: string
           slug: string
+          title: string
+        }[]
+      }
+      get_random_prompt_for_category: {
+        Args: {
+          p_category_id: string
+        }
+        Returns: {
+          id: string
+          is_system_generated: boolean | null
           title: string
         }[]
       }

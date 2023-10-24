@@ -161,15 +161,14 @@ export async function getPromptById(
   }
 }
 
-export async function getPromptOfTheDay(): Promise<PromptWithCategory | null> {
-  // TODO: create job to select new prompt for each day
+export async function getDailyPrompt(): Promise<PromptWithCategory | null> {
   try {
     const cookieStore = cookies();
     const supabase = createServerActionClient<Database>({
       cookies: () => cookieStore,
     });
     const { data } = await supabase
-      .from("prompt")
+      .rpc("get_daily_prompt")
       .select(
         `
         *,
@@ -178,7 +177,6 @@ export async function getPromptOfTheDay(): Promise<PromptWithCategory | null> {
         )
     `
       )
-      .in("id", [process.env.DAILY_PROMPT_ID])
       .limit(1)
       .single();
 
@@ -231,6 +229,111 @@ export async function getCategoryBySlug(
       .single();
 
     return parseCategory(data || null);
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function getRandomCategory() {
+  try {
+    const cookieStore = cookies();
+    const supabase = createServerActionClient<Database>({
+      cookies: () => cookieStore,
+    });
+
+    const { data, error } = await supabase.rpc("get_random_category");
+    if (error || data?.length === 0) {
+      throw new Error("Error fetching random category");
+    }
+    return parseCategory(data ? data[0] : null);
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function getRandomPromptForCategory(categoryId: string) {
+  try {
+    const cookieStore = cookies();
+    const supabase = createServerActionClient<Database>({
+      cookies: () => cookieStore,
+    });
+
+    const { data, error } = await supabase.rpc(
+      "get_random_prompt_for_category",
+      { p_category_id: categoryId }
+    );
+    if (error || data?.length === 0) {
+      throw new Error("Error fetching random prompt");
+    }
+    const prompt = await getPromptById(data[0].id);
+    return prompt;
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function createPrompt(
+  title: string,
+  categoryId?: string,
+  isSystemGenerated?: boolean
+) {
+  try {
+    const cookieStore = cookies();
+    const supabase = createServerActionClient<Database>({
+      cookies: () => cookieStore,
+    });
+
+    const { data: prompt, error: errorPrompt } = await supabase
+      .from("prompt")
+      .insert({
+        title,
+        ...(isSystemGenerated
+          ? { is_system_generated: isSystemGenerated }
+          : {}),
+      })
+      .select()
+      .single();
+    if (errorPrompt || !prompt) {
+      throw new Error("Error inserting new prompt");
+    }
+    if (categoryId) {
+      const { data: relation, error: errorRelation } = await supabase
+        .from("_category_to_prompt")
+        .insert({
+          prompt_id: prompt.id,
+          category_id: categoryId,
+        })
+        .select()
+        .single();
+      if (errorRelation || !relation) {
+        throw new Error("Error creating new relation for category to prompt");
+      }
+    }
+    const promptData = await getPromptById(prompt.id);
+    return promptData;
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function saveDailyPrompt(promptId: string) {
+  try {
+    const cookieStore = cookies();
+    const supabase = createServerActionClient<Database>({
+      cookies: () => cookieStore,
+    });
+
+    const { data, error } = await supabase
+      .from("daily_prompt")
+      .insert({
+        prompt_id: promptId,
+      })
+      .select()
+      .single();
+    if (error || !data) {
+      throw new Error("Error inserting daily prompt");
+    }
+    return prompt;
   } catch (error) {
     return null;
   }

@@ -1,6 +1,6 @@
 import { IconCross } from "@/components/common/icons";
 import { Link } from "@/components/ui/link";
-import { getPromptById, getPromptOfTheDay } from "@/app/actions";
+import { getPromptById, getDailyPrompt } from "@/app/actions";
 import { PromptWithCategory } from "@/lib/types";
 import { getSession } from "@/app/auth";
 import { redirect } from "next/navigation";
@@ -11,7 +11,7 @@ async function Page({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const promptOfTheDay = await getPromptOfTheDay();
+  const promptOfTheDay = await getDailyPrompt();
   let selectedPrompt: PromptWithCategory | null = null;
   if (searchParams["prompt_id"]) {
     selectedPrompt = await getPromptById(`${searchParams["prompt_id"]}`);

@@ -3,10 +3,10 @@ import { Layout, Section } from "@/components/common/layout";
 import { GratitudeForm } from "@/components/journal/gratitude-form";
 import { JournalNav } from "@/components/journal/journal-nav";
 import { Button } from "@/components/ui/button";
-import { getDailyGratitudeEntries, getPromptOfTheDay } from "@/app/actions";
+import { getDailyGratitudeEntries, getDailyPrompt } from "@/app/actions";
 
 async function Page() {
-  const promptOfTheDay = await getPromptOfTheDay();
+  const promptOfTheDay = await getDailyPrompt();
   const gratitudeData = await getDailyGratitudeEntries();
   return (
     <Layout
