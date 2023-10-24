@@ -1,6 +1,7 @@
 import localFont from "next/font/local";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 
 import { Providers } from "@/components/common/providers";
 import { Nav } from "@/components/common/nav";
@@ -92,6 +93,7 @@ export default async function RootLayout({
             </main>
           </div>
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
