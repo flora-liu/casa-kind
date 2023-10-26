@@ -13,6 +13,10 @@ import { ChatCompletionMessageParam } from "openai/resources/chat/index.mjs";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
+export const config = {
+  runtime: "edge",
+};
+
 const systemMessages = [
   {
     role: "system",
