@@ -4,6 +4,15 @@ import { Button } from "@/components/ui/button";
 
 const mobileWordLimit = 15;
 
+export const colors = [
+  "bg-[#E2D6CA]",
+  "bg-[#EBE9E1]",
+  "bg-[#E3DECB]",
+  "bg-[#EBE9E1]",
+  "bg-[#E3DECB]",
+  "bg-[#E2D6CA]",
+];
+
 type PromptCardProps = {
   categoryTitle: string;
   promptTitle: string;

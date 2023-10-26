@@ -6,7 +6,7 @@ import {
 } from "@/components/journal/prompt-card";
 import { Link } from "@/components/ui/link";
 import { getRandomPrompts } from "@/app/actions";
-import { colors } from "@/app/journal/prompts/page";
+import { colors } from "@/components/journal/prompt-card";
 import { cn } from "@/lib/utils";
 
 const features = [

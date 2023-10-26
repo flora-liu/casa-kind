@@ -5,18 +5,10 @@ import { JournalNav } from "@/components/journal/journal-nav";
 import {
   PromptCard,
   PromptCardContainer,
+  colors,
 } from "@/components/journal/prompt-card";
 import { Link } from "@/components/ui/link";
 import { cn } from "@/lib/utils";
-
-export const colors = [
-  "bg-[#E2D6CA]",
-  "bg-[#EBE9E1]",
-  "bg-[#E3DECB]",
-  "bg-[#EBE9E1]",
-  "bg-[#E3DECB]",
-  "bg-[#E2D6CA]",
-];
 
 async function Page() {
   const categories = await getAllPromptsByCategory();
