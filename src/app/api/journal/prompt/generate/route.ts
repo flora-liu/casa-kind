@@ -102,7 +102,7 @@ function createCategoryMessage(category: Category) {
  * 2. For the prompt: choose to either use an existing prompt or create a new one for this category
  * 3. Save the prompt from the above step to the database table
  */
-export async function POST(_req: Request) {
+export async function GET() {
   try {
     const category = await getRandomCategory();
     if (!category) {

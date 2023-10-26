@@ -359,6 +359,7 @@ export async function saveDailyPrompt(promptId: string) {
       .from("daily_prompt")
       .insert({
         prompt_id: promptId,
+        created_at: `${new Date().toISOString().split("T")[0]}`,
       })
       .select()
       .single();
