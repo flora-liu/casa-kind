@@ -5,8 +5,10 @@ import { JournalNav } from "@/components/journal/journal-nav";
 import {
   PromptCard,
   PromptCardContainer,
+  colors,
 } from "@/components/journal/prompt-card";
 import { Link } from "@/components/ui/link";
+import { cn } from "@/lib/utils";
 
 async function Page({ params }: { params: { id: string } }) {
   const { id } = params;
@@ -27,7 +29,10 @@ async function Page({ params }: { params: { id: string } }) {
               promptTitle={title}
               promptId={id}
               key={promptIndex}
-              className={promptIndex === 3 ? "md:hidden" : ""}
+              className={cn(
+                promptIndex === 3 ? "md:hidden" : "",
+                colors[promptIndex % colors.length]
+              )}
             />
           ))}
         </PromptCardContainer>
