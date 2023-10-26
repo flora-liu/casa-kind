@@ -88,9 +88,11 @@ export default async function Page() {
       <Section
         className="my-4 md:my-8"
         innerStyles="lg:px-0"
-        title="Journal prompts"
+        title="Create space to observe your thoughts"
       >
-        <p className="text-muted-foreground">Check in with your self</p>
+        <p className="text-muted-foreground md:mb-3">
+          Use these questions to check in with your self and connect within
+        </p>
         <PromptCardContainer>
           {prompts?.map((item, promptIndex) => (
             <PromptCard

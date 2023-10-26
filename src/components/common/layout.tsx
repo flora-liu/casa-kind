@@ -63,7 +63,7 @@ function Section({
     >
       <div
         className={cn(
-          "px-6 md:px-8 p-4 md:p-6 flex flex-col gap-y-4 md:gap-y-5",
+          "md:px-8 p-6 md:p-6 flex flex-col gap-y-4 md:gap-y-5",
           innerStyles
         )}
       >
