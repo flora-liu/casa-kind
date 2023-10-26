@@ -58,6 +58,10 @@ export function parsePrompt(data: ServerPrompt): PromptWithCategory | null {
   return result;
 }
 
+export function isPromptWithCategory(item: any): item is PromptWithCategory {
+  return item !== null;
+}
+
 export function isCategory(item: any): item is Category {
   return item !== null;
 }

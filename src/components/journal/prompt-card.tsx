@@ -55,9 +55,17 @@ function PromptCard({
   );
 }
 
-function PromptCardContainer({ children }: React.ComponentProps<"div">) {
+function PromptCardContainer({
+  children,
+  className,
+}: React.ComponentProps<"div">) {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
+    <div
+      className={cn(
+        "grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-6",
+        className
+      )}
+    >
       {children}
     </div>
   );

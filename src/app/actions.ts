@@ -3,10 +3,11 @@ import "server-only";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { Database } from "@/lib/database/types";
-import { Category, Entry, PromptWithCategory } from "@/lib/types";
+import { Category, Entry, PromptWithCategory, ServerPrompt } from "@/lib/types";
 import {
   isCategory,
   isEntry,
+  isPromptWithCategory,
   parseCategory,
   parseEntry,
   parsePrompt,
@@ -229,6 +230,37 @@ export async function getCategoryBySlug(
       .single();
 
     return parseCategory(data || null);
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function getRandomPrompts(
+  limit?: number
+): Promise<Array<PromptWithCategory> | null> {
+  try {
+    const cookieStore = cookies();
+    const supabase = createServerActionClient<Database>({
+      cookies: () => cookieStore,
+    });
+
+    const { data, error } = await supabase
+      .from("random_prompts")
+      .select(
+        `
+        *,
+        _category_to_prompt (
+          category (id, title, slug)
+        )
+      `
+      )
+      .limit(limit || 6);
+    if (error || data?.length === 0) {
+      throw new Error("Error fetching random prompts");
+    }
+    return data
+      ?.map((item) => parsePrompt((item as ServerPrompt) || null))
+      .filter(isPromptWithCategory);
   } catch (error) {
     return null;
   }

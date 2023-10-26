@@ -46,10 +46,12 @@ function Section({
   children,
   headerRight,
   className,
+  innerStyles,
   ...props
 }: {
   title?: string;
   headerRight?: React.ReactNode;
+  innerStyles?: string;
 } & React.ComponentProps<"div">) {
   return (
     <div
@@ -59,7 +61,12 @@ function Section({
       )}
       {...props}
     >
-      <div className="px-6 md:px-8 p-4 md:p-6 flex flex-col gap-y-4 md:gap-y-5">
+      <div
+        className={cn(
+          "px-6 md:px-8 p-4 md:p-6 flex flex-col gap-y-4 md:gap-y-5",
+          innerStyles
+        )}
+      >
         {(title || headerRight) && (
           <div className="flex justify-between items-center">
             <div>

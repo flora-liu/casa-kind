@@ -9,7 +9,7 @@ import {
 import { Link } from "@/components/ui/link";
 import { cn } from "@/lib/utils";
 
-const colors = [
+export const colors = [
   "bg-[#E2D6CA]",
   "bg-[#EBE9E1]",
   "bg-[#E3DECB]",

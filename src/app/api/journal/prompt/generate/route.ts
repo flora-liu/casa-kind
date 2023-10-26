@@ -35,13 +35,13 @@ You are creating a journaling prompt for your clients to guide their self-reflec
 Step 1: Take the Category that appears in the category section.
 Step 2: Take the Category Description, which is a description of the category. 
     - The use of the words "you" or "your" refer to the client. 
-Step 2: Take the Existing Journaling Prompts Table below.
+Step 3: Take the Existing Journaling Prompts Table below.
     - This table represents the journaling prompts that already exist for this Category
-Step 3: Generate 1 journaling prompt that is related to this Category.
+Step 4: Generate 1 journaling prompt that is related to this Category.
     - The Category Description describes the intentions and purposes of the Category and how journaling prompts related to this Category can help a client.
-    - Avoid creating a question that is similar to the prompts content in the Existing Journaling Prompts Table.
+    - Avoid creating a question that is similar to the content in the Existing Journaling Prompts Table.
     - Be creative in generating a new question that helps a client develop in the provided Category.
-Step 4: Provide your response for the journaling prompt and no other content.
+Step 5: Provide your response for the journaling prompt and no other content.
     - Do not include an indication that this is an official response or that this is the opinion of OpenAI.
     - The journaling prompt should always be a question.
 
@@ -147,7 +147,7 @@ export async function POST(_req: Request) {
       promptResult = await getRandomPromptForCategory(category.id);
     }
 
-    // Save generated prompt to the database
+    // Save generated prompt to the daily_prompt database
     if (promptResult?.prompt?.id) {
       console.info(
         `New daily prompt for ${new Date().toDateString()} with promptId: ${
