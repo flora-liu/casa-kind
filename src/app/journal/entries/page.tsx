@@ -1,10 +1,10 @@
 import { redirect } from "next/navigation";
 import { getEntriesForUser } from "@/app/actions";
 import { getSession } from "@/app/auth";
-import { EntryList } from "@/components/journal/entry-list";
 import { EmptyScreen } from "@/components/journal/empty-screen";
 import { Layout } from "@/components/common/layout";
 import { JournalNav } from "@/components/journal/journal-nav";
+import { EntryViewer } from "@/components/journal/entry-viewer";
 
 async function Page() {
   const session = await getSession();
@@ -12,10 +12,15 @@ async function Page() {
     redirect("/sign-in");
   }
   const entries = await getEntriesForUser(session?.user?.id);
+
   return (
-    <Layout title="Entries" headerNav={<JournalNav />}>
+    <Layout
+      title="Entries"
+      headerNav={<JournalNav />}
+      className="my-0 min-h-0 pt-16"
+    >
       {entries && entries?.length > 0 ? (
-        <EntryList entries={entries} />
+        <EntryViewer entries={entries} />
       ) : (
         <EmptyScreen />
       )}

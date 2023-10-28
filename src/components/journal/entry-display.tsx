@@ -6,11 +6,7 @@ import { Database } from "@/lib/database/types";
 import { useAuthContext } from "@/components/common/auth-provider";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import {
-  IconCross,
-  IconPencil,
-  IconArrowLeft,
-} from "@/components/common/icons";
+import { IconCross, IconPencil } from "@/components/common/icons";
 import { Entry } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -31,6 +27,8 @@ export function EntryDisplay({
   const { userId } = useAuthContext();
   const router = useRouter();
   const [error, setError] = useState<string | undefined>();
+  const [isEditDisabled, setIsEditDisabled] = useState<boolean>(false);
+  const [isDeleteDisabled, setIsDeleteDisabled] = useState<boolean>(false);
 
   if (!entry) {
     return null;
@@ -40,10 +38,13 @@ export function EntryDisplay({
     if (!userId || !entry?.id) {
       return;
     }
+    setIsDeleteDisabled(true);
     const { error } = await supabase.from("entry").delete().eq("id", entry.id);
+    setIsDeleteDisabled(false);
     if (error) {
       setError(error?.message);
     } else {
+      router.refresh();
       router.push("/journal/entries");
     }
   }
@@ -72,7 +73,11 @@ export function EntryDisplay({
               variant="outline"
               size="md"
               className="flex items-center"
-              onClick={onEdit}
+              onClick={() => {
+                onEdit();
+                setIsEditDisabled(true);
+              }}
+              disabled={isEditDisabled}
             >
               <IconPencil className="mr-1" />
               Edit
@@ -83,6 +88,7 @@ export function EntryDisplay({
             size="md"
             className="flex items-center"
             onClick={() => deleteEntry()}
+            disabled={isDeleteDisabled}
           >
             <IconCross className="mr-1 rotate-45" />
             Delete

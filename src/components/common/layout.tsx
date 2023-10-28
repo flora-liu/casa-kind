@@ -16,7 +16,8 @@ function Layout({
   return (
     <div
       className={cn(
-        "my-16 min-h-screen w-full flex flex-col justify-start items-center"
+        "my-16 min-h-screen w-full flex flex-col justify-start items-center",
+        className
       )}
       {...props}
     >
@@ -56,7 +57,7 @@ function Section({
   return (
     <div
       className={cn(
-        "relative mx-auto sm:max-w-3xl md:max-w-5xl w-full flex flex-col",
+        "relative mx-auto sm:max-w-3xl md:max-w-6xl w-full flex flex-col",
         className
       )}
       {...props}

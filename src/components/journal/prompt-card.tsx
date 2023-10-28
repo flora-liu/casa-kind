@@ -29,7 +29,7 @@ function PromptCard({
   return (
     <div
       className={cn(
-        "gap-y-2.5 md:gap-y-3 h-52 md:min-h-[18rem] md:h-96 bg-secondary rounded-lg p-3 sm:p-5 flex flex-col justify-between",
+        "gap-y-2.5 md:gap-y-3 h-52 md:min-h-[18rem] md:h-96 lg:h-[28rem] bg-secondary rounded-lg p-3 sm:p-5 flex flex-col justify-between",
         className
       )}
       {...props}

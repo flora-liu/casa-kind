@@ -1,9 +1,10 @@
-import { cn, getDateFormatted } from "@/lib/utils";
+import { calculateTimeAgo, cn } from "@/lib/utils";
 
 type EntryHeaderProps = {
   leading?: string;
   title?: string;
   date?: string;
+  titleStyles?: string;
 } & React.ComponentProps<"div">;
 
 export function EntryHeader({
@@ -11,32 +12,28 @@ export function EntryHeader({
   title,
   date,
   className,
+  titleStyles = "text-2xl md:text-3xl",
   ...props
 }: EntryHeaderProps) {
   return (
     <div
       className={cn(
-        "flex flex-col items-start px-5 md:px-0 w-full py-3",
+        "flex flex-col items-start px-5 md:px-0 w-full py-2",
         className
       )}
       {...props}
     >
-      <p className="pt-4 md:pt-8 pb-2 md:pb-3 leading-normal text-sm md:text-base text-muted-foreground">
-        {leading}
-      </p>
-      <p
-        className={cn(
-          "font-relative tracking-tight text-2xl md:text-3xl",
-          date ? "mb-6" : ""
+      <div className="flex gap-x-2 pb-1 md:pb-2 items-center">
+        <p className="leading-normal text-sm text-muted-foreground">
+          {leading}
+        </p>
+        {date && (
+          <div className="text-sm text-muted-foreground/60">
+            <p>{calculateTimeAgo(date)}</p>
+          </div>
         )}
-      >
-        {title}
-      </p>
-      {date && (
-        <div className="text-muted-foreground text-sm">
-          <p>{getDateFormatted(new Date(date))}</p>
-        </div>
-      )}
+      </div>
+      <p className={cn("font-relative tracking-tight", titleStyles)}>{title}</p>
     </div>
   );
 }

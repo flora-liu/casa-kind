@@ -50,3 +50,46 @@ export function getDateFormatted(date?: Date): string {
   const formattedDate = `${month} ${day}, ${year}`;
   return formattedDate;
 }
+
+export function calculateTimeAgo(datetimeString: string): string {
+  const inputDate = new Date(datetimeString);
+  const currentDate = new Date();
+
+  const diffInMilliseconds = currentDate.getTime() - inputDate.getTime();
+  const oneMinuteInMilliseconds = 60 * 1000;
+  const oneHourInMilliseconds = 60 * oneMinuteInMilliseconds;
+  const oneDayInMilliseconds = 24 * oneHourInMilliseconds;
+
+  if (diffInMilliseconds < oneHourInMilliseconds) {
+    const minutesAgo = Math.round(diffInMilliseconds / oneMinuteInMilliseconds);
+    return `${minutesAgo} ${minutesAgo < 2 ? "min" : "mins"} ago`;
+  }
+
+  if (diffInMilliseconds < oneDayInMilliseconds) {
+    const hoursAgo = Math.round(diffInMilliseconds / oneHourInMilliseconds);
+    return `${hoursAgo} ${hoursAgo < 2 ? "hour" : "hours"} ago`;
+  }
+
+  const daysAgo = Math.round(diffInMilliseconds / oneDayInMilliseconds);
+  if (daysAgo < 30) {
+    return `${daysAgo} ${daysAgo < 2 ? "day" : "days"} ago`;
+  }
+
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  return `${
+    monthNames[inputDate.getMonth()]
+  } ${inputDate.getDate()}, ${inputDate.getFullYear()}`;
+}

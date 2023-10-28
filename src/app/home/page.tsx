@@ -37,8 +37,8 @@ export default async function Page() {
       title="Welcome"
       subtitle="Warm hugs from Casa Kind, we're thrilled you're here."
     >
-      <div className="relative flex h-full flex-col items-center justify-center px-5 mt-2 md:mt-6">
-        <div className="md:max-w-5xl md:grid md:grid-cols-2 bg-card pt-2 pb-4 md:py-8 rounded-xl border border-border">
+      <Section className="relative flex h-full flex-col items-center justify-center mt-2 md:mt-6">
+        <div className="md:max-w-7xl md:grid md:grid-cols-2 bg-card pt-2 pb-4 md:py-8 rounded-xl border border-border">
           <div className="flex-1 w-full relative h-full flex-col p-5 md:px-10 md:py-4 dark:border-r md:flex">
             <div className="font-relative relative z-20 flex items-center text-4xl md:text-6xl lg:text-7xl mb-3">
               <h1>Self-Care Menu</h1>
@@ -84,12 +84,8 @@ export default async function Page() {
             </div>
           </div>
         </div>
-      </div>
-      <Section
-        className="my-4 md:my-8"
-        innerStyles="lg:px-0"
-        title="Create space to observe your thoughts"
-      >
+      </Section>
+      <Section className="my-4" title="Create space to observe your thoughts">
         <p className="text-muted-foreground md:mb-3">
           Use these questions to check in with your self and connect within
         </p>
