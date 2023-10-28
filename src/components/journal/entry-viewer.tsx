@@ -23,7 +23,8 @@ export function EntryViewer({ entries }: { entries: Array<Entry> }) {
                 "w-full rounded-lg md:hover:bg-accent/10",
                 index === currentEntry
                   ? "md:bg-accent/20 md:hover:bg-accent/20"
-                  : ""
+                  : "",
+                index === entries?.length - 1 ? "mb-8 md:mb-4" : ""
               )}
             >
               <div>
@@ -43,7 +44,9 @@ export function EntryViewer({ entries }: { entries: Array<Entry> }) {
                   <EntryRenderer entry={entry} className="px-5" />
                 </div>
               </div>
-              <Separator className="my-5 h-1 opacity-30 md:hidden" />
+              {index < entries.length - 1 && (
+                <Separator className="mt-7 mb-4 h-1 opacity-30 md:hidden" />
+              )}
             </div>
           );
         })}
