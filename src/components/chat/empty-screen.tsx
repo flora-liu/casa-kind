@@ -12,7 +12,7 @@ const examples = [
 
 export function EmptyScreen({ append }: Pick<UseChatHelpers, "append">) {
   return (
-    <div className="mx-auto max-w-2xl px-4">
+    <div className="mx-auto max-w-2xl px-4 py-3">
       <div className="rounded-lg border p-6 md:p-8 bg-muted">
         <p className="mb-2 leading-normal">
           We offer you a safe space for you to explore your feelings. This chat
