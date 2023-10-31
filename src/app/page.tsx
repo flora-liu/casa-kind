@@ -72,8 +72,8 @@ const journalPrompts = [
   },
   {
     prompt: {
-      id: "a0aa017a-280a-4acf-b5ce-6461973b3c2a",
-      title: "How can I build a life I love? What does a full life mean to me?",
+      id: "02d479bf-ad16-489d-b79a-90e0305ba8d2",
+      title: "What does a full life mean to me?",
     },
     category: {
       id: "ec3b52c7-d498-420e-996f-695748cb7860",
@@ -83,7 +83,7 @@ const journalPrompts = [
   },
   {
     prompt: {
-      id: "6464eae6-2b97-42f3-be34-6b0be3fdc2c5",
+      id: "5f01048d-ae70-41b3-b74a-04c7270b08c4",
       title: "What hurts right now?",
     },
     category: {
@@ -94,7 +94,7 @@ const journalPrompts = [
   },
   {
     prompt: {
-      id: "7072b012-f682-42bc-8626-98108a549b41",
+      id: "81fe9161-7ab7-441c-ab7d-439b0791577a",
       title: "What emotions am I holding on to?",
     },
     category: {
@@ -192,7 +192,7 @@ export default function Page() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-center justify-center px-5 py-20 md:p-16 lg:px-24 lg:py-24 w-full bg-accent/70">
+      <div className="flex md:min-h-[30rem] flex-col items-center justify-center px-5 py-20 md:p-16 lg:px-24 lg:py-24 w-full bg-accent/70">
         <div className="text-center max-w-5xl w-full flex items-center flex-col">
           <h3 className="mb-2 md:mb-3 text-xl font-relative tracking-tight md:text-2xl lg:text-3xl">
             Casa <span className="italic font-cambon">Kind </span>
@@ -201,9 +201,9 @@ export default function Page() {
             Where we care for your heart through conscious compassion
           </p>
           <p className="text-center max-w-xl">
-            As Sri Sri Ravi Shankar simply puts, the state of your life depends
-            on the state of your mind. So be kind to yourself. When we nurture a
-            practice of kindness through mindful observation and conscious
+            As Sri Sri Ravi Shankar simply puts, "The state of your life depends
+            on the state of your mind. So be kind to yourself." When we nurture
+            a practice of kindness through mindful observation and conscious
             choices, we possess the freedom to build a life that feels full and
             vibrant.
           </p>
