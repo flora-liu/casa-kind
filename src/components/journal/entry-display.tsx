@@ -63,7 +63,7 @@ export function EntryDisplay({
       <div className="py-2 md:py-4 w-full">
         <p
           className={cn(
-            "whitespace-pre-line min-h-[18rem] md:min-h-[24rem] w-full resize-none rounded-md bg-background p-4 focus-within:outline-none text-sm md:text-base border border-input/60 ring-offset-background",
+            "whitespace-pre-line min-h-[16rem] md:min-h-[24rem] w-full resize-none rounded-md bg-background p-4 focus-within:outline-none text-sm md:text-base border border-input/60 ring-offset-background",
             textareaStyles
           )}
         >
@@ -75,7 +75,7 @@ export function EntryDisplay({
           <p className="text-sm text-destructive">{error}</p>
         </div>
       )}
-      <div className="flex justify-between gap-2">
+      <div className="flex justify-between gap-2 mt-2">
         <div className="flex flex-row gap-2">
           {onEdit && (
             <Button

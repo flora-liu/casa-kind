@@ -14,9 +14,9 @@ function GratitudeForm({
   const router = useRouter();
 
   return (
-    <div className="grid md:grid-cols-2 gap-4 md:gap-6">
+    <div className="grid md:grid-cols-2 gap-6">
       <div>
-        <p>What are you grateful for today?</p>
+        <p className="mb-1">What are you grateful for today?</p>
         <EntryRenderer
           newPromptId={dailyGratitudeId}
           entry={dailyGratitudeEntry}
@@ -27,7 +27,7 @@ function GratitudeForm({
         />
       </div>
       <div>
-        <p>What are you grateful for in your life?</p>
+        <p className="mb-1">What are you grateful for in your life?</p>
         <EntryRenderer
           newPromptId={lifeGratitudeId}
           entry={lifeGratitudeEntry}

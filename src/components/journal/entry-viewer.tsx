@@ -218,7 +218,7 @@ export function EntryViewer({
           )}
         </Suspense>
         {entries?.length === 0 && (
-          <div className="px-5 py-2 md:px-1 text-center md:text-left">
+          <div className="text-sm md:text-base px-5 py-2 md:px-1 text-center md:text-left">
             No entries found.
           </div>
         )}
