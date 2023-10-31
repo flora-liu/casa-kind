@@ -3,6 +3,12 @@
 import { Hearts } from "@/components/common/hearts";
 import { IconHeart, IconPencil } from "@/components/common/icons";
 import { Button } from "@/components/ui/button";
+import {
+  PromptCard,
+  PromptCardContainer,
+} from "@/components/journal/prompt-card";
+import { colors } from "@/components/journal/prompt-card";
+import { cn } from "@/lib/utils";
 
 const features = [
   {
@@ -28,6 +34,77 @@ const features = [
   },
 ];
 
+const journalPrompts = [
+  {
+    prompt: {
+      id: "66ffaf2a-cb71-4d35-b6b0-12366d99bb71",
+      title: "What are you grateful for in your life?",
+    },
+    category: {
+      id: "b879443f-c75e-48ec-bd56-4a9672e7aae6",
+      title: "Gratitude",
+      slug: "gratitude",
+    },
+  },
+  {
+    prompt: {
+      id: "bab5b11a-ae0f-4721-8527-a75ca3f6c8c5",
+      title:
+        "What themes, patterns, or symbols have I noticed in my life lately?",
+    },
+    category: {
+      id: "30536a67-82b3-4f8e-b438-9119813a5aa9",
+      title: "Daily",
+      slug: "daily",
+    },
+  },
+  {
+    prompt: {
+      id: "a498a5b8-f570-4e41-b5ec-04c7c2a41989",
+      title:
+        "What’s one thing that I feel scared to do, even though I know it’s important?",
+    },
+    category: {
+      id: "efd5a892-9d03-461e-b45e-75ff5c9d0ed2",
+      title: "Self-discovery",
+      slug: "self-discovery",
+    },
+  },
+  {
+    prompt: {
+      id: "a0aa017a-280a-4acf-b5ce-6461973b3c2a",
+      title: "How can I build a life I love? What does a full life mean to me?",
+    },
+    category: {
+      id: "ec3b52c7-d498-420e-996f-695748cb7860",
+      title: "Self-discovery",
+      slug: "self-discovery",
+    },
+  },
+  {
+    prompt: {
+      id: "6464eae6-2b97-42f3-be34-6b0be3fdc2c5",
+      title: "What hurts right now?",
+    },
+    category: {
+      id: "d2e257d5-28f5-488f-8880-cf9f859742d7",
+      title: "Relationship",
+      slug: "relationship",
+    },
+  },
+  {
+    prompt: {
+      id: "7072b012-f682-42bc-8626-98108a549b41",
+      title: "What emotions am I holding on to?",
+    },
+    category: {
+      id: "30536a67-82b3-4f8e-b438-9119813a5aa9",
+      title: "Self-discovery",
+      slug: "self-discovery",
+    },
+  },
+];
+
 export default function Page() {
   return (
     <div className="relative">
@@ -48,9 +125,9 @@ export default function Page() {
           </div>
         </div>
       </div>
-      <div className="flex min-h-[60vh] bg-secondary flex-col items-center justify-center px-5 py-12 md:p-16 lg:px-24">
-        <div className="text-center md:max-w-xl pb-16 md:pb-24">
-          <h2 className="mb-6 md:mb-8 text-2xl font-relative md:text-3xl lg:text-4xl">
+      <div className="flex min-h-[60vh] bg-secondary flex-col items-center justify-center px-5 py-12 md:p-16 lg:py-20 lg:px-24">
+        <div className="text-center md:max-w-xl pb-12 md:pb-24">
+          <h2 className="mb-4 md:mb-8 text-2xl font-relative md:text-3xl lg:text-4xl">
             Dedicate daily moments to nurture your happiest, most{" "}
             <span className="font-cambon font-light italic">whole</span> self
           </h2>
@@ -59,7 +136,7 @@ export default function Page() {
             tools for building your individual practice of lifelong mindfulness.
           </p>
         </div>
-        <div className=" lg:w-full mb-20 md:mb-32 lg:max-w-5xl grid lg:mb-0 lg:grid-cols-3 text-left gap-y-4 sm:gap-x-4">
+        <div className="lg:w-full mb-4 md:mb-32 lg:max-w-5xl lg:mb-0 lg:grid-cols-3 text-left grid gap-y-4 sm:gap-x-4">
           {features.map((feature, index) => {
             return (
               <div
@@ -79,6 +156,57 @@ export default function Page() {
               </div>
             );
           })}
+        </div>
+      </div>
+      <div className="flex min-h-[60vh] flex-col items-center justify-center px-5 py-12 md:p-16 lg:px-24 lg:py-24 w-full">
+        <div className="text-left mb-12 md:mb-16 lg:mb-20 w-full">
+          <h2 className="mb-2 md:mb-3 text-2xl font-relative tracking-tight md:text-3xl lg:text-4xl">
+            Get to know your self
+          </h2>
+          <p className="text-muted-foreground text-lg md:text-xl mb-6 md:mb-8">
+            Through connecting your mind and heart
+          </p>
+          <p className="max-w-xl">
+            Engage in deeper, mindful observation of your thoughts to truly
+            understand your current state. Understanding these thought patterns
+            is the first step to creating alignment in your life. We offer
+            dedicated support and structure to guide your journey, like asking
+            meaningful questions to help you develop insight. We are here to
+            help you apply these insights to your life so you can actually make
+            impactful changes.
+          </p>
+        </div>
+        <div className="flex justify-end">
+          <div className="lg:w-full mb-12 md:mb-32 lg:max-w-5xl lg:mb-0 text-left gap-y-4 sm:gap-x-4">
+            <PromptCardContainer>
+              {journalPrompts?.map((item, promptIndex) => (
+                <PromptCard
+                  categoryTitle={item?.category?.title}
+                  promptId={item?.prompt?.id}
+                  promptTitle={item?.prompt?.title}
+                  key={promptIndex}
+                  className={cn(colors[promptIndex % colors.length])}
+                />
+              ))}
+            </PromptCardContainer>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col items-center justify-center px-5 py-20 md:p-16 lg:px-24 lg:py-24 w-full bg-accent/70">
+        <div className="text-center max-w-5xl w-full flex items-center flex-col">
+          <h3 className="mb-2 md:mb-3 text-xl font-relative tracking-tight md:text-2xl lg:text-3xl">
+            Casa <span className="italic font-cambon">Kind </span>
+          </h3>
+          <p className="text-base md:text-lg mb-6 md:mb-8">
+            Where we care for your heart through conscious compassion
+          </p>
+          <p className="text-center max-w-xl">
+            As Sri Sri Ravi Shankar simply puts, the state of your life depends
+            on the state of your mind. So be kind to yourself. When we nurture a
+            practice of kindness through mindful observation and conscious
+            choices, we possess the freedom to build a life that feels full and
+            vibrant.
+          </p>
         </div>
       </div>
     </div>
