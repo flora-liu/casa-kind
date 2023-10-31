@@ -192,7 +192,20 @@ export function EntryViewer({
                           }
                           titleStyles="text-lg text-left max-h-[48px] overflow-hidden"
                         />
-                        <EntryRenderer entry={entry} className="px-5" />
+                        <EntryRenderer
+                          entry={entry}
+                          onUpdate={(updatedEntry: Entry) => {
+                            const updatedEntries = entries;
+                            updatedEntries[index] = updatedEntry;
+                            setEntries(updatedEntries);
+                          }}
+                          onDelete={() => {
+                            const updatedEntries = [...entries];
+                            updatedEntries.splice(index, 1);
+                            setEntries(updatedEntries);
+                          }}
+                          className="px-5"
+                        />
                       </div>
                     </div>
                     {index < entries.length - 1 && (
