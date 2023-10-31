@@ -1,13 +1,7 @@
 import { IconChevronRight } from "@/components/common/icons";
 import { Layout, Section } from "@/components/common/layout";
-import {
-  PromptCard,
-  PromptCardContainer,
-} from "@/components/journal/prompt-card";
 import { Link } from "@/components/ui/link";
 import { getRandomPrompts } from "@/app/actions";
-import { colors } from "@/components/journal/prompt-card";
-import { cn } from "@/lib/utils";
 
 const features = [
   {
@@ -84,22 +78,6 @@ export default async function Page() {
             </div>
           </div>
         </div>
-      </Section>
-      <Section className="my-4" title="Create space to observe your thoughts">
-        <p className="text-muted-foreground md:mb-3">
-          Use these questions to check in with your self and connect within
-        </p>
-        <PromptCardContainer>
-          {prompts?.map((item, promptIndex) => (
-            <PromptCard
-              categoryTitle={item?.category?.title}
-              promptId={item?.prompt?.id}
-              promptTitle={item?.prompt?.title}
-              key={promptIndex}
-              className={cn(colors[promptIndex % colors.length])}
-            />
-          ))}
-        </PromptCardContainer>
       </Section>
     </Layout>
   );
