@@ -9,8 +9,8 @@ import { Link } from "@/components/ui/link";
 
 function JournalNav() {
   return (
-    <div className="flex flex-row gap-6 md:gap-8 items-end justify-between md:justify-start">
-      <div className="flex flex-row gap-6 md:gap-8">
+    <div className="flex flex-row flex-wrap gap-6 md:gap-8 items-end justify-between md:justify-start">
+      <div className="flex flex-row flex-wrap gap-6 md:gap-8">
         <Link
           variant="basic"
           href="/journal"
