@@ -15,9 +15,9 @@ export function EmptyScreen({ append }: Pick<UseChatHelpers, "append">) {
     <div className="mx-auto max-w-2xl px-4">
       <div className="rounded-lg border p-6 md:p-8 bg-muted">
         <p className="mb-2 leading-normal">
-          This is a safe space for you to explore your feelings. Powered by
-          ChatGPT, this experience is designed to help you get to know your
-          emotions and practice mindfulness.
+          We offer you a safe space for you to explore your feelings. This chat
+          experience is designed to help you get to know your emotions and
+          practice mindfulness.
         </p>
         <p className="mb-2 leading-normal">
           You will be guided through an exercise to build emotional awareness.
