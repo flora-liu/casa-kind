@@ -9,12 +9,14 @@ import { Button } from "@/components/ui/button";
 import { IconCross, IconPencil } from "@/components/common/icons";
 import { Entry } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { revalidatePath } from "next/cache";
 
 export type EntryDisplayProps = {
   entry?: Entry | null;
   onEdit?: () => void;
   textareaStyles?: string;
-  deleteLink?: string;
+  onDeleteLink?: string;
+  onDelete?: () => void;
 } & React.ComponentProps<"div">;
 
 export function EntryDisplay({
@@ -22,6 +24,8 @@ export function EntryDisplay({
   onEdit,
   textareaStyles,
   className,
+  onDeleteLink,
+  onDelete,
 }: EntryDisplayProps) {
   const supabase = createClientComponentClient<Database>();
   const { userId } = useAuthContext();
@@ -45,7 +49,12 @@ export function EntryDisplay({
       setError(error?.message);
     } else {
       router.refresh();
-      router.push("/journal/entries");
+      onDelete?.();
+      if (onDeleteLink) {
+        router.push(onDeleteLink);
+      } else {
+        router.push("/journal/entries");
+      }
     }
   }
 

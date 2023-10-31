@@ -1,4 +1,5 @@
 "use client";
+
 import { cn } from "@/lib/utils";
 import {
   freeFormCategory,
@@ -8,7 +9,7 @@ import {
 } from "@/lib/journal";
 import { EntryHeader } from "@/components/journal/entry-header";
 import { Entry } from "@/lib/types";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, Suspense } from "react";
 import { EntryRenderer } from "@/components/journal/entry-renderer";
 import { Separator } from "@/components/ui/separator";
 import { DatePickerWithRange } from "@/components/ui/date-picker";
@@ -18,6 +19,7 @@ import { format, isBefore } from "date-fns";
 import useQueryParams from "@/lib/hooks/use-query-params";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useAuthContext } from "@/components/common/auth-provider";
+import { SkeletonLoader } from "@/components/ui/skeleton";
 
 function parseDate(input: string) {
   const [year, month, day] = input.split("-").map(Number);
@@ -150,56 +152,58 @@ export function EntryViewer({
           </div>
           <Separator className="my-6 block md:hidden h-1 opacity-30" />
         </div>
-        {entries?.length > 0 && (
-          <ul className="md:h-[68vh] md:overflow-y-scroll pr-2 flex flex-col gap-y-2 list-none">
-            {entries.map((entry, index) => {
-              return (
-                <li
-                  key={index}
-                  className={cn(
-                    "w-full rounded-lg md:hover:bg-accent/10",
-                    index === currentEntry
-                      ? "md:bg-accent/20 md:hover:bg-accent/20"
-                      : "",
-                    index === entries?.length - 1 ? "mb-8 md:mb-4" : ""
-                  )}
-                >
-                  <div>
-                    <button
-                      className="hidden md:block px-5 pb-1 md:p-4 w-full"
-                      onClick={() => setCurrentEntry(index)}
-                    >
-                      <EntryHeader
-                        className="px-0 md:py-0"
-                        date={entry?.createdAt}
-                        title={entry?.prompt?.prompt?.title || freeFormTitle}
-                        leading={
-                          entry?.prompt?.category?.title || freeFormCategory
-                        }
-                        titleStyles="text-lg text-left max-h-[48px] overflow-hidden"
-                      />
-                    </button>
-                    <div className="md:hidden">
-                      <EntryHeader
-                        className="px-5 md:py-0"
-                        date={entry?.createdAt}
-                        title={entry?.prompt?.prompt?.title || freeFormTitle}
-                        leading={
-                          entry?.prompt?.category?.title || freeFormCategory
-                        }
-                        titleStyles="text-lg text-left max-h-[48px] overflow-hidden"
-                      />
-                      <EntryRenderer entry={entry} className="px-5" />
+        <Suspense fallback={<SkeletonLoader />}>
+          {entries?.length > 0 && (
+            <ul className="md:h-[68vh] md:overflow-y-scroll pr-2 flex flex-col gap-y-2 list-none">
+              {entries.map((entry, index) => {
+                return (
+                  <li
+                    key={index}
+                    className={cn(
+                      "w-full rounded-lg md:hover:bg-accent/10",
+                      index === currentEntry
+                        ? "md:bg-accent/20 md:hover:bg-accent/20"
+                        : "",
+                      index === entries?.length - 1 ? "mb-8 md:mb-4" : ""
+                    )}
+                  >
+                    <div>
+                      <button
+                        className="hidden md:block px-5 pb-1 md:p-4 w-full"
+                        onClick={() => setCurrentEntry(index)}
+                      >
+                        <EntryHeader
+                          className="px-0 md:py-0"
+                          date={entry?.createdAt}
+                          title={entry?.prompt?.prompt?.title || freeFormTitle}
+                          leading={
+                            entry?.prompt?.category?.title || freeFormCategory
+                          }
+                          titleStyles="text-lg text-left max-h-[48px] overflow-hidden"
+                        />
+                      </button>
+                      <div className="md:hidden">
+                        <EntryHeader
+                          className="px-5 md:py-0"
+                          date={entry?.createdAt}
+                          title={entry?.prompt?.prompt?.title || freeFormTitle}
+                          leading={
+                            entry?.prompt?.category?.title || freeFormCategory
+                          }
+                          titleStyles="text-lg text-left max-h-[48px] overflow-hidden"
+                        />
+                        <EntryRenderer entry={entry} className="px-5" />
+                      </div>
                     </div>
-                  </div>
-                  {index < entries.length - 1 && (
-                    <Separator className="mt-7 mb-4 h-1 opacity-30 md:hidden" />
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        )}
+                    {index < entries.length - 1 && (
+                      <Separator className="mt-7 mb-4 h-1 opacity-30 md:hidden" />
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </Suspense>
         {entries?.length === 0 && (
           <div className="px-5 py-2 md:px-1 text-center md:text-left">
             No entries found.
@@ -220,7 +224,20 @@ export function EntryViewer({
               }
               date={entries[currentEntry]?.createdAt}
             />
-            <EntryRenderer entry={entries[currentEntry]} className="px-0" />
+            <EntryRenderer
+              entry={entries[currentEntry]}
+              onUpdate={(updatedEntry: Entry) => {
+                const updatedEntries = entries;
+                updatedEntries[currentEntry] = updatedEntry;
+                setEntries(updatedEntries);
+              }}
+              onDelete={() => {
+                const updatedEntries = [...entries];
+                updatedEntries.splice(currentEntry, 1);
+                setEntries(updatedEntries);
+              }}
+              className="px-0"
+            />
           </>
         )}
       </div>

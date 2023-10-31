@@ -22,8 +22,8 @@ function GratitudeForm({
           entry={dailyGratitudeEntry}
           className="px-0 md:px-0"
           textareaStyles="min-h-[10rem] md:min-h-[14rem]"
-          hideCancelButton
-          deleteLink="/journal"
+          onDeleteLink="/journal"
+          onCreateRefresh
         />
       </div>
       <div>
@@ -33,8 +33,8 @@ function GratitudeForm({
           entry={lifeGratitudeEntry}
           className="px-0 md:px-0"
           textareaStyles="min-h-[10rem] md:min-h-[14rem]"
-          hideCancelButton
-          deleteLink="/journal"
+          onDeleteLink="/journal"
+          onCreateRefresh
         />
       </div>
     </div>

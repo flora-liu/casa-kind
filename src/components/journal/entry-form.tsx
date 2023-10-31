@@ -10,12 +10,15 @@ import { Database } from "@/lib/database/types";
 import { useAuthContext } from "@/components/common/auth-provider";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { parseEntry } from "@/lib/journal";
 
 export type EntryFormProps = {
   newPromptId?: string;
   entry?: Entry | null;
   onCancelEdit?: () => void;
   textareaStyles?: string;
+  onCreateRefresh?: boolean;
+  onUpdate?: (entry: Entry) => void;
 } & React.ComponentProps<"div">;
 
 export function EntryForm({
@@ -24,6 +27,8 @@ export function EntryForm({
   onCancelEdit,
   className,
   textareaStyles,
+  onCreateRefresh,
+  onUpdate,
 }: EntryFormProps) {
   const [input, setInput] = useState<string>(entry?.content || "");
   const [error, setError] = useState<string | undefined>();
@@ -51,7 +56,13 @@ export function EntryForm({
       setError(error?.message);
     }
     if (data) {
-      router.push(`/journal/entry/${data.id}`);
+      if (onCreateRefresh) {
+        router.refresh();
+      } else {
+        router.push(`/journal/entry/${data.id}`);
+      }
+      setIsLoading(false);
+      onCancelEdit?.();
     }
   }
 
@@ -67,7 +78,17 @@ export function EntryForm({
         user_id: userId,
         id: entry.id,
       })
-      .select()
+      .select(
+        `
+        *,
+        prompt (
+          *,
+          _category_to_prompt (
+            category (id, title, slug)
+          )
+        )
+      `
+      )
       .single();
     if (error) {
       setError(error?.message);
@@ -76,6 +97,10 @@ export function EntryForm({
       setIsLoading(false);
       onCancelEdit?.();
       router.refresh();
+      const entry = parseEntry(data || null);
+      if (entry) {
+        onUpdate?.(entry);
+      }
     }
   }
 

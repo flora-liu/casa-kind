@@ -12,7 +12,7 @@ import {
   parseEntry,
   parsePrompt,
 } from "@/lib/journal";
-import { format } from "date-fns";
+import { addDays, format } from "date-fns";
 
 export async function getEntryById(id: string): Promise<Entry | null> {
   try {
@@ -52,24 +52,34 @@ export async function getDailyGratitudeEntries() {
     const supabase = createServerActionClient<Database>({
       cookies: () => cookieStore,
     });
-    const { data, status, error } = await supabase
+    const userResult = await supabase.auth.getUser();
+
+    let query = supabase
       .from("entry")
       .select(
         `
+          *,
+          prompt (
             *,
-            prompt (
-              *,
-              _category_to_prompt (
-                category (id, title, slug)
-              )
+            _category_to_prompt (
+              category (id, title, slug)
             )
-          `
+          )
+        `
       )
       .in("prompt_id", [
         process.env.TODAY_GRATITUDE_ID,
         process.env.LIFE_GRATITUDE_ID,
       ])
-      .eq("created_at", new Date().toISOString().split("T")[0]);
+      .gte("created_at", format(new Date(), "yyyy-MM-dd"))
+      .lte("created_at", format(addDays(new Date(), 2), "yyyy-MM-dd"));
+    if (!userResult?.data?.user?.id) {
+      throw new Error(
+        "Error fetching daily gratitude entries due to missing userId"
+      );
+    }
+    query.eq("user_id", userResult?.data?.user?.id);
+    const { data, status, error } = await query;
 
     if (error && status !== 406) {
       throw error;
