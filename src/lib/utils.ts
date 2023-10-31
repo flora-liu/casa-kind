@@ -62,6 +62,9 @@ export function calculateTimeAgo(datetimeString: string): string {
 
   if (diffInMilliseconds < oneHourInMilliseconds) {
     const minutesAgo = Math.round(diffInMilliseconds / oneMinuteInMilliseconds);
+    if (minutesAgo === 0) {
+      return `Just now`;
+    }
     return `${minutesAgo} ${minutesAgo < 2 ? "min" : "mins"} ago`;
   }
 

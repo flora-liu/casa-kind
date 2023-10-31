@@ -26,7 +26,7 @@ async function Page({
       <div className="justify-start flex flex-col items-center mx-auto w-full">
         <div className="w-full flex justify-end my-7 md:my-10 px-5 md:px-6">
           <Link
-            href="/journal"
+            href="/journal/entries"
             className="flex items-center text-sm md:text-base"
             variant="basic"
           >

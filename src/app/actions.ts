@@ -94,28 +94,43 @@ export async function getDailyGratitudeEntries() {
 }
 
 export async function getEntriesForUser(
-  userId: string
+  userId: string,
+  filters?: {
+    startDate?: string;
+    endDate?: string;
+  }
 ): Promise<Array<Entry> | null> {
   try {
     const cookieStore = cookies();
     const supabase = createServerActionClient<Database>({
       cookies: () => cookieStore,
     });
-    const { data, status, error } = await supabase
+
+    let query = supabase
       .from("entry")
       .select(
         `
+          *,
+          prompt (
             *,
-            prompt (
-              *,
-              _category_to_prompt (
-                category (id, title, slug)
-              )
+            _category_to_prompt (
+              category (id, title, slug)
             )
-          `
+          )
+        `
       )
       .eq("user_id", userId)
       .order("created_at", { ascending: false });
+
+    if (filters) {
+      if (filters?.startDate) {
+        query.gte("created_at", filters?.startDate);
+      }
+      if (filters.endDate) {
+        query.gte("created_at", filters?.endDate);
+      }
+    }
+    const { data, status, error } = await query;
 
     if (error && status !== 406) {
       throw error;

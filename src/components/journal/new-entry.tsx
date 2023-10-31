@@ -53,6 +53,7 @@ function NewEntry({ selectedPrompt, promptOfTheDay }: NewEntryProps) {
         </TabsList>
       </Tabs>
       <EntryHeader
+        className="mt-6"
         leading={
           mode == EntryMode.Prompt
             ? selectedPrompt?.category?.title
