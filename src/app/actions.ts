@@ -12,6 +12,7 @@ import {
   parseEntry,
   parsePrompt,
 } from "@/lib/journal";
+import { format } from "date-fns";
 
 export async function getEntryById(id: string): Promise<Entry | null> {
   try {
@@ -184,19 +185,23 @@ export async function getDailyPrompt(): Promise<PromptWithCategory | null> {
       cookies: () => cookieStore,
     });
     const { data } = await supabase
-      .rpc("get_daily_prompt")
+      .from("daily_prompt")
       .select(
         `
         *,
-        _category_to_prompt (
-          category (id, title, slug)
+        prompt (
+          *,
+          _category_to_prompt (
+            category (id, title, slug)
+          )
         )
     `
       )
+      .eq("created_at", format(new Date(), "yyyy-MM-dd"))
       .limit(1)
       .single();
 
-    return parsePrompt(data) || null;
+    return data?.prompt ? parsePrompt(data?.prompt) : null;
   } catch (error) {
     return null;
   }
