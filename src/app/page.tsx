@@ -168,8 +168,8 @@ export default function Page() {
           </p>
           <p className="max-w-xl">
             Engage in deeper, mindful observation of your thoughts to truly
-            understand your current state. Understanding these thought patterns
-            is the first step to creating alignment in your life. We offer
+            understand your current state. Recognizing these thought patterns is
+            the first step to creating alignment in your life. We offer
             dedicated support and structure to guide your journey, like asking
             meaningful questions to help you develop insight. We are here to
             help you apply these insights to your life so you can actually make
