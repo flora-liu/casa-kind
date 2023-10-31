@@ -223,7 +223,7 @@ export function EntryViewer({
           </div>
         )}
       </div>
-      <div className="md:col-span-8 px-5 md:px-16 hidden md:block">
+      <div className="md:col-span-8 px-5 md:px-16 md:pb-16 hidden md:block">
         {currentEntry !== null && (
           <>
             <EntryHeader
