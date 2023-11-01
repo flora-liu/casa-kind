@@ -191,7 +191,7 @@ export default function Page() {
           </p>
         </div>
         <div className="order-1 lg:order-2 relative h-[22rem] lg:h-[32rem] w-full lg:w-3/5 my-4">
-          <div className="absolute top-[48%] md:top-[15%] left-1/2 -translate-x-1/2 rotate-3">
+          <div className="absolute top-[48%] md:top-[10%] left-1/2 -translate-x-1/2">
             <PromptCard
               categoryTitle={journalPrompts[4]?.category?.title}
               promptId={journalPrompts[4]?.prompt?.id}
@@ -202,7 +202,7 @@ export default function Page() {
               )}
             />
           </div>
-          <div className="absolute top-[3%] md:top-[15%] left-[5%] lg:left-0 rotate-12">
+          <div className="absolute top-[3%] md:top-[15%] left-[3%] -rotate-[10deg]">
             <PromptCard
               categoryTitle={journalPrompts[3]?.category?.title}
               promptId={journalPrompts[3]?.prompt?.id}
@@ -213,7 +213,7 @@ export default function Page() {
               )}
             />
           </div>
-          <div className="absolute top-[5%] md:top-[15%] right-[5%] lg:right-[3%] -rotate-12">
+          <div className="absolute top-[5%] md:top-[15%] right-[5%] lg:right-[3%] rotate-[10deg]">
             <PromptCard
               categoryTitle={journalPrompts[2]?.category?.title}
               promptId={journalPrompts[2]?.prompt?.id}
