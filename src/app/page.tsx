@@ -1,12 +1,9 @@
 "use client";
 
-import { Hearts } from "@/components/common/hearts";
 import { IconHeart, IconPencil } from "@/components/common/icons";
+import { PromptCard } from "@/components/journal/prompt-card";
 import { Button } from "@/components/ui/button";
-import {
-  PromptCard,
-  PromptCardContainer,
-} from "@/components/journal/prompt-card";
+import Image from "next/image";
 import { colors } from "@/components/journal/prompt-card";
 import { cn } from "@/lib/utils";
 
@@ -108,15 +105,14 @@ const journalPrompts = [
 export default function Page() {
   return (
     <div className="relative">
-      <Hearts />
-      <div className="min-h-[20rem] md:min-h-[48rem] px-5 py-12 md:px-16 md:py-24 flex flex-col items-center justify-center">
-        <div className="text-left sm:grid sm:grid-cols-12 md:max-w-7xl w-full z-30">
-          <div className="sm:col-span-8 mt-16">
+      <div className="relative min-h-[34rem] md:min-h-[42rem] px-5 py-12 md:px-16 md:py-24 flex flex-col items-center justify-center">
+        <div className="text-center grid grid-cols-12 md:max-w-7xl w-full z-30">
+          <div className="col-span-12 mt-12">
             <h1 className="font-relative text-3xl md:text-4xl lg:text-5xl leading-tight md:leading-snug mb-3 md:mb-6">
               Cultivating a kinder world, <br />
               beginning at heart
             </h1>
-            <p className="text-muted-foreground text-lg md:text-xl">
+            <p className="text-lg md:text-xl">
               Discover Casa Kind, your sanctuary for mindful self-care
             </p>
             <Button asChild size="lg" className="mt-8 md:mt-12">
@@ -124,9 +120,29 @@ export default function Page() {
             </Button>
           </div>
         </div>
+        <div className="absolute w-full h-full bg-orange-100">
+          <div className="w-full h-full">
+            <Image
+              alt="Palm leaf"
+              width={200}
+              height={160}
+              src="/images/tanya-trofymchuk-gzXhH-RiydU-unsplash-mobile.jpg"
+              sizes="100vw"
+              className="w-full h-full object-cover object-center opacity-30 md:hidden"
+            />
+            <Image
+              alt="Palm leaf"
+              width={200}
+              height={160}
+              src="/images/tanya-trofymchuk-gzXhH-RiydU-unsplash.jpg"
+              sizes="100vw"
+              className="w-full h-full object-cover object-center opacity-50 hidden md:block"
+            />
+          </div>
+        </div>
       </div>
-      <div className="flex min-h-[60vh] bg-secondary flex-col items-center justify-center px-5 py-12 md:p-16 lg:py-20 lg:px-24">
-        <div className="text-center md:max-w-xl pb-12 md:pb-24">
+      <div className="flex min-h-[60vh] bg-secondary flex-col items-center justify-center px-5 py-12 md:p-16 lg:p-24">
+        <div className="text-center md:max-w-xl pb-12 md:pb-24 mt-4">
           <h2 className="mb-4 md:mb-8 text-2xl font-relative md:text-3xl lg:text-4xl">
             Dedicate daily moments to nurture your happiest, most{" "}
             <span className="font-cambon font-light italic">whole</span> self
@@ -158,55 +174,88 @@ export default function Page() {
           })}
         </div>
       </div>
-      <div className="flex min-h-[60vh] flex-col items-center justify-center px-5 py-12 md:p-16 lg:px-24 lg:py-24 w-full">
-        <div className="text-left mb-12 md:mb-16 lg:mb-20 w-full">
+      <div className="relative flex min-h-[42rem] flex-col items-center justify-center px-5 w-full lg:flex-row">
+        <div className="order-2 lg:order-1 text-left my-6 md:mb-16 pb-12 md:p-16 lg:px-24 lg:py-24">
           <h2 className="mb-2 md:mb-3 text-2xl font-relative tracking-tight md:text-3xl lg:text-4xl">
             Get to know your self
           </h2>
-          <p className="text-muted-foreground text-lg md:text-xl mb-6 md:mb-8">
+          <p className="text-lg md:text-xl mb-6 md:mb-8">
             Through connecting your mind and heart
           </p>
           <p className="max-w-xl">
             Engage in deeper, mindful observation of your thoughts to truly
             understand your current state. Recognizing these thought patterns is
             the first step to creating alignment in your life. We offer
-            dedicated support and structure to guide your journey, like asking
-            meaningful questions to help you develop insight. We are here to
-            help you apply these insights to your life so you can actually make
-            impactful changes.
+            dedicated support to help apply your insights to your life so you
+            can actually make impactful changes.
           </p>
         </div>
-        <div className="flex justify-end">
-          <div className="lg:w-full mb-12 md:mb-32 lg:max-w-5xl lg:mb-0 text-left gap-y-4 sm:gap-x-4">
-            <PromptCardContainer>
-              {journalPrompts?.map((item, promptIndex) => (
-                <PromptCard
-                  categoryTitle={item?.category?.title}
-                  promptId={item?.prompt?.id}
-                  promptTitle={item?.prompt?.title}
-                  key={promptIndex}
-                  className={cn(colors[promptIndex % colors.length])}
-                />
-              ))}
-            </PromptCardContainer>
+        <div className="order-1 lg:order-2 relative h-[22rem] lg:h-[32rem] w-full lg:w-3/5 my-4">
+          <div className="absolute top-[48%] md:top-[15%] left-1/2 -translate-x-1/2 rotate-3">
+            <PromptCard
+              categoryTitle={journalPrompts[4]?.category?.title}
+              promptId={journalPrompts[4]?.prompt?.id}
+              promptTitle={journalPrompts[4]?.prompt?.title}
+              className={cn(
+                colors[1],
+                "w-[10rem] h-[12rem] sm:w-[12rem] sm:h-[15rem] md:min-h-none md:h-[18rem] md:w-[14rem] lg:h-[18rem]"
+              )}
+            />
+          </div>
+          <div className="absolute top-[3%] md:top-[15%] left-[5%] lg:left-0 rotate-12">
+            <PromptCard
+              categoryTitle={journalPrompts[3]?.category?.title}
+              promptId={journalPrompts[3]?.prompt?.id}
+              promptTitle={journalPrompts[3]?.prompt?.title}
+              className={cn(
+                colors[2],
+                "w-[10rem] h-[12rem] sm:w-[12rem] sm:h-[15rem] md:min-h-none md:h-[18rem] md:w-[14rem] lg:h-[18rem]"
+              )}
+            />
+          </div>
+          <div className="absolute top-[5%] md:top-[15%] right-[5%] lg:right-[3%] -rotate-12">
+            <PromptCard
+              categoryTitle={journalPrompts[2]?.category?.title}
+              promptId={journalPrompts[2]?.prompt?.id}
+              promptTitle={journalPrompts[2]?.prompt?.title}
+              className={cn(
+                colors[5],
+                "w-[10rem] h-[12rem] sm:w-[12rem] sm:h-[15rem] md:min-h-none md:h-[18rem] md:w-[14rem] lg:h-[18rem]"
+              )}
+            />
           </div>
         </div>
       </div>
-      <div className="flex md:min-h-[30rem] flex-col items-center justify-center px-5 py-20 md:p-16 lg:px-24 lg:py-24 w-full bg-accent/70">
-        <div className="text-center max-w-5xl w-full flex items-center flex-col">
-          <h3 className="mb-2 md:mb-3 text-xl font-relative tracking-tight md:text-2xl lg:text-3xl">
-            Casa <span className="italic font-cambon">Kind </span>
-          </h3>
-          <p className="text-base md:text-lg mb-6 md:mb-8">
-            Where we care for your heart through conscious compassion
-          </p>
-          <p className="text-center max-w-xl">
-            As Sri Sri Ravi Shankar simply puts, "The state of your life depends
-            on the state of your mind. So be kind to yourself." When we nurture
-            a practice of kindness through mindful observation and conscious
-            choices, we possess the freedom to build a life that feels full and
-            vibrant.
-          </p>
+      <div className="md:max-h-[34rem] w-full flex flex-col md:flex-row md:justify-between">
+        <div className="order-2 px-5 flex flex-col items-center md:items-start justify-center py-20 md:p-16 lg:py-24 lg:px-32">
+          <div className="text-left w-full flex items-start flex-col max-w-lg">
+            <h3 className="mb-2 text-xl font-relative tracking-tight md:text-2xl lg:text-3xl">
+              Casa <span className="italic font-cambon">Kind </span>
+            </h3>
+            <p className="text-base md:text-lg mb-6 md:mb-8">
+              Where we care for your heart through conscious compassion
+            </p>
+            <p className="max-w-xl">
+              As Sri Sri Ravi Shankar simply puts, &quot;The state of your life
+              depends on the state of your mind. So be kind to yourself.&quot;
+              When we nurture a practice of kindness through mindful observation
+              and conscious choices, we possess the freedom to build a life that
+              feels full and vibrant.
+            </p>
+          </div>
+        </div>
+        <div className="max-h-[20rem] md:max-h-none overflow-hidden order-1 md:grow">
+          <Image
+            alt="Palm leaf"
+            width={200}
+            height={160}
+            src="/images/annie-spratt-GMSqa8vdx84-unsplash.jpg"
+            // https://stackoverflow.com/questions/65169431/how-to-set-the-next-image-component-to-100-height
+            sizes="(max-width: 768px) 100vw,
+            (max-width: 1200px) 50vw,
+            33vw"
+            className="w-full h-full object-cover"
+          />
         </div>
       </div>
     </div>

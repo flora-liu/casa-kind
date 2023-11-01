@@ -27,7 +27,7 @@ function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
           </Button>
         </div>
       </SheetTrigger>
-      <SheetContent side="left" className="text-foreground">
+      <SheetContent side="left" className="rounded-r-3xl">
         <div className="flex flex-col justify-start font-relative tracking-tight text-xl gap-y-3 md:text-3xl md:gap-y-4">
           {isLoggedIn ? (
             <>
@@ -35,7 +35,10 @@ function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
               <a href="/journal">Journal</a>
               <a href="/heart-talk">Heart Talk</a>
               <a href="/meditate">Meditate</a>
-              <button className="text-left" onClick={signOut}>
+              <button
+                className="text-left focus:outline-none"
+                onClick={signOut}
+              >
                 Sign Out
               </button>
             </>

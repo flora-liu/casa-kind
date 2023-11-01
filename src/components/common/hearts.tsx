@@ -120,9 +120,9 @@ function Hearts() {
   return (
     <div
       ref={rootRef}
-      className="z-20 relative sm:absolute w-full sm:w-1/2 right-0 top-0"
+      className="z-20 relative sm:absolute w-full sm:w-1/3 lg:w-1/2 right-0 top-0"
     >
-      <div className="w-full h-full min-h-[16rem] md:min-h-[30rem] relative">
+      <div className="w-full h-full min-h-[16rem] md:h-[14rem] lg:min-h-[30rem] relative">
         <div className="absolute top-[85%] left-2/3 -rotate-6">
           <Heart1
             ref={(el) => (heartsRefs.current[0] = el)}
