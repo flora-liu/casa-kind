@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { colors } from "@/components/journal/prompt-card";
 import { cn } from "@/lib/utils";
+import { BlurImage } from "@/components/ui/blur-image";
 
 const features = [
   {
@@ -105,7 +106,7 @@ const journalPrompts = [
 export default function Page() {
   return (
     <div className="relative">
-      <div className="relative min-h-[34rem] md:min-h-[42rem] px-5 py-12 md:px-16 md:py-24 flex flex-col items-center justify-center">
+      <div className="relative min-h-[30rem] md:min-h-[42rem] px-5 py-12 md:px-16 md:py-24 flex flex-col items-center justify-center">
         <div className="text-center grid grid-cols-12 md:max-w-7xl w-full z-30">
           <div className="col-span-12 mt-12">
             <h1 className="font-relative text-3xl md:text-4xl lg:text-5xl leading-tight md:leading-snug mb-3 md:mb-6">
@@ -120,24 +121,16 @@ export default function Page() {
             </Button>
           </div>
         </div>
-        <div className="absolute w-full h-full bg-orange-100">
-          <div className="w-full h-full">
-            <Image
+        <div className="absolute w-full h-full">
+          <div className="relative w-full h-full overflow-hidden">
+            <BlurImage
               alt="Palm leaf"
-              width={200}
-              height={160}
-              src="/images/tanya-trofymchuk-gzXhH-RiydU-unsplash-mobile.jpg"
-              sizes="100vw"
-              className="w-full h-full object-cover object-center opacity-30 md:hidden"
-            />
-            <Image
-              alt="Palm leaf"
-              width={200}
-              height={160}
               src="/images/tanya-trofymchuk-gzXhH-RiydU-unsplash.jpg"
               sizes="100vw"
-              className="w-full h-full object-cover object-center opacity-50 hidden md:block"
+              className="object-center"
+              fill
             />
+            <div className="absolute w-full h-full bg-orange-100 opacity-50 md:/opacity-40" />
           </div>
         </div>
       </div>
@@ -174,68 +167,70 @@ export default function Page() {
           })}
         </div>
       </div>
-      <div className="relative flex min-h-[42rem] flex-col items-center justify-center px-5 w-full lg:flex-row">
-        <div className="order-2 lg:order-1 text-left my-6 md:mb-16 pb-12 md:p-16 lg:px-24 lg:py-24">
-          <h2 className="mb-2 md:mb-3 text-2xl font-relative tracking-tight md:text-3xl lg:text-4xl">
-            Get to know your self
-          </h2>
-          <p className="text-lg md:text-xl mb-6 md:mb-8">
-            Through connecting your mind and heart
-          </p>
-          <p className="max-w-xl">
-            Engage in deeper, mindful observation of your thoughts to truly
-            understand your current state. Recognizing these thought patterns is
-            the first step to creating alignment in your life. We offer
-            dedicated support to help apply your insights to your life so you
-            can actually make impactful changes.
-          </p>
-        </div>
-        <div className="order-1 lg:order-2 relative h-[22rem] lg:h-[32rem] w-full lg:w-3/5 my-4">
-          <div className="absolute top-[48%] md:top-[10%] left-1/2 -translate-x-1/2">
-            <PromptCard
-              categoryTitle={journalPrompts[4]?.category?.title}
-              promptId={journalPrompts[4]?.prompt?.id}
-              promptTitle={journalPrompts[4]?.prompt?.title}
-              className={cn(
-                colors[1],
-                "w-[10rem] h-[12rem] sm:w-[12rem] sm:h-[15rem] md:min-h-none md:h-[18rem] md:w-[14rem] lg:h-[18rem]"
-              )}
-            />
+      <div className="flex justify-center">
+        <div className="relative flex min-h-[42rem] max-w-5xl flex-col items-center justify-center w-full lg:flex-row">
+          <div className="order-2 lg:order-1 text-left my-6 md:my-16 pb-12 lg:py-24 px-5 md:pl-0 md:pr-16">
+            <h2 className="mb-2 text-2xl font-relative tracking-tight md:text-3xl">
+              Get to know your self
+            </h2>
+            <p className="text-lg mb-6 md:mb-8">
+              Through connecting your mind and heart
+            </p>
+            <p className="max-w-xl text-muted-foreground">
+              Engage in deeper, mindful observation of your thoughts to truly
+              understand your current state. Recognizing these thought patterns
+              is the first step to creating alignment in your life. We offer
+              dedicated support to help apply your insights to your life so you
+              can actually make impactful changes.
+            </p>
           </div>
-          <div className="absolute top-[3%] md:top-[15%] left-[3%] -rotate-[10deg]">
-            <PromptCard
-              categoryTitle={journalPrompts[3]?.category?.title}
-              promptId={journalPrompts[3]?.prompt?.id}
-              promptTitle={journalPrompts[3]?.prompt?.title}
-              className={cn(
-                colors[2],
-                "w-[10rem] h-[12rem] sm:w-[12rem] sm:h-[15rem] md:min-h-none md:h-[18rem] md:w-[14rem] lg:h-[18rem]"
-              )}
-            />
-          </div>
-          <div className="absolute top-[5%] md:top-[15%] right-[5%] lg:right-[3%] rotate-[10deg]">
-            <PromptCard
-              categoryTitle={journalPrompts[2]?.category?.title}
-              promptId={journalPrompts[2]?.prompt?.id}
-              promptTitle={journalPrompts[2]?.prompt?.title}
-              className={cn(
-                colors[5],
-                "w-[10rem] h-[12rem] sm:w-[12rem] sm:h-[15rem] md:min-h-none md:h-[18rem] md:w-[14rem] lg:h-[18rem]"
-              )}
-            />
+          <div className="order-1 lg:order-2 relative h-[16rem] sm:h-[20rem] lg:h-[32rem] w-full my-4 overflow-hidden md:overflow-visible">
+            <div className="absolute top-[15%] left-1/2 -translate-x-[150%] -rotate-[10deg]">
+              <PromptCard
+                categoryTitle={journalPrompts[3]?.category?.title}
+                promptId={journalPrompts[3]?.prompt?.id}
+                promptTitle={journalPrompts[3]?.prompt?.title}
+                className={cn(
+                  colors[2],
+                  "w-[10rem] h-[12rem] sm:w-[12rem] sm:h-[15rem] md:min-h-none md:h-[18rem] md:w-[14rem] lg:h-[18rem]"
+                )}
+              />
+            </div>
+            <div className="absolute top-[10%] left-1/2 -translate-x-1/2">
+              <PromptCard
+                categoryTitle={journalPrompts[4]?.category?.title}
+                promptId={journalPrompts[4]?.prompt?.id}
+                promptTitle={journalPrompts[4]?.prompt?.title}
+                className={cn(
+                  colors[1],
+                  "w-[10rem] h-[12rem] sm:w-[12rem] sm:h-[15rem] md:min-h-none md:h-[18rem] md:w-[14rem] lg:h-[18rem]"
+                )}
+              />
+            </div>
+            <div className="absolute top-[15%] left-1/2 translate-x-[50%] rotate-[10deg]">
+              <PromptCard
+                categoryTitle={journalPrompts[2]?.category?.title}
+                promptId={journalPrompts[2]?.prompt?.id}
+                promptTitle={journalPrompts[2]?.prompt?.title}
+                className={cn(
+                  colors[5],
+                  "w-[10rem] h-[12rem] sm:w-[12rem] sm:h-[15rem] md:min-h-none md:h-[18rem] md:w-[14rem] lg:h-[18rem]"
+                )}
+              />
+            </div>
           </div>
         </div>
       </div>
       <div className="md:max-h-[34rem] w-full flex flex-col md:flex-row md:justify-between">
         <div className="order-2 px-5 flex flex-col items-center md:items-start justify-center py-20 md:p-16 lg:py-24 lg:px-32">
-          <div className="text-left w-full flex items-start flex-col max-w-lg">
+          <div className="text-left w-full flex items-start flex-col md:max-w-lg">
             <h3 className="mb-2 text-xl font-relative tracking-tight md:text-2xl lg:text-3xl">
               Casa <span className="italic font-cambon">Kind </span>
             </h3>
             <p className="text-base md:text-lg mb-6 md:mb-8">
               Where we care for your heart through conscious compassion
             </p>
-            <p className="max-w-xl">
+            <p className="max-w-xl text-muted-foreground">
               As Sri Sri Ravi Shankar simply puts, &quot;The state of your life
               depends on the state of your mind. So be kind to yourself.&quot;
               When we nurture a practice of kindness through mindful observation
@@ -244,18 +239,18 @@ export default function Page() {
             </p>
           </div>
         </div>
-        <div className="max-h-[20rem] md:max-h-none overflow-hidden order-1 md:grow">
-          <Image
-            alt="Palm leaf"
-            width={200}
-            height={160}
-            src="/images/annie-spratt-GMSqa8vdx84-unsplash.jpg"
-            // https://stackoverflow.com/questions/65169431/how-to-set-the-next-image-component-to-100-height
-            sizes="(max-width: 768px) 100vw,
+        <div className="h-[20rem] md:h-auto w-full md:max-h-none overflow-hidden order-1 md:grow">
+          <div className="w-full h-full relative">
+            <BlurImage
+              alt="Palm leaf"
+              src="/images/annie-spratt-GMSqa8vdx84-unsplash.jpg"
+              // https://stackoverflow.com/questions/65169431/how-to-set-the-next-image-component-to-100-height
+              sizes="(max-width: 768px) 100vw,
             (max-width: 1200px) 50vw,
             33vw"
-            className="w-full h-full object-cover"
-          />
+              fill
+            />
+          </div>
         </div>
       </div>
     </div>
