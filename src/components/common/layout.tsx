@@ -16,7 +16,7 @@ function Layout({
   return (
     <div
       className={cn(
-        "min-h-screen w-full flex flex-col justify-start items-center",
+        "h-[calc(100vh-85px)] w-full flex flex-col justify-start items-center",
         className
       )}
       {...props}

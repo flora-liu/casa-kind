@@ -2,8 +2,9 @@ import { IconChevronRight } from "@/components/common/icons";
 import { Layout, Section } from "@/components/common/layout";
 import { Link } from "@/components/ui/link";
 import { BlurImage } from "@/components/ui/blur-image";
+import { Separator } from "@/components/ui/separator";
 
-const features = [
+const selfCareFeatures = [
   {
     name: "Journal",
     description: "Create space to reflect",
@@ -57,7 +58,7 @@ export default async function Page() {
           className="relative flex h-full flex-col items-center justify-center"
         >
           <div className="md:max-w-7xl w-full md:grid md:grid-cols-2">
-            <div className="flex-1 w-full relative h-full flex-col py-5 md:flex">
+            <div className="flex-1 w-full relative md:h-full flex-col py-5 md:flex">
               <div className="font-relative relative z-20 flex items-center text-3xl md:text-5xl mb-3">
                 <h1>Self-Care Menu</h1>
               </div>
@@ -71,7 +72,7 @@ export default async function Page() {
             </div>
             <div className="lg:px-8 md:py-4 relative flex-auto w-full">
               <div className="relative w-full h-full flex flex-col gap-y-3 py-2 md:gap-y-4">
-                {features.map((feature, index) => (
+                {selfCareFeatures.map((feature, index) => (
                   <div
                     key={index}
                     className="relative mx-auto flex w-full flex-col justify-center space-y-4 z-20 rounded-xl bg-[#E3DECB] hover:bg-[#E3DECB]/80 text-secondary-foreground"
@@ -99,6 +100,35 @@ export default async function Page() {
                     </Link>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        </Section>
+        <Separator className="my-6" />
+        <Section>
+          <div className="w-full grid md:grid-cols-12 gap-4 md:gap-8">
+            <div className="md:col-span-4 h-[26rem] md:h-[30rem] overflow-hidden">
+              <BlurImage
+                alt="Flowers"
+                src="/images/yaoqi-Bs_OAcsozAo-unsplash.jpg"
+                fill
+                sizes="(max-width: 768px) 100vw,
+            (max-width: 1200px) 50vw,
+            33vw"
+                className="object-bottom"
+                aspectRatio="aspect-h-4 aspect-w-3"
+              />
+            </div>
+            <div className="md:col-start-6 md:col-span-6 self-stretch h-ful flex flex-col content-between py-2">
+              <div>
+                <p className="text-muted-foreground mb-3">Tiny thought</p>
+              </div>
+              <div className="text-left mt-auto grow flex flex-col justify-center">
+                <p className="font-relative text-2xl md:text-3xl mb-4">
+                  You are the universe, expressing itself as a human for a
+                  little while.
+                </p>
+                <p>- Eckhart Tolle</p>
               </div>
             </div>
           </div>
