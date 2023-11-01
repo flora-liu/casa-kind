@@ -14,11 +14,7 @@ async function Page() {
   const entries = await getEntriesForUser(session?.user?.id);
 
   return (
-    <Layout
-      title="Entries"
-      headerNav={<JournalNav />}
-      className="my-0 min-h-0 pt-16"
-    >
+    <Layout title="Entries" headerNav={<JournalNav />} className="my-0 min-h-0">
       {entries && entries?.length > 0 ? (
         <EntryViewer entries={entries} />
       ) : (

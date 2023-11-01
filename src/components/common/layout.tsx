@@ -9,24 +9,28 @@ function Layout({
   className,
   ...props
 }: {
-  title: string;
+  title?: string;
   subtitle?: string;
   headerNav?: React.ReactNode;
 } & React.ComponentProps<"div">) {
   return (
     <div
       className={cn(
-        "my-16 min-h-screen w-full flex flex-col justify-start items-center",
+        "min-h-screen w-full flex flex-col justify-start items-center",
         className
       )}
       {...props}
     >
       <div className="relative mx-auto flex flex-col items-start justify-start w-full px-6 md:px-8">
-        <div className="pt-4 md:pt-10 w-full flex justify-between flex-col gap-4 md:gap-6 md:flex-row">
+        <div className="pt-2 w-full flex justify-between flex-col gap-4 md:gap-6 md:flex-row">
           <div>
-            <p className={cn("text-xl font-semibold", subtitle ? "mb-3" : "")}>
-              {title}
-            </p>
+            {title && (
+              <p
+                className={cn("text-xl font-semibold", subtitle ? "mb-3" : "")}
+              >
+                {title}
+              </p>
+            )}
             {subtitle && (
               <p className="leading-normal text-muted-foreground pb-1">
                 {subtitle}
@@ -36,7 +40,7 @@ function Layout({
           {headerNav}
         </div>
       </div>
-      <Separator className="my-4" />
+      {(title || subtitle) && <Separator className="my-4" />}
       {children}
     </div>
   );
