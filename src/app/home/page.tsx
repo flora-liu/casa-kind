@@ -54,7 +54,7 @@ export default async function Page() {
         <div className="absolute w-full h-full">
           <div className="relative w-full h-full overflow-hidden">
             <BlurImage
-              alt="Palm leaf"
+              alt="Window silhouette"
               src="/images/steinar-engeland-BfMbxUu0EGE-unsplash.jpg"
               sizes="100vw"
               className="absolute w-full h-full object-center z-10"
@@ -171,14 +171,12 @@ export default async function Page() {
             <div className="md:col-span-4 h-[26rem] md:h-[30rem]">
               <div className="relative w-full h-full overflow-hidden rounded-xl">
                 <BlurImage
-                  alt="Flowers"
+                  alt="Bed sheets"
                   src="/images/yaoqi-Bs_OAcsozAo-unsplash.jpg"
+                  sizes="100vw"
+                  className="absolute w-full h-full object-center rounded-xl"
                   fill
-                  sizes="(max-width: 768px) 100vw,
-            (max-width: 1200px) 50vw,
-            33vw"
-                  className="object-bottom"
-                  aspectRatio="aspect-h-4 aspect-w-3 rounded-xl"
+                  aspectRatio="aspect-w-3 aspect-h-4"
                 />
               </div>
             </div>
