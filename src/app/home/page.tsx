@@ -107,17 +107,19 @@ export default async function Page() {
         <Separator className="my-6" />
         <Section>
           <div className="w-full grid md:grid-cols-12 gap-4 md:gap-8">
-            <div className="md:col-span-4 h-[26rem] md:h-[30rem] overflow-hidden">
-              <BlurImage
-                alt="Flowers"
-                src="/images/yaoqi-Bs_OAcsozAo-unsplash.jpg"
-                fill
-                sizes="(max-width: 768px) 100vw,
+            <div className="md:col-span-4 h-[26rem] md:h-[30rem]">
+              <div className="w-full h-full overflow-hidden">
+                <BlurImage
+                  alt="Flowers"
+                  src="/images/yaoqi-Bs_OAcsozAo-unsplash.jpg"
+                  fill
+                  sizes="(max-width: 768px) 100vw,
             (max-width: 1200px) 50vw,
             33vw"
-                className="object-bottom"
-                aspectRatio="aspect-h-4 aspect-w-3"
-              />
+                  className="object-bottom"
+                  aspectRatio="aspect-h-4 aspect-w-3"
+                />
+              </div>
             </div>
             <div className="md:col-start-6 md:col-span-6 self-stretch h-ful flex flex-col content-between py-2">
               <div>
