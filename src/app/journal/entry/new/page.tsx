@@ -5,6 +5,7 @@ import { PromptWithCategory } from "@/lib/types";
 import { getSession } from "@/app/auth";
 import { redirect } from "next/navigation";
 import { NewEntry } from "@/components/journal/new-entry";
+import { Button } from "@/components/ui/button";
 
 async function Page({
   searchParams,
@@ -22,9 +23,9 @@ async function Page({
   }
 
   return (
-    <div className="min-h-screen">
-      <div className="justify-start flex flex-col items-center mx-auto w-full">
-        <div className="w-full flex justify-end my-7 md:my-10 px-5 md:px-6">
+    <div className="relative h-[calc(100vh-85px)]">
+      {/* <div className="absolute justify-end flex flex-col items-center mx-auto right-0 py-4 md:py-2">
+        <div className="w-full flex justify-end px-5 md:px-6">
           <Link
             href="/journal/entries"
             className="flex items-center text-sm md:text-base"
@@ -33,11 +34,12 @@ async function Page({
             <IconCross className="h-5 w-5 rotate-45" />
           </Link>
         </div>
-      </div>
-      <div className="sm:max-w-2xl justify-start flex flex-col items-center mx-auto w-full pb-16 md:pb-20">
+      </div> */}
+      <div className="sm:max-w-2xl justify-start flex flex-col items-center mx-auto w-full pb-2">
         <NewEntry
           promptOfTheDay={promptOfTheDay}
           selectedPrompt={selectedPrompt}
+          onCancelEditLink="/journal/entries"
         />
       </div>
     </div>
