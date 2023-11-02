@@ -137,6 +137,12 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+### Generate prompts
+
+To test generating the daily prompt:
+
+`curl localhost:3000/api/journal/prompt/generate`
+
 ## Troubleshooting
 
 ### Missing grants
