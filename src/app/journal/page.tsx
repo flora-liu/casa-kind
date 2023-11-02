@@ -14,6 +14,7 @@ import {
 } from "@/components/journal/prompt-card";
 import { colors } from "@/components/journal/prompt-card";
 import { cn } from "@/lib/utils";
+import { Separator } from "@/components/ui/separator";
 
 async function Page() {
   const dailyPrompt = await getDailyPrompt();
@@ -23,7 +24,7 @@ async function Page() {
   return (
     <Layout
       title="Journal"
-      subtitle="Cultivate awareness through observing what's on your mind"
+      subtitle="Cultivate awareness by observing your thoughts"
       headerNav={<JournalNav />}
     >
       {dailyPrompt && (
@@ -48,6 +49,7 @@ async function Page() {
       <Section title="Daily gratitude">
         <GratitudeForm {...gratitudeData} />
       </Section>
+      <Separator className="my-4 md:my-6" />
       <Section title="Create space to observe your thoughts">
         <p className="text-muted-foreground md:mb-3">
           Use these questions to check in with your self and connect within

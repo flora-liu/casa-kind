@@ -119,7 +119,7 @@ export function EntryForm({
         placeholder="Enter your thoughts"
         spellCheck={false}
         className={cn(
-          "whitespace-pre-line min-h-[18rem] md:min-h-[24rem] w-full resize-none rounded-md bg-background p-4 focus-within:outline-none text-sm md:text-base border border-input ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
+          "whitespace-pre-line min-h-[12rem] md:min-h-[20rem] w-full resize-none rounded-md bg-background p-4 focus-within:outline-none text-sm md:text-base border border-input ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
           textareaStyles
         )}
       />

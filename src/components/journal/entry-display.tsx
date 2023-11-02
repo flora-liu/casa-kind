@@ -63,7 +63,7 @@ export function EntryDisplay({
       <div className="py-2 md:py-4 w-full">
         <p
           className={cn(
-            "whitespace-pre-line min-h-[16rem] md:min-h-[24rem] w-full resize-none rounded-md bg-background p-4 focus-within:outline-none text-sm md:text-base border border-input/60 ring-offset-background",
+            "whitespace-pre-line min-h-[12rem] md:min-h-[20rem] w-full resize-none rounded-md bg-background p-4 focus-within:outline-none text-sm md:text-base border border-input/60 ring-offset-background",
             textareaStyles
           )}
         >

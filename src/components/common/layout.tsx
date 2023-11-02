@@ -23,20 +23,23 @@ function Layout({
     >
       <div className="relative mx-auto flex flex-col items-start justify-start w-full px-6 md:px-8">
         <div className="pt-2 w-full flex justify-between flex-col gap-4 md:gap-6 md:flex-row">
-          <div>
+          <p className="flex flex-col sm:flex-row sm:items-center">
             {title && (
-              <p
-                className={cn("text-xl font-semibold", subtitle ? "mb-3" : "")}
+              <span
+                className={cn(
+                  "font-medium",
+                  subtitle ? "mr-2 mb-2 md:mb-0" : ""
+                )}
               >
                 {title}
-              </p>
+              </span>
             )}
             {subtitle && (
-              <p className="leading-normal text-muted-foreground pb-1">
+              <span className="mb-2 sm:mb-0 leading-normal text-muted-foreground/80 text-sm sm:text-base">
                 {subtitle}
-              </p>
+              </span>
             )}
-          </div>
+          </p>
           {headerNav}
         </div>
       </div>
