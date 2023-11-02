@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Button } from "@/components/ui/button";
 
@@ -7,17 +8,22 @@ import { IconChevronDown } from "@/components/common/icons";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { useGlobalContext } from "@/components/common/global-provider";
+import { useRouter } from "next/navigation";
 
 function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
   const supabase = createClientComponentClient();
   const { navPosition } = useGlobalContext();
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
 
   async function signOut() {
     await supabase.auth.signOut();
+    setOpen(false);
+    router.push("/");
   }
 
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <div
         className={cn(
           navPosition === "absolute"
