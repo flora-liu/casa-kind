@@ -167,7 +167,7 @@ export default async function Page() {
         </Section>
         <Separator className="my-6" /> */}
         <Section innerStyles="pt-2">
-          <div className="w-full grid md:grid-cols-12 gap-4 md:gap-8">
+          <div className="w-full flex flex-col md:grid md:grid-cols-12 gap-4 md:gap-8">
             <div className="md:col-span-4 h-[26rem] md:h-[30rem]">
               <div className="relative w-full h-full overflow-hidden rounded-xl">
                 <BlurImage

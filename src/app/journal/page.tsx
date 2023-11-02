@@ -24,11 +24,11 @@ async function Page() {
   return (
     <Layout
       title="Journal"
-      subtitle="Cultivate awareness by observing your thoughts"
+      subtitle="Cultivate awareness by noting your thoughts"
       headerNav={<JournalNav />}
     >
       {dailyPrompt && (
-        <Section title="Prompt of the day">
+        <Section title="Prompt of the day" innerStyles="pt-2">
           <div className="bg-card text-card-foreground rounded-lg p-4 md:p-6 border border-border min-h-[14rem] flex flex-col justify-between gap-y-2.5 md:gap-y-3">
             <p className="text-sm text-muted-foreground">
               {dailyPrompt?.category?.title}

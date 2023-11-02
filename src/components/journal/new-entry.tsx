@@ -3,7 +3,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
 import { EntryHeader } from "@/components/journal/entry-header";
 import { Category, Prompt } from "@/lib/types";
-import { EntryForm } from "@/components/journal/entry-form";
+import { EntryForm, EntryFormProps } from "@/components/journal/entry-form";
 
 enum EntryMode {
   PromptOfTheDay = "prompt-of-the-day",
@@ -12,7 +12,7 @@ enum EntryMode {
   Edit = "edit",
 }
 
-interface NewEntryProps {
+type NewEntryProps = {
   promptOfTheDay?: {
     prompt?: Prompt;
     category?: Category;
@@ -21,9 +21,9 @@ interface NewEntryProps {
     prompt?: Prompt;
     category?: Category;
   } | null;
-}
+} & EntryFormProps;
 
-function NewEntry({ selectedPrompt, promptOfTheDay }: NewEntryProps) {
+function NewEntry({ selectedPrompt, promptOfTheDay, ...props }: NewEntryProps) {
   const [mode, setMode] = useState<string>(
     selectedPrompt
       ? EntryMode.Prompt
@@ -77,6 +77,7 @@ function NewEntry({ selectedPrompt, promptOfTheDay }: NewEntryProps) {
             ? promptOfTheDay?.prompt?.id
             : undefined
         }
+        {...props}
       />
     </>
   );

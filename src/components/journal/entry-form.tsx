@@ -16,6 +16,7 @@ export type EntryFormProps = {
   newPromptId?: string;
   entry?: Entry | null;
   onCancelEdit?: () => void;
+  onCancelEditLink?: string;
   textareaStyles?: string;
   onCreateRefresh?: boolean;
   onUpdate?: (entry: Entry) => void;
@@ -25,6 +26,7 @@ export function EntryForm({
   newPromptId,
   entry,
   onCancelEdit,
+  onCancelEditLink,
   className,
   textareaStyles,
   onCreateRefresh,
@@ -163,6 +165,14 @@ export function EntryForm({
           >
             <IconCross className="mr-1 rotate-45" />
             Cancel
+          </Button>
+        )}
+        {onCancelEditLink && (
+          <Button size="md" variant="secondary" asChild>
+            <a href={onCancelEditLink} className="flex items-center">
+              <IconCross className="mr-1 rotate-45" />
+              Cancel
+            </a>
           </Button>
         )}
       </div>
