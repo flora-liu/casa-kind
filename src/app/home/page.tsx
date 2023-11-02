@@ -182,11 +182,9 @@ export default async function Page() {
                 />
               </div>
             </div>
-            <div className="md:col-start-6 md:col-span-6 self-stretch h-ful flex flex-col content-between py-2">
-              <div>
-                <p className="text-muted-foreground mb-3">Tiny thought</p>
-              </div>
-              <div className="text-left mt-auto grow flex flex-col justify-center">
+            <div className="md:col-start-6 md:col-span-6 h-full flex flex-col justify-center py-2">
+              <p className="text-muted-foreground mb-6 md:mb-8">Tiny thought</p>
+              <div className="text-left flex flex-col justify-center">
                 <p className="font-relative text-2xl md:text-3xl mb-4">
                   You are the universe, expressing itself as a human for a
                   little while.
