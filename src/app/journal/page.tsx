@@ -15,6 +15,7 @@ import {
 import { colors } from "@/components/journal/prompt-card";
 import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
+import { BlurImage } from "@/components/ui/blur-image";
 
 async function Page() {
   const dailyPrompt = await getDailyPrompt();
@@ -28,20 +29,41 @@ async function Page() {
       headerNav={<JournalNav />}
     >
       {dailyPrompt && (
-        <Section title="Prompt of the day" innerStyles="pt-2">
-          <div className="bg-card text-card-foreground rounded-lg p-4 md:p-6 border border-border min-h-[14rem] flex flex-col justify-between gap-y-2.5 md:gap-y-3">
-            <p className="text-sm text-muted-foreground">
-              {dailyPrompt?.category?.title}
-            </p>
-            <h2 className="text-xl md:text-3xl font-relative tracking-tight">
-              {dailyPrompt?.prompt?.title}
-            </h2>
-            <div>
-              <Button variant="secondary" size="sm" asChild>
-                <a href="/journal/entry/new">
-                  <IconPencil className="mr-1.5 h-3 w-3" /> Answer
-                </a>
-              </Button>
+        <Section innerStyles="pt-3">
+          <div className="bg-card text-card-foreground rounded-xl border border-border overflow-hidden">
+            <div className="w-full flex flex-col md:grid md:grid-cols-12 md:gap-4">
+              <div className="order-2 md:order-none md:col-span-7 h-full p-4 md:p-6 min-h-[14rem] flex flex-col justify-between gap-y-6">
+                <p className="text-base md:text-lg mt-2 font-semibold">
+                  Prompt of the day
+                </p>
+                <div>
+                  <p className="text-sm md:text-base text-muted-foreground mb-2 md:mb-4">
+                    {dailyPrompt?.category?.title}
+                  </p>
+                  <h2 className="text-xl md:text-3xl font-relative tracking-tight">
+                    {dailyPrompt?.prompt?.title}
+                  </h2>
+                </div>
+                <div>
+                  <Button variant="secondary" size="sm" asChild>
+                    <a href="/journal/entry/new">
+                      <IconPencil className="mr-1.5 h-3 w-3" /> Answer
+                    </a>
+                  </Button>
+                </div>
+              </div>
+              <div className="order-1 md:order-none md:col-start-8 md:col-span-5 md:h-[30rem]">
+                <div className="relative w-full h-full overflow-hidden">
+                  <BlurImage
+                    alt="Sea shells"
+                    src="/images/crina-parasca-f-HAwc4A36s-unsplash.jpg"
+                    sizes="100vw"
+                    className="absolute w-full h-full object-center md:object-bottom"
+                    fill
+                    aspectRatio="aspect-w-4 aspect-h-3 md:aspect-w-3 md:aspect-h-4 md:aspect-none md:object-cover"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </Section>
