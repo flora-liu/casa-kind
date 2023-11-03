@@ -1,20 +1,16 @@
 "use client";
-import { useRouter } from "next/navigation";
+
 import { GratitudeEntryData } from "@/lib/types";
 import { EntryRenderer } from "@/components/journal/entry-renderer";
-
-interface GratitudeFormProps extends GratitudeEntryData {}
 
 function GratitudeForm({
   dailyGratitudeId,
   dailyGratitudeEntry,
   lifeGratitudeId,
   lifeGratitudeEntry,
-}: GratitudeFormProps) {
-  const router = useRouter();
-
+}: GratitudeEntryData) {
   return (
-    <div className="grid md:grid-cols-2 gap-6">
+    <div className="grid md:grid-cols-2 gap-6 md:gap-8">
       <div>
         <p className="mb-1">What are you grateful for today?</p>
         <EntryRenderer

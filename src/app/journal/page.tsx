@@ -14,7 +14,6 @@ import {
 } from "@/components/journal/prompt-card";
 import { colors } from "@/components/journal/prompt-card";
 import { cn } from "@/lib/utils";
-import { Separator } from "@/components/ui/separator";
 import { BlurImage } from "@/components/ui/blur-image";
 
 async function Page() {
@@ -28,8 +27,24 @@ async function Page() {
       subtitle="Cultivate awareness by noting your thoughts"
       headerNav={<JournalNav />}
     >
+      <Section innerStyles="justify-center">
+        <div className="md:grid md:grid-cols-12 gap-6 md:gap-8">
+          <div className="md:col-span-5 pb-6 md:pb-4">
+            <h3 className="text-base md:text-lg font-semibold mb-2 md:mb-3">
+              Daily gratitude
+            </h3>
+            <p className="text-sm md:text-base text-muted-foreground">
+              Simply notice the good things that are happening. What do you
+              appreciate about them? How would you feel if it went away?
+            </p>
+          </div>
+          <div className="md;col-start-1 md:col-span-12">
+            <GratitudeForm {...gratitudeData} />
+          </div>
+        </div>
+      </Section>
       {dailyPrompt && (
-        <Section innerStyles="pt-3">
+        <Section innerStyles="pt-0">
           <div className="bg-card text-card-foreground rounded-xl border border-border overflow-hidden">
             <div className="w-full flex flex-col md:grid md:grid-cols-12 md:gap-4">
               <div className="order-2 md:order-none md:col-span-7 h-full p-4 md:p-6 min-h-[14rem] flex flex-col justify-between gap-y-6">
@@ -37,7 +52,7 @@ async function Page() {
                   Prompt of the day
                 </p>
                 <div>
-                  <p className="text-sm md:text-base text-muted-foreground mb-2 md:mb-4">
+                  <p className="text-sm md:text-base text-muted-foreground mb-2 md:mb-3">
                     {dailyPrompt?.category?.title}
                   </p>
                   <h2 className="text-xl md:text-3xl font-relative tracking-tight">
@@ -68,10 +83,6 @@ async function Page() {
           </div>
         </Section>
       )}
-      <Section title="Daily gratitude">
-        <GratitudeForm {...gratitudeData} />
-      </Section>
-      <Separator className="my-4 md:my-6" />
       <Section title="Create space to observe your thoughts">
         <p className="text-muted-foreground md:mb-3">
           Use these questions to check in with your self and connect within
