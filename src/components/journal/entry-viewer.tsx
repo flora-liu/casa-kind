@@ -38,6 +38,7 @@ export function EntryViewer({
   const startDateFilter = queryParams?.get("start-date");
   const endDateFilter = queryParams?.get("end-date");
   const [error, setError] = useState<string | undefined>();
+  const [loading, setLoading] = useState<boolean>(false);
   const [entries, setEntries] = useState<Array<Entry>>(entriesProp || []);
   const [currentEntry, setCurrentEntry] = useState<number | null>(
     entries?.length > 0 ? 0 : null
@@ -51,6 +52,7 @@ export function EntryViewer({
 
   const fetchEntries = useCallback(
     async function () {
+      setLoading(true);
       let query = supabase
         .from("entry")
         .select(
@@ -73,6 +75,7 @@ export function EntryViewer({
       if (date?.to) {
         query.lte("created_at", format(date?.to, "yyyy-MM-dd"));
       }
+
       const { data, status, error } = await query;
 
       if (error && status !== 406) {
@@ -84,6 +87,7 @@ export function EntryViewer({
         result = data?.map((item) => parseEntry(item))?.filter(isEntry);
         setEntries(result);
       }
+      setLoading(false);
     },
     [date]
   );
@@ -153,68 +157,76 @@ export function EntryViewer({
           <Separator className="my-6 block md:hidden h-1 opacity-30" />
         </div>
         <Suspense fallback={<SkeletonLoader />}>
-          {entries?.length > 0 && (
-            <ul className="md:h-[68vh] md:overflow-y-scroll pr-2 flex flex-col gap-y-2 list-none">
-              {entries.map((entry, index) => {
-                return (
-                  <li
-                    key={index}
-                    className={cn(
-                      "w-full rounded-lg md:hover:bg-accent/10",
-                      index === currentEntry
-                        ? "md:bg-accent/20 md:hover:bg-accent/20"
-                        : "",
-                      index === entries?.length - 1 ? "mb-8 md:mb-4" : ""
-                    )}
-                  >
-                    <div>
-                      <button
-                        className="hidden md:block px-5 pb-1 md:p-4 w-full"
-                        onClick={() => setCurrentEntry(index)}
-                      >
-                        <EntryHeader
-                          className="px-0 md:py-0"
-                          date={entry?.createdAt}
-                          title={entry?.prompt?.prompt?.title || freeFormTitle}
-                          leading={
-                            entry?.prompt?.category?.title || freeFormCategory
-                          }
-                          titleStyles="text-lg text-left max-h-[48px] overflow-hidden"
-                        />
-                      </button>
-                      <div className="md:hidden">
-                        <EntryHeader
-                          className="px-5 md:py-0"
-                          date={entry?.createdAt}
-                          title={entry?.prompt?.prompt?.title || freeFormTitle}
-                          leading={
-                            entry?.prompt?.category?.title || freeFormCategory
-                          }
-                          titleStyles="text-lg text-left max-h-[48px] overflow-hidden"
-                        />
-                        <EntryRenderer
-                          entry={entry}
-                          onUpdate={(updatedEntry: Entry) => {
-                            const updatedEntries = entries;
-                            updatedEntries[index] = updatedEntry;
-                            setEntries(updatedEntries);
-                          }}
-                          onDelete={() => {
-                            const updatedEntries = [...entries];
-                            updatedEntries.splice(index, 1);
-                            setEntries(updatedEntries);
-                          }}
-                          className="px-5"
-                        />
+          {loading ? (
+            <SkeletonLoader />
+          ) : (
+            entries?.length > 0 && (
+              <ul className="md:h-[68vh] md:overflow-y-scroll pr-2 flex flex-col gap-y-2 list-none">
+                {entries.map((entry, index) => {
+                  return (
+                    <li
+                      key={index}
+                      className={cn(
+                        "w-full rounded-lg md:hover:bg-accent/10",
+                        index === currentEntry
+                          ? "md:bg-accent/20 md:hover:bg-accent/20"
+                          : "",
+                        index === entries?.length - 1 ? "mb-8 md:mb-4" : ""
+                      )}
+                    >
+                      <div>
+                        <button
+                          className="hidden md:block px-5 pb-1 md:p-4 w-full"
+                          onClick={() => setCurrentEntry(index)}
+                        >
+                          <EntryHeader
+                            className="px-0 md:py-0"
+                            date={entry?.createdAt}
+                            title={
+                              entry?.prompt?.prompt?.title || freeFormTitle
+                            }
+                            leading={
+                              entry?.prompt?.category?.title || freeFormCategory
+                            }
+                            titleStyles="text-lg text-left max-h-[48px] overflow-hidden"
+                          />
+                        </button>
+                        <div className="md:hidden">
+                          <EntryHeader
+                            className="px-5 md:py-0"
+                            date={entry?.createdAt}
+                            title={
+                              entry?.prompt?.prompt?.title || freeFormTitle
+                            }
+                            leading={
+                              entry?.prompt?.category?.title || freeFormCategory
+                            }
+                            titleStyles="text-lg text-left max-h-[48px] overflow-hidden"
+                          />
+                          <EntryRenderer
+                            entry={entry}
+                            onUpdate={(updatedEntry: Entry) => {
+                              const updatedEntries = entries;
+                              updatedEntries[index] = updatedEntry;
+                              setEntries(updatedEntries);
+                            }}
+                            onDelete={() => {
+                              const updatedEntries = [...entries];
+                              updatedEntries.splice(index, 1);
+                              setEntries(updatedEntries);
+                            }}
+                            className="px-5"
+                          />
+                        </div>
                       </div>
-                    </div>
-                    {index < entries.length - 1 && (
-                      <Separator className="mt-7 mb-4 h-1 opacity-30 md:hidden" />
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
+                      {index < entries.length - 1 && (
+                        <Separator className="mt-7 mb-4 h-1 opacity-30 md:hidden" />
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            )
           )}
         </Suspense>
         {entries?.length === 0 && (
