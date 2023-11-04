@@ -12,7 +12,7 @@ function GratitudeForm({
   return (
     <div className="grid md:grid-cols-2 gap-6 md:gap-8">
       <div>
-        <p className="mb-1">What are you grateful for today?</p>
+        <p>What are you grateful for today?</p>
         <EntryRenderer
           newPromptId={dailyGratitudeId}
           entry={dailyGratitudeEntry}
@@ -23,7 +23,7 @@ function GratitudeForm({
         />
       </div>
       <div>
-        <p className="mb-1">What are you grateful for in your life?</p>
+        <p>What are you grateful for in your life?</p>
         <EntryRenderer
           newPromptId={lifeGratitudeId}
           entry={lifeGratitudeEntry}

@@ -1,6 +1,5 @@
 import { IconPencil } from "@/components/common/icons";
 import { Layout, Section } from "@/components/common/layout";
-import { GratitudeForm } from "@/components/journal/gratitude-form";
 import { JournalNav } from "@/components/journal/journal-nav";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,6 +14,7 @@ import {
 import { colors } from "@/components/journal/prompt-card";
 import { cn } from "@/lib/utils";
 import { BlurImage } from "@/components/ui/blur-image";
+import { GratitudeViewer } from "@/components/journal/gratitude-viewer";
 
 async function Page() {
   const dailyPrompt = await getDailyPrompt();
@@ -27,9 +27,9 @@ async function Page() {
       subtitle="Cultivate awareness by noting your thoughts"
       headerNav={<JournalNav />}
     >
-      <Section innerStyles="justify-center">
-        <div className="md:grid md:grid-cols-12 gap-6 md:gap-8">
-          <div className="md:col-span-5 pb-6 md:pb-4">
+      <Section innerStyles="justify-center pb-10">
+        <div className="flex flex-col md:grid md:grid-cols-12 gap-6 md:gap-8">
+          <div className="md:col-start-1 md:col-span-5">
             <h3 className="text-base md:text-lg font-semibold mb-2 md:mb-3">
               Daily gratitude
             </h3>
@@ -38,9 +38,7 @@ async function Page() {
               appreciate about them? How would you feel if it went away?
             </p>
           </div>
-          <div className="md;col-start-1 md:col-span-12">
-            <GratitudeForm {...gratitudeData} />
-          </div>
+          <GratitudeViewer data={gratitudeData} />
         </div>
       </Section>
       {dailyPrompt && (
@@ -83,7 +81,10 @@ async function Page() {
           </div>
         </Section>
       )}
-      <Section title="Create space to observe your thoughts">
+      <Section
+        title="Create space to observe your thoughts"
+        className="pb-4 md:pb-8"
+      >
         <p className="text-muted-foreground md:mb-3">
           Use these questions to check in with your self and connect within
         </p>

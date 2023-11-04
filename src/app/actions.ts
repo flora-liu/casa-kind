@@ -3,8 +3,15 @@ import "server-only";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { Database } from "@/lib/database/types";
-import { Category, Entry, PromptWithCategory, ServerPrompt } from "@/lib/types";
 import {
+  Category,
+  Entry,
+  GratitudeEntryData,
+  PromptWithCategory,
+  ServerPrompt,
+} from "@/lib/types";
+import {
+  groupByCreatedAt,
   isCategory,
   isEntry,
   isPromptWithCategory,
@@ -46,7 +53,10 @@ export async function getEntryById(id: string): Promise<Entry | null> {
   }
 }
 
-export async function getDailyGratitudeEntries() {
+export async function getDailyGratitudeEntries(): Promise<Record<
+  string,
+  GratitudeEntryData
+> | null> {
   try {
     const cookieStore = cookies();
     const supabase = createServerActionClient<Database>({
@@ -71,7 +81,7 @@ export async function getDailyGratitudeEntries() {
         process.env.TODAY_GRATITUDE_ID,
         process.env.LIFE_GRATITUDE_ID,
       ])
-      .gte("created_at", format(new Date(), "yyyy-MM-dd"))
+      .gte("created_at", format(addDays(new Date(), -7), "yyyy-MM-dd"))
       .lte("created_at", format(addDays(new Date(), 2), "yyyy-MM-dd"));
     if (!userResult?.data?.user?.id) {
       throw new Error(
@@ -84,18 +94,30 @@ export async function getDailyGratitudeEntries() {
     if (error && status !== 406) {
       throw error;
     }
-    if (data) {
-      const parsed = data?.map((item) => parseEntry(item));
-      return {
-        dailyGratitudeId: process.env.TODAY_GRATITUDE_ID,
-        dailyGratitudeEntry: parsed?.find(
-          (item) => item?.prompt?.prompt?.id === process.env.TODAY_GRATITUDE_ID
-        ),
-        lifeGratitudeId: process.env.LIFE_GRATITUDE_ID,
-        lifeGratitudeEntry: parsed?.find(
-          (item) => item?.prompt?.prompt?.id === process.env.LIFE_GRATITUDE_ID
-        ),
-      };
+    const parsed = data?.map((item) => parseEntry(item))?.filter(isEntry);
+    if (parsed) {
+      const groupedByCreatedAt = groupByCreatedAt(parsed);
+      const groupedByDay = Object.keys(groupedByCreatedAt).reduce(
+        (group: Record<string, GratitudeEntryData>, key: string) => {
+          const entries = groupedByCreatedAt[key];
+          const dayData = {
+            dailyGratitudeId: process.env.TODAY_GRATITUDE_ID,
+            dailyGratitudeEntry: entries?.find(
+              (item) =>
+                item?.prompt?.prompt?.id === process.env.TODAY_GRATITUDE_ID
+            ),
+            lifeGratitudeId: process.env.LIFE_GRATITUDE_ID,
+            lifeGratitudeEntry: entries?.find(
+              (item) =>
+                item?.prompt?.prompt?.id === process.env.LIFE_GRATITUDE_ID
+            ),
+          };
+          group[key] = dayData;
+          return group;
+        },
+        {}
+      );
+      return groupedByDay;
     }
 
     return null;
