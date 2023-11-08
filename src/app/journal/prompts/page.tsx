@@ -8,6 +8,7 @@ import {
   colors,
 } from "@/components/journal/prompt-card";
 import { Link } from "@/components/ui/link";
+import { journal } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 
 async function Page() {
@@ -34,7 +35,7 @@ async function Page() {
                   <Link
                     variant="basic"
                     className="flex items-center"
-                    href={`/journal/category/${slug}`}
+                    href={`${journal.href}/category/${slug}`}
                   >
                     <p className="text-sm md:text-base">See more</p>
                     <IconArrowRight className="ml-0.5 mr:ml-1 h-3 w-3 md:h-4 md:w-4 md:mt-0.5" />

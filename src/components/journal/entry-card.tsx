@@ -3,6 +3,7 @@ import { freeFormTitle } from "@/lib/journal";
 import { cn, getDateFormatted } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { IconOpenEye } from "../common/icons";
+import { journalEntry } from "@/lib/routes";
 
 interface EntryCardProps {
   entry: Entry;
@@ -22,7 +23,7 @@ function EntryCard({ entry }: EntryCardProps) {
         {entry.prompt?.prompt?.title || freeFormTitle}
       </p>
       <Button variant="secondary" size="sm" asChild>
-        <a href={`/journal/entry/${entry.id}`}>
+        <a href={`${journalEntry.href}/${entry.id}`}>
           <IconOpenEye className="mr-1" />
           <p>View entry</p>
         </a>

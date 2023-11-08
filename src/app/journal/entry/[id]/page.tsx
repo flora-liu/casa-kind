@@ -5,18 +5,19 @@ import { Link } from "@/components/ui/link";
 import { redirect } from "next/navigation";
 import { EntryHeader } from "@/components/journal/entry-header";
 import { freeFormCategory, freeFormTitle } from "@/lib/journal";
+import { journal, journalEntries } from "@/lib/routes";
 
 async function Page({ params: { id } }: { params: { id: string } }) {
   const entry = await getEntryById(id);
   if (!entry) {
-    redirect("/journal");
+    redirect(journal.href);
   }
   return (
     <div className="min-h-screen">
       <div className="justify-start flex flex-col items-center mx-auto w-full">
         <div className="w-full flex justify-end my-7 md:my-10 px-5 md:px-6">
           <Link
-            href="/journal/entries"
+            href={journalEntries.href}
             className="flex items-center text-sm md:text-base"
             variant="basic"
           >

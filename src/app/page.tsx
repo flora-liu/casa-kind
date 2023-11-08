@@ -1,31 +1,31 @@
 "use client";
 
-import { IconHeart, IconPencil } from "@/components/common/icons";
 import { PromptCard } from "@/components/journal/prompt-card";
 import { Button } from "@/components/ui/button";
 import { colors } from "@/components/journal/prompt-card";
 import { cn } from "@/lib/utils";
 import { BlurImage } from "@/components/ui/blur-image";
+import { appName, heartTalk, homeBase, journal, meditate } from "@/lib/routes";
 
 const features = [
   {
-    icon: <IconPencil />,
+    icon: journal.icon,
     leading: "Tap into crafted spaces for thought",
-    title: "Journal",
+    title: journal.title,
     description:
       "Carve out an intentional space for your thoughts and what’s on your mind. Discover your deepest self with tailored prompts that inspire reflection.",
   },
   {
-    icon: <IconHeart />,
+    icon: heartTalk.icon,
     leading: "Discover through dialogue",
-    title: "Heart Talk",
+    title: heartTalk.title,
     description:
       "Engage, express, and explore your feelings with our approachable chat experience designed to help you build emotional awareness.",
   },
   {
-    icon: <IconPencil />,
+    icon: meditate.icon,
     leading: "Uncover the power of stillness",
-    title: "Meditate",
+    title: meditate.title,
     description:
       "Experience the transformative power of meditation for clarity and rejuvenation. Build a steady mindfulness practice that brings alignment to your everyday.",
   },
@@ -113,10 +113,10 @@ export default function Page() {
               beginning at heart
             </h1>
             <p className="text-lg md:text-xl">
-              Discover Casa Kind, your sanctuary for mindful self-care
+              Discover {appName}, your sanctuary for mindful self-care
             </p>
             <Button asChild size="lg" className="mt-8 md:mt-12">
-              <a href="/home">Start now</a>
+              <a href={homeBase.href}>Start now</a>
             </Button>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import { IconPencil } from "@/components/common/icons";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { journalNewEntry } from "@/lib/routes";
 
 const mobileWordLimit = 15;
 
@@ -55,7 +56,7 @@ function PromptCard({
           size="sm"
           className="bg-white hover:bg-white/80 text-muted-foreground text-sm"
         >
-          <a href={`/journal/entry/new?prompt_id=${promptId}`}>
+          <a href={`${journalNewEntry.href}?prompt_id=${promptId}`}>
             <IconPencil className="mr-1.5 h-3 w-3" /> Answer
           </a>
         </Button>

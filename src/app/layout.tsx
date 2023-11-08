@@ -8,6 +8,7 @@ import { Nav } from "@/components/common/nav";
 import { getSession } from "@/app/auth";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { appName } from "@/lib/routes";
 
 export const runtime = "edge";
 
@@ -53,7 +54,7 @@ const cambonFont = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Casa Kind",
+  title: appName,
   description: "Miniapp for self-care and lifelong blossoming.",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "light" },

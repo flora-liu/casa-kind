@@ -11,6 +11,7 @@ import { useAuthContext } from "@/components/common/auth-provider";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { parseEntry } from "@/lib/journal";
+import { journalEntry } from "@/lib/routes";
 
 export type EntryFormProps = {
   newPromptId?: string;
@@ -65,7 +66,7 @@ export function EntryForm({
       if (onCreateRefresh) {
         router.refresh();
       } else {
-        router.push(`/journal/entry/${data.id}`);
+        router.push(`${journalEntry.href}/${data.id}`);
       }
       setIsLoading(false);
       onCancelEdit?.();

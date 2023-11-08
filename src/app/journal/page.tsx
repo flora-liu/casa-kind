@@ -15,6 +15,7 @@ import { colors } from "@/components/journal/prompt-card";
 import { cn } from "@/lib/utils";
 import { BlurImage } from "@/components/ui/blur-image";
 import { GratitudeViewer } from "@/components/journal/gratitude-viewer";
+import { journal, journalNewEntry } from "@/lib/routes";
 
 async function Page() {
   const dailyPrompt = await getDailyPrompt();
@@ -23,7 +24,7 @@ async function Page() {
 
   return (
     <Layout
-      title="Journal"
+      title={journal.title}
       subtitle="Cultivate awareness by noting your thoughts"
       headerNav={<JournalNav />}
     >
@@ -59,7 +60,7 @@ async function Page() {
                 </div>
                 <div>
                   <Button variant="secondary" size="sm" asChild>
-                    <a href="/journal/entry/new">
+                    <a href={journalNewEntry.href}>
                       <IconPencil className="mr-1.5 h-3 w-3" /> Answer
                     </a>
                   </Button>

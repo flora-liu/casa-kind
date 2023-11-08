@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { IconArrowRight } from "@/components/common/icons";
+import { journalNewEntry } from "@/lib/routes";
 
 export function EmptyScreen() {
   return (
@@ -16,7 +17,7 @@ export function EmptyScreen() {
         <div className="mt-6 flex flex-col items-start space-y-2">
           <div className="flex items-center">
             <Button size="md" asChild>
-              <a href="/journal/entry/new">
+              <a href={journalNewEntry.href}>
                 <IconArrowRight className="mr-1" />
                 Get started
               </a>

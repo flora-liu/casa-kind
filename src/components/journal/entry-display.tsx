@@ -10,6 +10,7 @@ import { IconCross, IconPencil } from "@/components/common/icons";
 import { Entry } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
+import { journalEntries } from "@/lib/routes";
 
 export type EntryDisplayProps = {
   entry?: Entry | null;
@@ -53,7 +54,7 @@ export function EntryDisplay({
       if (onDeleteLink) {
         router.push(onDeleteLink);
       } else {
-        router.push("/journal/entries");
+        router.push(journalEntries.href);
       }
     }
   }

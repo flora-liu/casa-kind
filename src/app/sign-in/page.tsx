@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "@/components/ui/link";
 import { Separator } from "@/components/ui/separator";
+import { homeBase } from "@/lib/routes";
 
 export default function Page() {
   const [email, setEmail] = useState("");
@@ -26,7 +27,7 @@ export default function Page() {
     if (error) {
       setError(error.message);
     } else {
-      redirect("/home");
+      redirect(homeBase.href);
     }
   }
 

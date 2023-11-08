@@ -7,8 +7,11 @@ import { Link, LinkProps } from "@/components/ui/link";
 
 import {
   IconChevronDown,
+  IconClosedEye,
   IconExit,
+  IconHeart,
   IconHome,
+  IconPencil,
   IconUser,
 } from "@/components/common/icons";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
@@ -22,9 +25,21 @@ import {
   NavigationMenuLink,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import {
+  account,
+  appName,
+  heartTalk,
+  homeBase,
+  journal,
+  meditate,
+  signIn,
+  signOut,
+  signUp,
+} from "@/lib/routes";
 
 interface NavItem {
   key: string;
+  icon?: React.ReactNode;
   title: string | React.ReactNode;
   href?: string; // Link
   description?: string;
@@ -32,117 +47,38 @@ interface NavItem {
 }
 
 const desktopLeftNavLinks: Array<NavItem> = [
-  {
-    key: "home",
-    title: (
-      <div className="flex items-center gap-1.5">
-        <IconHome />
-        <p>Home</p>
-      </div>
-    ),
-    href: "/home",
-  },
-  {
-    key: "journal",
-    title: "Journal",
-    href: "/journal",
-    description: "Create space to reflect",
-  },
-  {
-    key: "heart-talk",
-    title: "Heart Talk",
-    href: "/heart-talk",
-    description: "Explore through conversation",
-  },
-  {
-    key: "meditate",
-    title: "Meditate",
-    href: "/meditate",
-    description: "Focus on the breath",
-  },
+  homeBase,
+  journal,
+  heartTalk,
+  meditate,
 ];
+
+const signOutButtonBase = {
+  ...signOut,
+  href: undefined,
+  onClick: "sign-out",
+};
 
 const desktopRightSignedInNavLinks: Array<NavItem> = [
+  account,
   {
-    key: "account",
-    title: (
-      <div className="flex items-center gap-1.5">
-        <IconUser />
-        <p>Account</p>
-      </div>
-    ),
-    href: "/account",
-  },
-  {
-    key: "sign-out",
-    title: (
-      <div className="flex items-center gap-1.5">
-        <IconExit />
-        <p>Sign Out</p>
-      </div>
-    ),
-    onClick: "sign-out",
+    ...signOutButtonBase,
+    icon: signOut.icon,
   },
 ];
 
-const desktopRightSignedOutNavLinks: Array<NavItem> = [
-  {
-    key: "sign-in",
-    title: "Sign In",
-    href: "/sign-in",
-  },
-  {
-    key: "sign-up",
-    title: "Sign Up",
-    href: "/sign-up",
-  },
-];
+const desktopRightSignedOutNavLinks: Array<NavItem> = [signIn, signUp];
 
 const mobileSignedInNavLinks: Array<NavItem> = [
-  {
-    key: "home",
-    title: "Home",
-    href: "/home",
-  },
-  {
-    key: "journal",
-    title: "Journal",
-    href: "/journal",
-  },
-  {
-    key: "heart-talk",
-    title: "Heart Talk",
-    href: "/heart-talk",
-  },
-  {
-    key: "meditate",
-    title: "Meditate",
-    href: "/meditate",
-  },
-  {
-    key: "account",
-    title: "Account",
-    href: "/account",
-  },
-  {
-    key: "sign-out",
-    title: "Sign Out",
-    onClick: "sign-out",
-  },
+  homeBase,
+  journal,
+  heartTalk,
+  meditate,
+  account,
+  signOutButtonBase,
 ];
 
-const mobileSignedOutNavLinks: Array<NavItem> = [
-  {
-    key: "home",
-    title: "Home",
-    href: "/",
-  },
-  {
-    key: "sign-in",
-    title: "Sign In",
-    href: "/sign-in",
-  },
-];
+const mobileSignedOutNavLinks: Array<NavItem> = [homeBase, signIn];
 
 function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
   const { navPosition } = useGlobalContext();
@@ -182,9 +118,9 @@ function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
                           key={`desktop-left-nav-item-${item.key}`}
                           title={item.title}
                           href={item.href}
-                        >
-                          {item.description}
-                        </NavListItem>
+                          description={item.description}
+                          icon={item.icon}
+                        />
                       ))}
                     </ul>
                   </NavigationMenuContent>
@@ -199,7 +135,7 @@ function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
             variant="basic"
             className="font-relative text-lg xl:text-xl"
           >
-            Casa Kind
+            {appName}
           </Link>
         </div>
         <div className="w-[calc(50%-75px)] flex items-center justify-end gap-4">
@@ -224,6 +160,7 @@ function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
                         href={item.href}
                         onClick={item.onClick}
                         setOpen={setOpen}
+                        icon={item.icon}
                       />
                     ))}
                   </ul>
@@ -278,14 +215,13 @@ const desktopNavListItemTextStyles =
 const mobileNavListItemTextStyles =
   "text-left focus:outline-none font-relative tracking-tight text-xl md:text-3xl";
 
-const NavListItem = forwardRef<
-  React.ElementRef<"a">,
-  Omit<LinkProps, "title" | "href" | "onClick"> &
-    NavItem & {
-      setOpen: (open: boolean) => void;
-      navVariant?: "desktop" | "mobile";
-    }
->(
+type NavListItemProps = Omit<LinkProps, "title" | "href" | "onClick"> &
+  NavItem & {
+    setOpen: (open: boolean) => void;
+    navVariant?: "desktop" | "mobile";
+  };
+
+const NavListItem = forwardRef<React.ElementRef<"a">, NavListItemProps>(
   (
     {
       className,
@@ -293,6 +229,8 @@ const NavListItem = forwardRef<
       children,
       href,
       setOpen,
+      icon,
+      description,
       onClick,
       navVariant = "desktop",
       ...props
@@ -316,15 +254,18 @@ const NavListItem = forwardRef<
               href={href}
               ref={ref}
               containerStyles="w-full"
-              className={cn(desktopNavListItemStyles, className)}
+              className={cn(
+                desktopNavListItemStyles,
+                desktopNavListItemTextStyles,
+                className
+              )}
               {...props}
             >
-              <div className={desktopNavListItemTextStyles}>{title}</div>
-              {children && (
-                <p className="line-clamp-2 text-sm pt-2 leading-snug text-muted-foreground">
-                  {children}
-                </p>
-              )}
+              <InnerNavListItem
+                icon={icon}
+                title={title}
+                description={description}
+              />
             </Link>
           </NavigationMenuLink>
         )}
@@ -348,7 +289,11 @@ const NavListItem = forwardRef<
             )}
             onClick={signOut}
           >
-            {title}
+            <InnerNavListItem
+              icon={icon}
+              title={title}
+              description={description}
+            />
           </button>
         )}
       </li>
@@ -357,5 +302,23 @@ const NavListItem = forwardRef<
 );
 
 NavListItem.displayName = "NavListItem";
+
+const InnerNavListItem = ({
+  icon,
+  title,
+  description,
+}: Pick<NavListItemProps, "icon" | "title" | "description">) => (
+  <div className="flex items-start gap-3">
+    {icon && <div>{icon}</div>}
+    <div className="flex flex-col items-start">
+      <p>{title}</p>
+      {description && (
+        <p className="line-clamp-2 text-sm pt-2 leading-snug text-muted-foreground">
+          {description}
+        </p>
+      )}
+    </div>
+  </div>
+);
 
 export { Nav };

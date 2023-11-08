@@ -8,6 +8,7 @@ import {
   colors,
 } from "@/components/journal/prompt-card";
 import { Link } from "@/components/ui/link";
+import { journalPrompts } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 
 async function Page({ params }: { params: { id: string } }) {
@@ -39,7 +40,7 @@ async function Page({ params }: { params: { id: string } }) {
       </Section>
       <Section className="flex justify-start">
         <Link
-          href="/journal/prompts"
+          href={journalPrompts.href}
           className="flex items-center text-sm md:text-base"
           variant="basic"
         >

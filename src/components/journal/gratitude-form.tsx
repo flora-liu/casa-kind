@@ -4,6 +4,7 @@ import { GratitudeEntryData } from "@/lib/types";
 import { EntryRenderer } from "@/components/journal/entry-renderer";
 import { formatDateAtHour } from "@/lib/utils";
 import { format } from "date-fns";
+import { journal } from "@/lib/routes";
 
 type GratitudeFormProps = {
   date: string;
@@ -27,7 +28,7 @@ function GratitudeForm({
           entry={dailyGratitudeEntry}
           className="px-0 md:px-0"
           textareaStyles="min-h-[10rem] md:min-h-[14rem]"
-          onDeleteLink="/journal"
+          onDeleteLink={journal.href}
           onCreateRefresh
           createdAt={
             dailyGratitudeEntry || isToday
@@ -45,7 +46,7 @@ function GratitudeForm({
           entry={lifeGratitudeEntry}
           className="px-0 md:px-0"
           textareaStyles="min-h-[10rem] md:min-h-[14rem]"
-          onDeleteLink="/journal"
+          onDeleteLink={journal.href}
           onCreateRefresh
           createdAt={
             lifeGratitudeEntry || isToday
