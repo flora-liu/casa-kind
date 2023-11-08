@@ -1,6 +1,7 @@
-import NextLink from "next/link";
+import NextLink, { LinkProps as NextLinkProps } from "next/link";
 import { cn } from "@/lib/utils";
 import { VariantProps, cva } from "class-variance-authority";
+import { forwardRef } from "react";
 
 const linkVariants = cva(
   "relative cursor-pointer after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-bottom-left after:scale-x-0 after:transition-transform after:duration-300 after:ease-in-out hover:after:origin-bottom-left hover:after:scale-x-100",
@@ -25,27 +26,43 @@ const linkVariants = cva(
   }
 );
 
-export interface LinkProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement>,
-    VariantProps<typeof linkVariants> {
-  external?: boolean;
-}
+export type LinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
+  NextLinkProps &
+  VariantProps<typeof linkVariants> & {
+    external?: boolean;
+    containerStyles?: string;
+  };
 
-function Link({ href, children, className, variant, external }: LinkProps) {
-  if (external) {
+const Link = forwardRef<React.ElementRef<"a">, LinkProps>(
+  ({ href, children, className, variant, external, containerStyles }, ref) => {
+    if (external) {
+      return (
+        <a
+          ref={ref}
+          href={href}
+          target="_blank"
+          className={cn("inline-flex", containerStyles)}
+        >
+          <div className={cn(linkVariants({ variant, className }))}>
+            {children}
+          </div>
+        </a>
+      );
+    }
     return (
-      <a href={href} target="_blank" className="inline-flex">
+      <NextLink
+        ref={ref}
+        href={href || "/"}
+        className={cn("inline-flex", containerStyles)}
+      >
         <div className={cn(linkVariants({ variant, className }))}>
           {children}
         </div>
-      </a>
+      </NextLink>
     );
   }
-  return (
-    <NextLink href={href || "/"} className="inline-flex">
-      <div className={cn(linkVariants({ variant, className }))}>{children}</div>
-    </NextLink>
-  );
-}
+);
+
+Link.displayName = "Link";
 
 export { linkVariants, Link };
