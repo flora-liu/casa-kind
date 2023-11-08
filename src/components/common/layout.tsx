@@ -22,13 +22,13 @@ function Layout({
       {...props}
     >
       <div className="relative mx-auto flex flex-col items-start justify-start w-full px-6 md:px-8">
-        <div className="pt-2 w-full flex justify-between flex-col gap-4 md:gap-6 md:flex-row">
+        <div className="pt-2 w-full flex justify-between flex-col gap-4 md:gap-6 lg:flex-row">
           <p className="flex flex-col sm:flex-row sm:items-center">
             {title && (
               <span
                 className={cn(
                   "font-medium",
-                  subtitle ? "mr-2 mb-2 md:mb-0" : ""
+                  subtitle ? "mr-2 mb-2 sm:mb-0" : ""
                 )}
               >
                 {title}

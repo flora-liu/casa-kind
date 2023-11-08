@@ -29,7 +29,7 @@ function PromptCard({
   return (
     <div
       className={cn(
-        "gap-y-2.5 md:gap-y-3 h-52 md:min-h-[18rem] md:h-96 lg:h-[28rem] bg-secondary rounded-lg p-3 sm:p-5 flex flex-col justify-between",
+        "gap-y-2.5 md:gap-y-3 h-56 md:min-h-[20rem] bg-secondary rounded-lg p-3 sm:p-5 flex flex-col justify-between",
         className
       )}
       {...props}
@@ -37,7 +37,7 @@ function PromptCard({
       <div className="flex justify-start">
         <p className="text-sm text-muted-foreground">{categoryTitle}</p>
       </div>
-      <p className="sm:text-lg md:text-3xl font-relative tracking-tight">
+      <p className="sm:text-lg md:text-xl lg:text-2xl font-relative tracking-tight">
         <span className="sm:hidden">
           {promptTitle.split(" ").length <= mobileWordLimit
             ? promptTitle
@@ -71,7 +71,7 @@ function PromptCardContainer({
   return (
     <div
       className={cn(
-        "grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-6",
+        "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6",
         className
       )}
     >
