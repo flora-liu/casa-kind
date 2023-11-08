@@ -85,3 +85,20 @@ export function parseCategory(data: ServerCategory): Category | null {
 
 export const freeFormCategory = "Free form";
 export const freeFormTitle = "Journal entry";
+
+export function groupByCreatedAt(entries: Entry[]): Record<string, Entry[]> {
+  return entries.reduce((group: Record<string, Entry[]>, entry: Entry) => {
+    // Use the createdAt date as the key
+    const date = format(new Date(entry.createdAt), "yyyy-MM-dd");
+
+    // If the group does not have an entry for this date, create an empty array
+    if (!group[date]) {
+      group[date] = [];
+    }
+
+    // Push the current entry onto the array for this date
+    group[date].push(entry);
+
+    return group;
+  }, {});
+}

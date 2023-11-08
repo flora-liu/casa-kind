@@ -11,13 +11,13 @@ import {
   ServerPrompt,
 } from "@/lib/types";
 import {
-  groupByCreatedAt,
   isCategory,
   isEntry,
   isPromptWithCategory,
   parseCategory,
   parseEntry,
   parsePrompt,
+  groupByCreatedAt,
 } from "@/lib/journal";
 import { addDays, format } from "date-fns";
 
@@ -53,11 +53,16 @@ export async function getEntryById(id: string): Promise<Entry | null> {
   }
 }
 
-export async function getDailyGratitudeEntries(): Promise<Record<
-  string,
-  GratitudeEntryData
-> | null> {
+export async function getDailyGratitudeEntries(): Promise<{
+  entries?: Record<string, GratitudeEntryData>;
+  dailyGratitudePromptId?: string;
+  lifeGratitudePromptId?: string;
+} | null> {
   try {
+    const defaultGratitudeData = {
+      dailyGratitudePromptId: process.env.TODAY_GRATITUDE_ID,
+      lifeGratitudePromptId: process.env.LIFE_GRATITUDE_ID,
+    };
     const cookieStore = cookies();
     const supabase = createServerActionClient<Database>({
       cookies: () => cookieStore,
@@ -117,10 +122,10 @@ export async function getDailyGratitudeEntries(): Promise<Record<
         },
         {}
       );
-      return groupedByDay;
+      return { entries: groupedByDay, ...defaultGratitudeData };
     }
 
-    return null;
+    return defaultGratitudeData;
   } catch (error) {
     return null;
   }

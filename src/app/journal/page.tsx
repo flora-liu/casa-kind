@@ -38,7 +38,7 @@ async function Page() {
               appreciate about them? How would you feel if it went away?
             </p>
           </div>
-          <GratitudeViewer data={gratitudeData} />
+          <GratitudeViewer {...gratitudeData} />
         </div>
       </Section>
       {dailyPrompt && (

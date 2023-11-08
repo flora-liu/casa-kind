@@ -1,17 +1,23 @@
 "use client";
 
 import { WeekPicker } from "@/components/journal/week-picker";
-import { getWeekDates } from "@/lib/journal";
 import { GratitudeEntryData } from "@/lib/types";
 import { format } from "date-fns";
 import { useCallback, useState } from "react";
 import { GratitudeForm } from "@/components/journal/gratitude-form";
+import { getWeekDates, formatDateAtHour } from "@/lib/utils";
+
+interface GratitudeViewerProps {
+  entries?: Record<string, GratitudeEntryData>;
+  dailyGratitudePromptId?: string;
+  lifeGratitudePromptId?: string;
+}
 
 function GratitudeViewer({
-  data,
-}: {
-  data: Record<string, GratitudeEntryData> | null;
-}) {
+  entries,
+  dailyGratitudePromptId,
+  lifeGratitudePromptId,
+}: GratitudeViewerProps) {
   const today = format(new Date(), "yyyy-MM-dd");
   const weekDates = getWeekDates(today);
   const [selected, setSelected] = useState(today);
@@ -24,14 +30,17 @@ function GratitudeViewer({
     [weekDates]
   );
 
-  if (!data) {
-    return null;
-  }
-  const gratitudeData = data[selected];
+  const gratitudeData =
+    entries && entries[selected]
+      ? entries[selected]
+      : {
+          dailyGratitudeId: dailyGratitudePromptId,
+          lifeGratitudeId: lifeGratitudePromptId,
+        };
   const daysWithData = Object.keys(weekDates).reduce(
     (group: Record<string, boolean>, key: string) => {
       const date = weekDates[key];
-      group[key] = !!data[date];
+      group[key] = entries ? !!entries[date] : false;
       return group;
     },
     {}
@@ -52,7 +61,7 @@ function GratitudeViewer({
         </div>
       </div>
       <div className="md:col-start-1 md:col-span-12">
-        <GratitudeForm {...gratitudeData} />
+        <GratitudeForm date={selected} {...gratitudeData} />
       </div>
     </>
   );

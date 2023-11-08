@@ -20,6 +20,7 @@ export type EntryFormProps = {
   textareaStyles?: string;
   onCreateRefresh?: boolean;
   onUpdate?: (entry: Entry) => void;
+  createdAt?: string;
 } & React.ComponentProps<"div">;
 
 export function EntryForm({
@@ -31,6 +32,7 @@ export function EntryForm({
   textareaStyles,
   onCreateRefresh,
   onUpdate,
+  createdAt,
 }: EntryFormProps) {
   const [input, setInput] = useState<string>(entry?.content || "");
   const [error, setError] = useState<string | undefined>();
@@ -44,13 +46,15 @@ export function EntryForm({
       return;
     }
     setError(undefined);
+    const newEntryData = {
+      content: input,
+      user_id: userId,
+      ...(newPromptId && { prompt_id: newPromptId }),
+      ...(createdAt && { created_at: createdAt }),
+    };
     const { data, error } = await supabase
       .from("entry")
-      .insert({
-        content: input,
-        user_id: userId,
-        ...(newPromptId && { prompt_id: newPromptId }),
-      })
+      .insert(newEntryData)
       .select()
       .single();
     setIsLoading(false);

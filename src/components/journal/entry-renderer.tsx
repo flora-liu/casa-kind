@@ -6,7 +6,6 @@ import {
   EntryDisplayProps,
 } from "@/components/journal/entry-display";
 import { EntryForm, EntryFormProps } from "@/components/journal/entry-form";
-import { Entry } from "@/lib/types";
 
 type EntryRendererProps = EntryFormProps & EntryDisplayProps;
 
@@ -18,6 +17,7 @@ export function EntryRenderer({
   textareaStyles,
   onCreateRefresh,
   onUpdate,
+  createdAt,
   // EntryDisplayProps
   onDeleteLink,
   onDelete,
@@ -41,6 +41,7 @@ export function EntryRenderer({
           textareaStyles={textareaStyles}
           onCreateRefresh={onCreateRefresh}
           onUpdate={onUpdate}
+          createdAt={createdAt}
         />
       ) : (
         <EntryDisplay

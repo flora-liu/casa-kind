@@ -2,13 +2,22 @@
 
 import { GratitudeEntryData } from "@/lib/types";
 import { EntryRenderer } from "@/components/journal/entry-renderer";
+import { formatDateAtHour } from "@/lib/utils";
+import { format } from "date-fns";
+
+type GratitudeFormProps = {
+  date: string;
+} & GratitudeEntryData;
 
 function GratitudeForm({
   dailyGratitudeId,
   dailyGratitudeEntry,
   lifeGratitudeId,
   lifeGratitudeEntry,
-}: GratitudeEntryData) {
+  date,
+}: GratitudeFormProps) {
+  const isToday = format(new Date(), "yyyy-MM-dd") === date;
+
   return (
     <div className="grid md:grid-cols-2 gap-6 md:gap-8">
       <div>
@@ -20,6 +29,13 @@ function GratitudeForm({
           textareaStyles="min-h-[10rem] md:min-h-[14rem]"
           onDeleteLink="/journal"
           onCreateRefresh
+          createdAt={
+            dailyGratitudeEntry || isToday
+              ? // Use current time
+                undefined
+              : // Manually set to 12pm for previous date
+                formatDateAtHour(date, 12)
+          }
         />
       </div>
       <div>
@@ -31,6 +47,13 @@ function GratitudeForm({
           textareaStyles="min-h-[10rem] md:min-h-[14rem]"
           onDeleteLink="/journal"
           onCreateRefresh
+          createdAt={
+            lifeGratitudeEntry || isToday
+              ? // Use current time
+                undefined
+              : // Manually set to 12pm for previous date
+                formatDateAtHour(date, 12)
+          }
         />
       </div>
     </div>
