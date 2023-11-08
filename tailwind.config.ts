@@ -107,6 +107,22 @@ const config: Config = {
             transform: "translateX(-100%)",
           },
         },
+        "slide-from-bottom": {
+          "0%": {
+            transform: "translateY(-100%)",
+          },
+          "100%": {
+            transform: "translateY(0)",
+          },
+        },
+        "slide-to-bottom": {
+          "0%": {
+            transform: "translateY(0)",
+          },
+          "100%": {
+            transform: "translateY(-100%)",
+          },
+        },
       },
       animation: {
         "slide-from-left":
@@ -115,9 +131,13 @@ const config: Config = {
           "slide-to-left 0.25s cubic-bezier(0.82, 0.085, 0.395, 0.895)",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "slide-from-bottom":
+          "slide-from-bottom 0.3s cubic-bezier(0.82, 0.085, 0.395, 0.895)",
+        "slide-to-bottom":
+          "slide-to-bottom 0.25s cubic-bezier(0.82, 0.085, 0.395, 0.895)",
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/aspect-ratio")],
 };
 export default config;
