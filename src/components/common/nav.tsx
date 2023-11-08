@@ -272,7 +272,7 @@ function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
 }
 
 const desktopNavListItemStyles =
-  "w-full block select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-secondary hover:text-secondary-foreground focus:bg-accent focus:text-accent-foreground";
+  "w-full block select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-secondary hover:text-secondary-foreground";
 const desktopNavListItemTextStyles =
   "text-left text-base font-medium leading-none";
 const mobileNavListItemTextStyles =
