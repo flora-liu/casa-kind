@@ -49,7 +49,7 @@ export default function Page() {
   };
 
   return (
-    <div className="h-[800px] flex flex-col items-center justify-center">
+    <div className="h-[calc(100vh-85px)] flex flex-col items-center justify-center">
       <div className="relative mx-auto sm:max-w-2xl p-4 w-full">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <div className="flex flex-col space-y-2 text-center">

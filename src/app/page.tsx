@@ -128,6 +128,7 @@ export default function Page() {
               sizes="100vw"
               className="absolute w-full h-full object-center z-10"
               fill
+              aspectRatio="aspect-w-3 aspect-h-4 md:aspect-h-3 md:aspect-w-4"
             />
             <div className="z-20 inset-0 absolute w-full h-full bg-orange-100 opacity-50 md:opacity-40" />
           </div>
