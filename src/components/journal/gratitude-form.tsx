@@ -17,8 +17,6 @@ function GratitudeForm({
   lifeGratitudeEntry,
   date,
 }: GratitudeFormProps) {
-  const isToday = format(new Date(), "yyyy-MM-dd") === date;
-
   return (
     <div className="grid md:grid-cols-2 gap-6 md:gap-8">
       <div>
@@ -31,7 +29,7 @@ function GratitudeForm({
           onDeleteLink={journal.href}
           onCreateRefresh
           createdAt={
-            dailyGratitudeEntry || isToday
+            dailyGratitudeEntry
               ? // Use current time
                 undefined
               : // Manually set to 12pm for previous date
@@ -49,7 +47,7 @@ function GratitudeForm({
           onDeleteLink={journal.href}
           onCreateRefresh
           createdAt={
-            lifeGratitudeEntry || isToday
+            lifeGratitudeEntry
               ? // Use current time
                 undefined
               : // Manually set to 12pm for previous date
