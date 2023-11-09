@@ -31,6 +31,7 @@ function PromptCard({
     <div
       className={cn(
         "gap-y-2.5 md:gap-y-3 h-56 md:min-h-[20rem] bg-secondary rounded-lg p-3 sm:p-5 flex flex-col justify-between",
+        "dark:bg-secondary dark:text-secondary-foreground",
         className
       )}
       {...props}
@@ -54,7 +55,7 @@ function PromptCard({
           asChild
           variant="outline"
           size="sm"
-          className="bg-white hover:bg-white/80 text-muted-foreground text-sm"
+          className="bg-white hover:bg-white/80 text-muted-foreground text-sm dark:text-primary-foreground"
         >
           <a href={`${journalNewEntry.href}?prompt_id=${promptId}`}>
             <IconPencil className="mr-1.5 h-3 w-3" /> Answer

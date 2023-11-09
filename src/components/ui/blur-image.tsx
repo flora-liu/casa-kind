@@ -27,6 +27,7 @@ type BlurImageProps = {
   aspectRatio?: string;
   grayscale?: boolean;
   renderWrapperDiv?: (content: React.ReactNode) => React.ReactNode;
+  containerStyles?: string;
 } & ImageProps;
 
 export const BlurImage = forwardRef<HTMLImageElement, BlurImageProps>(
@@ -36,6 +37,7 @@ export const BlurImage = forwardRef<HTMLImageElement, BlurImageProps>(
       aspectRatio = "aspect-h-1 aspect-w-1 xl:aspect-h-7 xl:aspect-w-8",
       grayscale = false,
       className = "",
+      containerStyles,
       alt = "",
       renderWrapperDiv = null,
       sizes = undefined,
@@ -73,7 +75,11 @@ export const BlurImage = forwardRef<HTMLImageElement, BlurImageProps>(
     return (
       <div
         ref={ref}
-        className={cn("w-full overflow-hidden bg-gray-100", aspectRatio)}
+        className={cn(
+          "w-full overflow-hidden bg-gray-100",
+          aspectRatio,
+          containerStyles
+        )}
       >
         {renderImage}
       </div>

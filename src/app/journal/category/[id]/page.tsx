@@ -30,7 +30,10 @@ async function Page({ params }: { params: { id: string } }) {
               promptTitle={title}
               promptId={id}
               key={promptIndex}
-              className={cn(colors[promptIndex % colors.length])}
+              className={cn(
+                colors[promptIndex % colors.length],
+                "dark:bg-secondary dark:text-secondary-foreground"
+              )}
             />
           ))}
         </PromptCardContainer>

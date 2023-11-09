@@ -146,7 +146,7 @@ function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
                   className="bg-transparent rounded-full p-0 h-7 xl:h-9"
                   hideIcon
                 >
-                  <div className="rounded-full h-7 w-7 xl:h-9 xl:w-9 bg-secondary border-2 border-border"></div>
+                  <div className="rounded-full h-7 w-7 xl:h-9 xl:w-9 bg-secondary dark:bg-accent dark:border-primary/60 border-2 border-border"></div>
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="rounded-xl justify-end left-[auto]">
                   <ul className="grid w-[120px] p-1">

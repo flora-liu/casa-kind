@@ -44,11 +44,13 @@ export default async function Page() {
       <div className="relative min-h-[30rem] md:min-h-[42rem] px-5 py-12 md:px-16 md:py-24 flex flex-col items-center justify-center">
         <div className="text-center grid grid-cols-12 md:max-w-7xl w-full z-30">
           <div className="col-span-12 mt-12">
-            <h1 className="font-relative text-3xl md:text-4xl lg:text-5xl leading-tight md:leading-snug mb-3 md:mb-6">
+            <h1 className="font-relative text-3xl md:text-4xl lg:text-5xl leading-tight md:leading-snug mb-3 md:mb-6 dark:text-primary-foreground">
               Wherever you are, <br /> take a moment to{" "}
               <span className="font-cambon italic">ground</span>
             </h1>
-            <p className="text-lg md:text-xl">Anchor yourself in this moment</p>
+            <p className="text-lg md:text-xl dark:text-primary-foreground">
+              Anchor yourself in this moment
+            </p>
           </div>
         </div>
         <div className="absolute w-full h-full">
@@ -88,7 +90,7 @@ export default async function Page() {
                 {selfCareFeatures.map((feature, index) => (
                   <div
                     key={index}
-                    className="relative mx-auto flex w-full flex-col justify-center space-y-4 z-20 rounded-xl bg-[#E3DECB] hover:bg-[#E3DECB]/80 text-secondary-foreground"
+                    className="relative mx-auto flex w-full flex-col justify-center space-y-4 z-20 rounded-xl bg-[#E3DECB] hover:bg-[#E3DECB]/80 text-secondary-foreground dark:bg-secondary dark:text-secondary-foreground"
                   >
                     <Link
                       className="flex flex-col space-y-2 text-left px-4 py-4 md:py-8 w-full"
@@ -171,6 +173,7 @@ export default async function Page() {
             <div className="md:col-span-4 h-[26rem] md:h-[30rem]">
               <div className="relative w-full h-full overflow-hidden rounded-xl">
                 <BlurImage
+                  containerStyles="dark:bg-background"
                   alt="Bed sheets"
                   src="/images/yaoqi-Bs_OAcsozAo-unsplash.jpg"
                   sizes="100vw"

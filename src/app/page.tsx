@@ -108,11 +108,11 @@ export default function Page() {
       <div className="relative min-h-[30rem] md:min-h-[42rem] px-5 py-12 md:px-16 md:py-24 flex flex-col items-center justify-center">
         <div className="text-center grid grid-cols-12 md:max-w-7xl w-full z-30">
           <div className="col-span-12 mt-12">
-            <h1 className="font-relative text-3xl md:text-4xl lg:text-5xl leading-tight md:leading-snug mb-3 md:mb-6">
+            <h1 className="font-relative text-3xl md:text-4xl lg:text-5xl leading-tight md:leading-snug mb-3 md:mb-6 dark:text-primary-foreground">
               Cultivating a kinder world, <br />
               beginning at heart
             </h1>
-            <p className="text-lg md:text-xl">
+            <p className="text-lg md:text-xl dark:text-primary-foreground">
               Discover {appName}, your sanctuary for mindful self-care
             </p>
             <Button asChild size="lg" className="mt-8 md:mt-12">
@@ -152,7 +152,7 @@ export default function Page() {
                 key={index}
                 className="px-2 py-4 flex flex-col gap-y-2 md:gap-y-3"
               >
-                <div className="p-3 py-2.5 bg-accent/60 rounded-md w-fit mb-3">
+                <div className="p-3 py-2.5 bg-accent/60 rounded-md w-fit mb-3 dark:bg-primary/30">
                   {feature.icon}
                 </div>
                 <p className="max-w-[30ch] text-sm md:text-base text-muted-foreground">
@@ -192,7 +192,8 @@ export default function Page() {
                 promptTitle={journalPrompts[3]?.prompt?.title}
                 className={cn(
                   colors[2],
-                  "w-[10rem] h-[12rem] sm:w-[12rem] sm:h-[15rem] md:min-h-none md:h-[18rem] md:w-[14rem] lg:h-[18rem]"
+                  "w-[10rem] h-[12rem] sm:w-[12rem] sm:h-[15rem] md:min-h-none md:h-[18rem] md:w-[14rem] lg:h-[18rem]",
+                  "dark:bg-secondary dark:text-secondary-foreground"
                 )}
               />
             </div>
@@ -203,7 +204,8 @@ export default function Page() {
                 promptTitle={journalPrompts[4]?.prompt?.title}
                 className={cn(
                   colors[1],
-                  "w-[10rem] h-[12rem] sm:w-[12rem] sm:h-[15rem] md:min-h-none md:h-[18rem] md:w-[14rem] lg:h-[18rem]"
+                  "w-[10rem] h-[12rem] sm:w-[12rem] sm:h-[15rem] md:min-h-none md:h-[18rem] md:w-[14rem] lg:h-[18rem]",
+                  "dark:bg-secondary dark:text-secondary-foreground"
                 )}
               />
             </div>
@@ -214,7 +216,8 @@ export default function Page() {
                 promptTitle={journalPrompts[2]?.prompt?.title}
                 className={cn(
                   colors[5],
-                  "w-[10rem] h-[12rem] sm:w-[12rem] sm:h-[15rem] md:min-h-none md:h-[18rem] md:w-[14rem] lg:h-[18rem]"
+                  "w-[10rem] h-[12rem] sm:w-[12rem] sm:h-[15rem] md:min-h-none md:h-[18rem] md:w-[14rem] lg:h-[18rem]",
+                  "dark:bg-secondary dark:text-secondary-foreground"
                 )}
               />
             </div>

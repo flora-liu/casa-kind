@@ -41,8 +41,10 @@ function WeekPicker({
               onClick={() => onClick?.(day.dayOfWeek)}
               className={cn(
                 "h-7 w-7 rounded-full border-2 border-border/40 flex items-center justify-center",
-                selected === day.dayOfWeek ? "border-accent" : "",
-                days?.[day.dayOfWeek] ? "bg-accent/20" : ""
+                selected === day.dayOfWeek
+                  ? "border-accent dark:border-primary"
+                  : "",
+                days?.[day.dayOfWeek] ? "bg-accent/20 dark:bg-primary/40" : ""
               )}
             ></button>
           </div>
