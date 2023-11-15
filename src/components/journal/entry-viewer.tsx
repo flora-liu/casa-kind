@@ -129,7 +129,7 @@ export function EntryViewer({
   }, [entries]);
 
   return (
-    <div className="w-full md:grid-cols-12 md:grid sm:max-w-3xl md:max-w-6xl mt-3">
+    <div className="w-full md:grid-cols-12 md:grid sm:max-w-3xl md:max-w-7xl mt-3">
       <div className="md:col-span-4 md:px-5">
         <div className="mb-6 md:mb-4 md:py-2 rounded-xl">
           <div className="px-5 md:px-0">

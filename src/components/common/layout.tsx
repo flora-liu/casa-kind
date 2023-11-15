@@ -64,7 +64,7 @@ function Section({
   return (
     <div
       className={cn(
-        "relative mx-auto sm:max-w-3xl md:max-w-6xl w-full flex flex-col",
+        "relative mx-auto sm:max-w-3xl md:max-w-7xl w-full flex flex-col",
         className
       )}
       {...props}
