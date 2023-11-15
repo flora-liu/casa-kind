@@ -171,13 +171,13 @@ export default async function Page() {
         <Section innerStyles="pt-2">
           <div className="w-full flex flex-col md:grid md:grid-cols-12 gap-4 md:gap-8">
             <div className="md:col-span-4 h-[26rem] md:h-[30rem]">
-              <div className="relative w-full h-full overflow-hidden rounded-xl">
+              <div className="relative w-full h-full overflow-hidden rounded-lg">
                 <BlurImage
                   containerStyles="dark:bg-background"
                   alt="Bed sheets"
                   src="/images/yaoqi-Bs_OAcsozAo-unsplash.jpg"
                   sizes="100vw"
-                  className="absolute w-full h-full object-center rounded-xl"
+                  className="absolute w-full h-full object-center rounded-lg"
                   fill
                   aspectRatio="aspect-w-3 aspect-h-4"
                 />

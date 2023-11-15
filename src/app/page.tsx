@@ -134,104 +134,112 @@ export default function Page() {
           </div>
         </div>
       </div>
-      <div className="flex min-h-[60vh] bg-secondary flex-col items-center justify-center px-5 py-12 md:p-16 lg:p-24">
-        <div className="text-center md:max-w-xl pb-12 md:pb-24 mt-4">
-          <h2 className="mb-4 md:mb-8 text-2xl font-relative md:text-3xl lg:text-4xl">
-            Dedicate daily moments to nurture your happiest, most{" "}
-            <span className="font-cambon font-light italic">whole</span> self
-          </h2>
-          <p>
-            We understand that what everyone has different needs. We provide
-            tools for building your individual practice of lifelong mindfulness.
-          </p>
+      <div className="bg-secondary">
+        <div className="flex min-h-[60vh] justify-center max-w-7xl mx-auto md:py-8 md:px-5">
+          <div className="flex flex-col items-center justify-center px-5 py-12">
+            <div className="text-center md:max-w-xl pb-12 md:pb-24 mt-4">
+              <h2 className="mb-4 md:mb-8 text-2xl font-relative md:text-3xl lg:text-4xl">
+                Dedicate daily moments to nurture your happiest, most{" "}
+                <span className="font-cambon font-light italic">whole</span>{" "}
+                self
+              </h2>
+              <p>
+                We understand that what everyone has different needs. We provide
+                tools for building your individual practice of lifelong
+                mindfulness.
+              </p>
+            </div>
+            <div className="lg:w-full mb-4 md:mb-32 lg:max-w-7xl lg:mb-0 lg:grid-cols-3 text-left grid gap-y-4 sm:gap-x-4">
+              {features.map((feature, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="px-2 py-4 flex flex-col gap-y-2 md:gap-y-3"
+                  >
+                    <div className="p-3 py-2.5 bg-accent/60 rounded-md w-fit mb-3 dark:bg-primary/30">
+                      {feature.icon}
+                    </div>
+                    <p className="max-w-[30ch] text-sm md:text-base text-muted-foreground">
+                      {feature.leading}
+                    </p>
+                    <h2 className="mb-2 text-lg md:text-xl font-medium tracking-tight">
+                      {feature.title}
+                    </h2>
+                    <p>{feature.description}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
-        <div className="lg:w-full mb-4 md:mb-32 lg:max-w-5xl lg:mb-0 lg:grid-cols-3 text-left grid gap-y-4 sm:gap-x-4">
-          {features.map((feature, index) => {
-            return (
-              <div
-                key={index}
-                className="px-2 py-4 flex flex-col gap-y-2 md:gap-y-3"
-              >
-                <div className="p-3 py-2.5 bg-accent/60 rounded-md w-fit mb-3 dark:bg-primary/30">
-                  {feature.icon}
-                </div>
-                <p className="max-w-[30ch] text-sm md:text-base text-muted-foreground">
-                  {feature.leading}
-                </p>
-                <h2 className="mb-2 text-lg md:text-xl font-medium tracking-tight">
-                  {feature.title}
-                </h2>
-                <p>{feature.description}</p>
+      </div>
+      <div className="flex justify-center max-w-7xl mx-auto md:py-8 sm:overflow-hidden lg:overflow-visible md:px-5">
+        <div className="w-full grid lg:grid-cols-12 gap-4 md:gap-8">
+          <div className="lg:col-span-4 order-2 lg:order-1 text-left pt-4 sm:pt-8 pb-12 px-5 flex justify-center md:justify-start items-center">
+            <div className="lg:max-w-sm w-full">
+              <h2 className="mb-2 text-2xl font-relative tracking-tight md:text-3xl">
+                Get to know your self
+              </h2>
+              <p className="text-lg mb-6 md:mb-8">
+                Through connecting your mind and heart
+              </p>
+              <p className="text-muted-foreground">
+                Engage in deeper, mindful observation of your thoughts to
+                understand your current state. Recognizing these thought
+                patterns is the first step to creating alignment in your life.
+              </p>
+            </div>
+          </div>
+          <div className="lg:col-span-8 order-1 lg:order-2 relative overflow-hidden lg:overflow-visible">
+            <div className="h-[16rem] sm:h-[20rem] md:h-[24rem] w-full my-4">
+              <div className="absolute top-[20%] sm:top-[13%] left-1/2 -translate-x-[140%] -rotate-[15deg]">
+                <PromptCard
+                  categoryTitle={journalPrompts[4]?.category?.title}
+                  promptId={journalPrompts[4]?.prompt?.id}
+                  promptTitle={journalPrompts[4]?.prompt?.title}
+                  className={cn(
+                    colors[2],
+                    "w-[10rem] h-[12rem] sm:w-[12rem] sm:h-[15rem] md:min-h-none md:h-[18rem] md:w-[14rem] lg:h-[18rem]",
+                    "dark:bg-secondary dark:text-secondary-foreground"
+                  )}
+                />
               </div>
-            );
-          })}
-        </div>
-      </div>
-      <div className="flex justify-center">
-        <div className="relative flex sm:min-h-[42rem] md:min-h-[32rem] max-w-5xl flex-col items-center justify-center w-full lg:flex-row">
-          <div className="order-2 lg:order-1 text-left my-6 md:my-8 lg:py-24 pb-12 sm:pt-12 px-5 md:pl-0 md:pr-16">
-            <h2 className="mb-2 text-2xl font-relative tracking-tight md:text-3xl">
-              Get to know your self
-            </h2>
-            <p className="text-lg mb-6 md:mb-8">
-              Through connecting your mind and heart
-            </p>
-            <p className="max-w-xl text-muted-foreground">
-              Engage in deeper, mindful observation of your thoughts to truly
-              understand your current state. Recognizing these thought patterns
-              is the first step to creating alignment in your life. We offer
-              dedicated support to help apply your insights to your life so you
-              can actually make impactful changes.
-            </p>
-          </div>
-          <div className="order-1 lg:order-2 relative h-[16rem] sm:h-[20rem] lg:h-[32rem] w-full my-4 overflow-hidden md:overflow-visible">
-            <div className="absolute top-[15%] left-1/2 -translate-x-[150%] -rotate-[10deg]">
-              <PromptCard
-                categoryTitle={journalPrompts[4]?.category?.title}
-                promptId={journalPrompts[4]?.prompt?.id}
-                promptTitle={journalPrompts[4]?.prompt?.title}
-                className={cn(
-                  colors[2],
-                  "w-[10rem] h-[12rem] sm:w-[12rem] sm:h-[15rem] md:min-h-none md:h-[18rem] md:w-[14rem] lg:h-[18rem]",
-                  "dark:bg-secondary dark:text-secondary-foreground"
-                )}
-              />
-            </div>
-            <div className="absolute top-[10%] left-1/2 -translate-x-1/2">
-              <PromptCard
-                categoryTitle={journalPrompts[3]?.category?.title}
-                promptId={journalPrompts[3]?.prompt?.id}
-                promptTitle={journalPrompts[3]?.prompt?.title}
-                className={cn(
-                  colors[1],
-                  "w-[10rem] h-[12rem] sm:w-[12rem] sm:h-[15rem] md:min-h-none md:h-[18rem] md:w-[14rem] lg:h-[18rem]",
-                  "dark:bg-secondary dark:text-secondary-foreground"
-                )}
-              />
-            </div>
-            <div className="absolute top-[15%] left-1/2 translate-x-[50%] rotate-[10deg]">
-              <PromptCard
-                categoryTitle={journalPrompts[2]?.category?.title}
-                promptId={journalPrompts[2]?.prompt?.id}
-                promptTitle={journalPrompts[2]?.prompt?.title}
-                className={cn(
-                  colors[5],
-                  "w-[10rem] h-[12rem] sm:w-[12rem] sm:h-[15rem] md:min-h-none md:h-[18rem] md:w-[14rem] lg:h-[18rem]",
-                  "dark:bg-secondary dark:text-secondary-foreground"
-                )}
-              />
+              <div className="absolute top-[12%] sm:top-[5%] left-1/2 -translate-x-1/2">
+                <PromptCard
+                  categoryTitle={journalPrompts[3]?.category?.title}
+                  promptId={journalPrompts[3]?.prompt?.id}
+                  promptTitle={journalPrompts[3]?.prompt?.title}
+                  className={cn(
+                    colors[1],
+                    "w-[10rem] h-[12rem] sm:w-[12rem] sm:h-[15rem] md:min-h-none md:h-[18rem] md:w-[14rem] lg:h-[18rem]",
+                    "dark:bg-secondary dark:text-secondary-foreground"
+                  )}
+                />
+              </div>
+              <div className="absolute top-[20%] sm:top-[12%] left-[47%] translate-x-[50%] rotate-[14deg]">
+                <PromptCard
+                  categoryTitle={journalPrompts[2]?.category?.title}
+                  promptId={journalPrompts[2]?.prompt?.id}
+                  promptTitle={journalPrompts[2]?.prompt?.title}
+                  className={cn(
+                    colors[5],
+                    "w-[10rem] h-[12rem] sm:w-[12rem] sm:h-[15rem] md:min-h-none md:h-[18rem] md:w-[14rem] lg:h-[18rem]",
+                    "dark:bg-secondary dark:text-secondary-foreground"
+                  )}
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="md:max-h-[34rem] max-w-5xl mx-auto md:py-8">
+      <div className="md:max-h-[34rem] max-w-7xl mx-auto md:py-8 md:px-5">
         <div className="grid md:grid-cols-2 gap-4 md:gap-8">
-          <div className="order-2 px-5 flex flex-col items-center md:items-start justify-center p-8">
-            <div className="text-left w-full flex items-start flex-col md:max-w-lg">
+          <div className="order-2 px-5 flex flex-col items-center justify-center p-8">
+            <div className="text-left w-full flex items-start flex-col md:max-w-sm">
               <h3 className="mb-2 text-xl font-relative tracking-tight md:text-2xl lg:text-3xl">
                 Casa Kind
               </h3>
-              <p className="text-base md:text-lg mb-6 md:mb-8">
+              <p className="text-lg mb-6 md:mb-8">
                 Where we care for your heart through conscious compassion
               </p>
               <p className="max-w-xl text-muted-foreground">
@@ -243,8 +251,8 @@ export default function Page() {
               </p>
             </div>
           </div>
-          <div className="h-[20rem] md:h-auto w-full md:max-h-none overflow-hidden order-1 md:grow">
-            <div className="w-full h-full relative">
+          <div className="h-[20rem] md:h-[24rem] w-full md:max-h-none overflow-hidden order-1 md:grow md:px-5">
+            <div className="w-full h-full relative md:rounded-lg overflow-hidden">
               <BlurImage
                 alt="Palm leaf"
                 src="/images/annie-spratt-GMSqa8vdx84-unsplash.jpg"
@@ -253,6 +261,7 @@ export default function Page() {
             (max-width: 1200px) 50vw,
             33vw"
                 fill
+                className="md:rounded-lg overflow-hidden"
               />
             </div>
           </div>
