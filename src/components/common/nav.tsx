@@ -38,12 +38,7 @@ interface NavItem {
   onClick?: string; // Button
 }
 
-const desktopLeftNavLinks: Array<NavItem> = [
-  homeBase,
-  journal,
-  heartTalk,
-  meditate,
-];
+const leftNavLinks: Array<NavItem> = [homeBase, journal, heartTalk, meditate];
 
 const signOutButtonBase = {
   ...signOut,
@@ -51,7 +46,7 @@ const signOutButtonBase = {
   onClick: "sign-out",
 };
 
-const desktopRightSignedInNavLinks: Array<NavItem> = [
+const signedInRightNavLinks: Array<NavItem> = [
   account,
   {
     ...signOutButtonBase,
@@ -59,14 +54,7 @@ const desktopRightSignedInNavLinks: Array<NavItem> = [
   },
 ];
 
-const desktopRightSignedOutNavLinks: Array<NavItem> = [signIn, signUp];
-
-const mobileSignedInNavLinks: Array<NavItem> = [
-  homeBase,
-  journal,
-  heartTalk,
-  meditate,
-];
+const signedOutRightNavLinks: Array<NavItem> = [signIn, signUp];
 
 function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
   const { navPosition } = useGlobalContext();
@@ -101,7 +89,7 @@ function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
                       <ul className="grid w-[240px] p-1">
-                        {desktopLeftNavLinks.map((item) => (
+                        {leftNavLinks.map((item) => (
                           <NavListItem
                             setOpen={setOpen}
                             key={`desktop-left-nav-item-${item.key}`}
@@ -134,7 +122,7 @@ function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
                 </SheetTrigger>
                 <SheetContent side="left" className="rounded-r-3xl">
                   <ul className="list-none flex flex-col justify-start gap-y-3 md:gap-y-4">
-                    {mobileSignedInNavLinks.map((item) => (
+                    {signedInRightNavLinks.map((item) => (
                       <NavListItem
                         key={`mobile-nav-item-${item.key}`}
                         href={item.href}
@@ -172,8 +160,8 @@ function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
                 <NavigationMenuContent className="rounded-xl justify-end left-[auto]">
                   <ul className="grid w-[120px] p-1">
                     {(isLoggedIn
-                      ? desktopRightSignedInNavLinks
-                      : desktopRightSignedOutNavLinks
+                      ? signedInRightNavLinks
+                      : signedOutRightNavLinks
                     ).map((item) => (
                       <NavListItem
                         key={`desktop-right-nav-item-${item.key}`}
