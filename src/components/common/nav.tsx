@@ -5,15 +5,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Button } from "@/components/ui/button";
 import { Link, LinkProps } from "@/components/ui/link";
 
-import {
-  IconChevronDown,
-  IconClosedEye,
-  IconExit,
-  IconHeart,
-  IconHome,
-  IconPencil,
-  IconUser,
-} from "@/components/common/icons";
+import { IconChevronDown } from "@/components/common/icons";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { useGlobalContext } from "@/components/common/global-provider";
@@ -74,11 +66,7 @@ const mobileSignedInNavLinks: Array<NavItem> = [
   journal,
   heartTalk,
   meditate,
-  account,
-  signOutButtonBase,
 ];
-
-const mobileSignedOutNavLinks: Array<NavItem> = [homeBase, signIn];
 
 function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
   const { navPosition } = useGlobalContext();
@@ -92,40 +80,73 @@ function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
           : "relative flex justify-start px-5 py-6 md:px-8 items-center h-[85px]"
       )}
     >
-      {/* Desktop menu */}
-      <div className="hidden md:flex justify-between items-center w-full m-auto list-none">
+      <div className="flex justify-between items-center w-full m-auto list-none">
         <div className="w-[calc(50%-75px)] flex items-center gap-4">
           {isLoggedIn && (
             <>
-              <NavigationMenu className="z-[99]">
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger
-                    className="bg-accent rounded-full py-1 px-2.5 h-9"
-                    hideIcon
-                  >
-                    <div className="flex justify-between items-center gap-x-2 group">
-                      <div className="border border-primary rounded-full p-0.5">
-                        <IconChevronDown className="h-4 w-4 transition duration-300 group-data-[state=open]:rotate-180" />
+              {/* Desktop menu */}
+              <div className="hidden md:block">
+                <NavigationMenu className="z-[99]">
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger
+                      className="bg-accent rounded-full py-1 px-2.5 h-9"
+                      hideIcon
+                    >
+                      <div className="flex justify-between items-center gap-x-2 group">
+                        <div className="border border-primary rounded-full p-0.5">
+                          <IconChevronDown className="h-4 w-4 transition duration-300 group-data-[state=open]:rotate-180" />
+                        </div>
+                        <p className="pr-2 text-base">Menu</p>
                       </div>
-                      <p className="pr-2 text-base">Menu</p>
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid w-[240px] p-1">
+                        {desktopLeftNavLinks.map((item) => (
+                          <NavListItem
+                            setOpen={setOpen}
+                            key={`desktop-left-nav-item-${item.key}`}
+                            title={item.title}
+                            href={item.href}
+                            description={item.description}
+                            icon={item.icon}
+                          />
+                        ))}
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                </NavigationMenu>
+              </div>
+              {/* Mobile menu */}
+              <Sheet open={open} onOpenChange={setOpen}>
+                <SheetTrigger>
+                  <Button
+                    asChild
+                    variant="accent"
+                    className="md:hidden rounded-full px-2"
+                  >
+                    <div className="flex justify-between items-center gap-x-3 group">
+                      <div className="border border-primary rounded-full p-0.5">
+                        <IconChevronDown className="h-5 w-5" />
+                      </div>
+                      <p className="pr-2">Menu</p>
                     </div>
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid w-[240px] p-1">
-                      {desktopLeftNavLinks.map((item) => (
-                        <NavListItem
-                          setOpen={setOpen}
-                          key={`desktop-left-nav-item-${item.key}`}
-                          title={item.title}
-                          href={item.href}
-                          description={item.description}
-                          icon={item.icon}
-                        />
-                      ))}
-                    </ul>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-              </NavigationMenu>
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="left" className="rounded-r-3xl">
+                  <ul className="list-none flex flex-col justify-start gap-y-3 md:gap-y-4">
+                    {mobileSignedInNavLinks.map((item) => (
+                      <NavListItem
+                        key={`mobile-nav-item-${item.key}`}
+                        href={item.href}
+                        title={item.title}
+                        onClick={item.onClick}
+                        setOpen={setOpen}
+                        navVariant="mobile"
+                      />
+                    ))}
+                  </ul>
+                </SheetContent>
+              </Sheet>
             </>
           )}
         </div>
@@ -170,40 +191,6 @@ function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
           </>
         </div>
       </div>
-      {/* Mobile menu */}
-      <Sheet open={open} onOpenChange={setOpen}>
-        <SheetTrigger>
-          <Button
-            asChild
-            variant="accent"
-            className="md:hidden rounded-full px-2"
-          >
-            <div className="flex justify-between items-center gap-x-3 group">
-              <div className="border border-primary rounded-full p-0.5">
-                <IconChevronDown className="h-5 w-5" />
-              </div>
-              <p className="pr-2">Menu</p>
-            </div>
-          </Button>
-        </SheetTrigger>
-        <SheetContent side="left" className="rounded-r-3xl">
-          <ul className="list-none flex flex-col justify-start gap-y-3 md:gap-y-4">
-            {(isLoggedIn
-              ? mobileSignedInNavLinks
-              : mobileSignedOutNavLinks
-            ).map((item) => (
-              <NavListItem
-                key={`mobile-nav-item-${item.key}`}
-                href={item.href}
-                title={item.title}
-                onClick={item.onClick}
-                setOpen={setOpen}
-                navVariant="mobile"
-              />
-            ))}
-          </ul>
-        </SheetContent>
-      </Sheet>
     </div>
   );
 }
