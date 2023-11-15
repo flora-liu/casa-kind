@@ -3,7 +3,6 @@ import { format, utcToZonedTime } from "date-fns-tz";
 import { parseISO, setHours } from "date-fns";
 
 import { twMerge } from "tailwind-merge";
-import { Entry } from "@/lib/types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

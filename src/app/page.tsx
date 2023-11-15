@@ -168,8 +168,8 @@ export default function Page() {
         </div>
       </div>
       <div className="flex justify-center">
-        <div className="relative flex min-h-[42rem] max-w-5xl flex-col items-center justify-center w-full lg:flex-row">
-          <div className="order-2 lg:order-1 text-left my-6 md:my-16 pb-12 lg:py-24 px-5 md:pl-0 md:pr-16">
+        <div className="relative flex sm:min-h-[42rem] md:min-h-[32rem] max-w-5xl flex-col items-center justify-center w-full lg:flex-row">
+          <div className="order-2 lg:order-1 text-left my-6 md:my-8 lg:py-24 pb-12 sm:pt-12 px-5 md:pl-0 md:pr-16">
             <h2 className="mb-2 text-2xl font-relative tracking-tight md:text-3xl">
               Get to know your self
             </h2>
@@ -187,9 +187,9 @@ export default function Page() {
           <div className="order-1 lg:order-2 relative h-[16rem] sm:h-[20rem] lg:h-[32rem] w-full my-4 overflow-hidden md:overflow-visible">
             <div className="absolute top-[15%] left-1/2 -translate-x-[150%] -rotate-[10deg]">
               <PromptCard
-                categoryTitle={journalPrompts[3]?.category?.title}
-                promptId={journalPrompts[3]?.prompt?.id}
-                promptTitle={journalPrompts[3]?.prompt?.title}
+                categoryTitle={journalPrompts[4]?.category?.title}
+                promptId={journalPrompts[4]?.prompt?.id}
+                promptTitle={journalPrompts[4]?.prompt?.title}
                 className={cn(
                   colors[2],
                   "w-[10rem] h-[12rem] sm:w-[12rem] sm:h-[15rem] md:min-h-none md:h-[18rem] md:w-[14rem] lg:h-[18rem]",
@@ -199,9 +199,9 @@ export default function Page() {
             </div>
             <div className="absolute top-[10%] left-1/2 -translate-x-1/2">
               <PromptCard
-                categoryTitle={journalPrompts[4]?.category?.title}
-                promptId={journalPrompts[4]?.prompt?.id}
-                promptTitle={journalPrompts[4]?.prompt?.title}
+                categoryTitle={journalPrompts[3]?.category?.title}
+                promptId={journalPrompts[3]?.prompt?.id}
+                promptTitle={journalPrompts[3]?.prompt?.title}
                 className={cn(
                   colors[1],
                   "w-[10rem] h-[12rem] sm:w-[12rem] sm:h-[15rem] md:min-h-none md:h-[18rem] md:w-[14rem] lg:h-[18rem]",
@@ -224,35 +224,37 @@ export default function Page() {
           </div>
         </div>
       </div>
-      <div className="md:max-h-[34rem] w-full flex flex-col md:flex-row md:justify-between">
-        <div className="order-2 px-5 flex flex-col items-center md:items-start justify-center py-20 md:p-16 lg:py-24 lg:px-32">
-          <div className="text-left w-full flex items-start flex-col md:max-w-lg">
-            <h3 className="mb-2 text-xl font-relative tracking-tight md:text-2xl lg:text-3xl">
-              Casa <span className="italic font-cambon">Kind </span>
-            </h3>
-            <p className="text-base md:text-lg mb-6 md:mb-8">
-              Where we care for your heart through conscious compassion
-            </p>
-            <p className="max-w-xl text-muted-foreground">
-              As Sri Sri Ravi Shankar simply puts, &quot;The state of your life
-              depends on the state of your mind. So be kind to yourself.&quot;
-              When we nurture a practice of kindness through mindful observation
-              and conscious choices, we possess the freedom to build a life that
-              feels full and vibrant.
-            </p>
+      <div className="md:max-h-[34rem] max-w-5xl mx-auto md:py-8">
+        <div className="grid md:grid-cols-2 gap-4 md:gap-8">
+          <div className="order-2 px-5 flex flex-col items-center md:items-start justify-center p-8">
+            <div className="text-left w-full flex items-start flex-col md:max-w-lg">
+              <h3 className="mb-2 text-xl font-relative tracking-tight md:text-2xl lg:text-3xl">
+                Casa Kind
+              </h3>
+              <p className="text-base md:text-lg mb-6 md:mb-8">
+                Where we care for your heart through conscious compassion
+              </p>
+              <p className="max-w-xl text-muted-foreground">
+                As Sri Sri Ravi Shankar simply puts, &quot;The state of your
+                life depends on the state of your mind. So be kind to
+                yourself.&quot; When we nurture a practice of kindness through
+                mindful observation and conscious choices, we possess the
+                freedom to build a life that feels full and vibrant.
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="h-[20rem] md:h-auto w-full md:max-h-none overflow-hidden order-1 md:grow">
-          <div className="w-full h-full relative">
-            <BlurImage
-              alt="Palm leaf"
-              src="/images/annie-spratt-GMSqa8vdx84-unsplash.jpg"
-              // https://stackoverflow.com/questions/65169431/how-to-set-the-next-image-component-to-100-height
-              sizes="(max-width: 768px) 100vw,
+          <div className="h-[20rem] md:h-auto w-full md:max-h-none overflow-hidden order-1 md:grow">
+            <div className="w-full h-full relative">
+              <BlurImage
+                alt="Palm leaf"
+                src="/images/annie-spratt-GMSqa8vdx84-unsplash.jpg"
+                // https://stackoverflow.com/questions/65169431/how-to-set-the-next-image-component-to-100-height
+                sizes="(max-width: 768px) 100vw,
             (max-width: 1200px) 50vw,
             33vw"
-              fill
-            />
+                fill
+              />
+            </div>
           </div>
         </div>
       </div>
