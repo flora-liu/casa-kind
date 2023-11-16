@@ -122,7 +122,7 @@ function Nav({ isLoggedIn }: { isLoggedIn: boolean }) {
                 </SheetTrigger>
                 <SheetContent side="left" className="rounded-r-3xl">
                   <ul className="list-none flex flex-col justify-start gap-y-3 md:gap-y-4">
-                    {signedInRightNavLinks.map((item) => (
+                    {leftNavLinks.map((item) => (
                       <NavListItem
                         key={`mobile-nav-item-${item.key}`}
                         href={item.href}

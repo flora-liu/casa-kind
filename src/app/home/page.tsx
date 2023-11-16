@@ -69,7 +69,7 @@ export default async function Page() {
       </div>
       <Layout className="min-h-0 pb-12">
         <Section
-          innerStyles="py-2 w-full"
+          innerStyles="w-full"
           className="relative flex h-full flex-col items-center justify-center"
         >
           <div className="md:max-w-7xl w-full md:grid md:grid-cols-2">
@@ -119,7 +119,6 @@ export default async function Page() {
             </div>
           </div>
         </Section>
-        <Separator className="my-6" />
         {/* <Section
           innerStyles="py-2 w-full"
           className="relative flex h-full flex-col items-center justify-center"
@@ -166,10 +165,9 @@ export default async function Page() {
               </div>
             </div>
           </div>
-        </Section>
-        <Separator className="my-6" /> */}
-        <Section innerStyles="pt-2">
-          <div className="w-full flex flex-col md:grid md:grid-cols-12 gap-4 md:gap-8">
+        </Section> */}
+        <Section outerStyles="bg-secondary">
+          <div className="w-full flex flex-col md:grid md:grid-cols-12 gap-4 md:gap-8 py-4">
             <div className="md:col-span-4 h-[26rem] md:h-[30rem]">
               <div className="relative w-full h-full overflow-hidden rounded-lg">
                 <BlurImage

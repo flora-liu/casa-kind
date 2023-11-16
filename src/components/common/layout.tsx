@@ -21,30 +21,38 @@ function Layout({
       )}
       {...props}
     >
-      <div className="relative mx-auto flex flex-col items-start justify-start w-full px-6 md:px-8">
-        <div className="pt-2 w-full flex justify-between flex-col gap-4 md:gap-6 lg:flex-row">
-          <p className="flex flex-col sm:flex-row sm:items-center">
-            {title && (
-              <span
-                className={cn(
-                  "font-medium",
-                  subtitle ? "mr-2 mb-2 sm:mb-0" : ""
-                )}
-              >
-                {title}
-              </span>
-            )}
-            {subtitle && (
-              <span className="mb-2 sm:mb-0 leading-normal text-muted-foreground/80 text-sm sm:text-base">
-                {subtitle}
-              </span>
-            )}
-          </p>
-          {headerNav}
-        </div>
+      <div className="relative mx-auto flex flex-col items-center justify-start w-full">
+        {(title || subtitle) && (
+          <>
+            <div className="px-5 md:px-8 w-full">
+              <div className="full flex justify-between flex-col gap-4 md:gap-6 lg:flex-row">
+                <p className="hidden md:flex flex-col sm:flex-row sm:items-center">
+                  {title && (
+                    <span
+                      className={cn(
+                        "font-medium",
+                        subtitle ? "mr-2 mb-2 sm:mb-0" : ""
+                      )}
+                    >
+                      {title}
+                    </span>
+                  )}
+                  {subtitle && (
+                    <span className="hidden md:block mb-2 sm:mb-0 leading-normal text-muted-foreground/80 text-sm sm:text-base">
+                      {subtitle}
+                    </span>
+                  )}
+                </p>
+                {headerNav}
+              </div>
+            </div>
+            <Separator className="my-4" />
+          </>
+        )}
       </div>
-      {(title || subtitle) && <Separator className="my-4" />}
-      {children}
+      <div className="relative mx-auto flex flex-col items-center justify-start w-full">
+        {children}
+      </div>
     </div>
   );
 }
@@ -55,37 +63,43 @@ function Section({
   headerRight,
   className,
   innerStyles,
+  outerStyles,
   ...props
 }: {
   title?: string;
   headerRight?: React.ReactNode;
   innerStyles?: string;
+  outerStyles?: string;
 } & React.ComponentProps<"div">) {
   return (
-    <div
-      className={cn(
-        "relative mx-auto sm:max-w-3xl md:max-w-7xl w-full flex flex-col",
-        className
-      )}
-      {...props}
-    >
+    <div className={cn("relative mx-auto w-full", outerStyles)}>
       <div
         className={cn(
-          "md:px-8 p-6 flex flex-col gap-y-4 md:gap-y-5",
-          innerStyles
+          "relative mx-auto sm:max-w-3xl md:max-w-7xl w-full flex flex-col",
+          className
         )}
+        {...props}
       >
-        {(title || headerRight) && (
-          <div className="flex justify-between items-center">
-            <div>
-              {title && (
-                <h3 className="text-base md:text-lg font-semibold">{title}</h3>
-              )}
+        <div
+          className={cn(
+            "md:px-8 p-6 flex flex-col gap-y-4 md:gap-y-5",
+            innerStyles
+          )}
+        >
+          {(title || headerRight) && (
+            <div className="flex justify-between items-center">
+              <div>
+                {title && (
+                  <h3 className="text-base md:text-lg font-semibold">
+                    {title}
+                  </h3>
+                )}
+              </div>
+              {headerRight}
             </div>
-            {headerRight}
-          </div>
-        )}
-        {children}
+          )}
+          {children}
+        </div>
       </div>
     </div>
   );
